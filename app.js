@@ -30,17 +30,15 @@ app.use(passport.session());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-app.get("/auth/google",passport.authenticate("google",{
-  scope:["profile","email"]
-}));
-app.get("/auth/google/redirect",passport.authenticate('google'),(req,res)=>{
-  res.send(req.user);
-});
+app.get("/auth/google",passport.authenticate("google",{scope:["profile","email"]}));
+app.get("/auth/google/redirect",passport.authenticate('google',{failureRedirect:'/auth/google',successRedirect:'/',failureFlash:true}));
 app.get('/auth/logout',(req,res)=>{
   req.logout();
   req.session.destroy();
   res.redirect('/');
 });
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
