@@ -6,9 +6,11 @@ var logger = require('morgan');
 let passport = require('passport');
 let session = require('express-session');
 let mongoose = require('mongoose');
+var formidable = require('formidable');
 require('./passport_setup')(passport);
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var uploadRouter = require('./routes/uploadPage');
 const keys = require('./config/keys');
 
 var app = express();
@@ -16,7 +18,6 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -29,6 +30,22 @@ app.use(passport.session());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+// app.use('/uploadPage', uploadRouter);
+app.get('/uploadPage',(req,res) =>
+{
+  res.render('uploadPage');
+})
+app.post('/submit-form', (req, res) => {
+  new formidable.IncomingForm().parse(req)
+    .on('fileBegin', (name, file) => {
+        file.path = __dirname + '/uploads/' + file.name
+    })
+    .on('file', (name, file) => {
+      console.log('Uploaded file', name, file)
+    })
+    //...
+})
+
 
 app.get("/auth/google",passport.authenticate("google",{scope:["profile","email"]}));
 app.get("/auth/google/redirect",passport.authenticate('google',{failureRedirect:'/auth/google',successRedirect:'/',failureFlash:true}));
@@ -64,4 +81,5 @@ mongoose.connect(keys.mongodb.dbURI,{useNewUrlParser: true,useUnifiedTopology:tr
 })
 .catch(err=>console.log(err));
 
+console.log("blah");
 module.exports = app;

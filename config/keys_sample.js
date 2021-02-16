@@ -9,5 +9,4 @@ module.exports= {
     session:{
         cookieKey:"Bsdk Cookie ",
     }
-
 };
