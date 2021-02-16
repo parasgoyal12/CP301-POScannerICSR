@@ -36,14 +36,13 @@ app.get('/uploadPage',(req,res) =>
   res.render('uploadPage');
 })
 app.post('/submit-form', (req, res) => {
-  new formidable.IncomingForm().parse(req)
-    .on('fileBegin', (name, file) => {
-        file.path = __dirname + '/uploads/' + file.name
-    })
-    .on('file', (name, file) => {
-      console.log('Uploaded file', name, file)
-    })
-    //...
+  var form = new formidable.IncomingForm();
+  form.parse(req);
+  form.on('fileBegin',function(name,file)
+  {
+    file.path=__dirname+"/public/uploads/"+file.name;
+  })
+  res.render("index",{title:"express"});
 })
 
 
