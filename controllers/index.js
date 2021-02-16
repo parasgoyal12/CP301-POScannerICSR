@@ -9,12 +9,11 @@ exports.getUploadPage = (req,res,next)=>{
 };
 
 exports.submitUploadPage = (req,res,next)=>{
-    new formidable.IncomingForm().parse(req)
-    .on('fileBegin', (name, file) => {
-        file.path = path.join(path.resolve(__dirname,'..'),'public/uploads/',file.name);
-    })
-    .on('file', (name, file) => {
-      console.log('Uploaded file', name, file)
+    let form = new formidable.IncomingForm();
+    form.parse(req);
+    form.on('fileBegin',function(name,file)
+    {
+        file.path=path.join(path.resolve(__dirname,'..'),'public/uploads/',file.name);
     })
     res.redirect('/');
 };
