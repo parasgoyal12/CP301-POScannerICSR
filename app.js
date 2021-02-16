@@ -29,6 +29,23 @@ app.use(passport.session());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+<<<<<<< HEAD
+=======
+// app.use('/uploadPage', uploadRouter);
+app.get('/uploadPage',(req,res) =>
+{
+  res.render('uploadPage');
+})
+app.post('/submit-form', (req, res) => {
+  var form = new formidable.IncomingForm();
+  form.parse(req);
+  form.on('fileBegin',function(name,file)
+  {
+    file.path=__dirname+"/public/uploads/"+file.name;
+  })
+  res.render("index",{title:"express"});
+})
+>>>>>>> dc8c6c310f6e315fe0c32a58df880918b24056bc
 
 
 app.get("/auth/google",passport.authenticate("google",{scope:["profile","email"]}));
