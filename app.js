@@ -6,11 +6,10 @@ var logger = require('morgan');
 let passport = require('passport');
 let session = require('express-session');
 let mongoose = require('mongoose');
-var formidable = require('formidable');
+
 require('./passport_setup')(passport);
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var uploadRouter = require('./routes/uploadPage');
 const keys = require('./config/keys');
 
 var app = express();
@@ -30,21 +29,6 @@ app.use(passport.session());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-// app.use('/uploadPage', uploadRouter);
-app.get('/uploadPage',(req,res) =>
-{
-  res.render('uploadPage');
-})
-app.post('/submit-form', (req, res) => {
-  new formidable.IncomingForm().parse(req)
-    .on('fileBegin', (name, file) => {
-        file.path = __dirname + '/uploads/' + file.name
-    })
-    .on('file', (name, file) => {
-      console.log('Uploaded file', name, file)
-    })
-    //...
-})
 
 
 app.get("/auth/google",passport.authenticate("google",{scope:["profile","email"]}));
@@ -81,5 +65,5 @@ mongoose.connect(keys.mongodb.dbURI,{useNewUrlParser: true,useUnifiedTopology:tr
 })
 .catch(err=>console.log(err));
 
-console.log("blah");
+// console.log("blah");
 module.exports = app;
