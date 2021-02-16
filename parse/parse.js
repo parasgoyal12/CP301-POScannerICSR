@@ -1,50 +1,61 @@
 const fs = require('fs');
 
-fs.readFile('res1.json', (err, data) => {
+fs.readFile('res2.json', (err, data) => {
     if (err) throw err;
-    let str = JSON.parse(data);
-    str = str.text;
+
+    // res1
+    // let str = JSON.parse(data).text;
+
+    // rest
+    let str = JSON.parse(data).fullTextAnnotation.text;
+    // console.log(str);
+
 
     // Assumptions for rgx in comments, won't work without these
 
-    // First instance is always date (as in samples)
+    // xx.xx.xxxx format, First instance is always date (as in samples)
     const dateRgx = /\d{2}[.]\d{2}[.]\d{4}/;
     const date = (str.match(dateRgx))[0];
 
-    // Total\nAmt
-    const amountRgx = /Total[" "-:;]*\n[\d,.]*/ 
+    // Total followed by Amt
+    const amountRgx = /total[^\d]*[\d,.]*/i; 
     let amount = (str.match(amountRgx))[0];
-    amount = amount.substring(amount.match(/Total[" "-:;]*\n/)[0].length, amount.length);
+    amount = amount.substring(amount.match(/[\d]/).index, amount.length);
 
     // PO number starts with digit and ??
-    const PONoRgx = /PO No[:\n][" "]*[\d-,/\w]*/;
+    const PONoRgx = /po[" "]*no[^\d]*[\d-,/\w]*/i;
     let PO = (str.match(PONoRgx))[0];
     PO = PO.substring(PO.search(/[\d]/), PO.length);
 
     // Supple of 'item'
-    const itemRgx = /Supply[" "]*of[" "-.:,]*'[\w" "\d-.,:]*'/;
+    const itemRgx = /supply[" "]*of[^\w]*[\w" "\d-.,:]*[^'\n]/i;
     let item = (str.match(itemRgx))[0];
-    item = item.substring(item.search(/'/) + 1, item.length - 1);
+    console.log(item);
+    item = item.substring(item.match(/supply[" "]*of[^\w]*/i)[0].length, item.length);
 
     // FOR : Deaprtment of .., (no comma in dept name & comma after dept name)
-    const deptRgx = /FOR[" ":]*Department of[" "]*[\w" "\d]*/;
+    const deptRgx = /for[" ":]*department of[" "]*[\w" "\d]*/i;
     let dept = (str.match(deptRgx))[0];
-    dept = dept.substring(dept.match(/FOR[" ":]*Department of[" "]*/)[0].length, dept.length);
+    dept = dept.substring(dept.match(/for[" ":]*department of[" "]*/i)[0].length, dept.length);
 
     // M/s supplier
-    const supRgx = /[Mm]\/[Ss][" "\w\d]*/;
+    const supRgx = /M\/s[^,\n]*/i;
     let supplier = (str.match(supRgx))[0];
 
-    // CC to : Indentator
-    const indRgx = /[cC]{2}[" "]*[tT][Oo][" ":]*\n1.[" "\w.]*/;
+    // CC to : Indentator   
+    const indRgx = /cc[" "]*to[" ":]*\n1.[" "\w.]*/i;
     let indentator = (str.match(indRgx))[0];
-    indentator = indentator.substring(indentator.match(/[cC]{2}[" "]*[tT][Oo][" ":]*\n1.[" "]*/)[0].length, indentator.length);
+    indentator = indentator.substring(indentator.match(/cc[" "]*to[" ":]*\n1.[" "]*/i)[0].length, indentator.length);
 
-    console.log(date, '\n', amount, '\n', PO, '\n', item, '\n', dept, '\n', supplier, '\n', indentator);
+    let info = {
+        date: date,
+        amount: amount,
+        PO: PO,
+        item: item,
+        dept: dept,
+        supplier: supplier,
+        indentator: indentator
+    };
+    console.log(info);
+
 });
-
-
-
-
-
-
