@@ -8,7 +8,7 @@ fs.readFile('res2.json', (err, data) => {
 
     // rest
     let str = JSON.parse(data).fullTextAnnotation.text;
-    console.log(str);
+//     console.log(str);
 
     // Assumptions for rgx in comments, won't work without these
 
