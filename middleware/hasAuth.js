@@ -4,6 +4,7 @@ exports.isLoggedIn=(req,res,next)=>{
         next();
     }
     else{
-        next(createError(403,"You Must Login to continue."));
+        // next(createError(403,"You Must Login to continue."));
+        res.redirect('/auth/google');
     }
 };
