@@ -13,7 +13,7 @@ exports.submitUploadPage = (req,res,next)=>{
     form.parse(req);
     form.on('fileBegin',function(name,file)
     {
-    file.path=__dirname+"/../public/stylesheets/uploads/"+file.name;
+        file.path=path.join(path.resolve(__dirname,'..'),'public/uploads',file.name);
     });	
     res.render("index",{title:"Express"});
 };
