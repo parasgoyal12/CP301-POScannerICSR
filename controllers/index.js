@@ -9,11 +9,11 @@ exports.getUploadPage = (req,res,next)=>{
 };
 
 exports.submitUploadPage = (req,res,next)=>{
-    let form = new formidable.IncomingForm();
+    var form = new formidable.IncomingForm();
     form.parse(req);
     form.on('fileBegin',function(name,file)
     {
-        file.path=path.join(path.resolve(__dirname,'..'),'public/uploads/',file.name);
-    })
-    res.redirect('/');
+    file.path=__dirname+"/../public/stylesheets/uploads/"+file.name;
+    });	
+    res.render("index",{title:"Express"});
 };

@@ -30,7 +30,6 @@ app.use(passport.session());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-
 app.get("/auth/google",passport.authenticate("google",{scope:["profile","email"]}));
 app.get("/auth/google/redirect",passport.authenticate('google',{failureRedirect:'/auth/google',successRedirect:'/',failureFlash:true}));
 app.get('/auth/logout',(req,res)=>{
@@ -65,5 +64,4 @@ mongoose.connect(keys.mongodb.dbURI,{useNewUrlParser: true,useUnifiedTopology:tr
 })
 .catch(err=>console.log(err));
 
-// console.log("blah");
 module.exports = app;
