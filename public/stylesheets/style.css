@@ -1,54 +1,8 @@
-*{
-  /* margin:0; */
-  padding:0;
-}
-.image{
-  background-image: url(bg.png);
-  background-size: cover;
-  background-position: center;
-  height:750px;
-  position:fixed;
-  left:0;
-  right:0;
-  top:0;
-  z-index: -1;
-  opacity: 0.5;
-}
-.navbar{
-  /* background-color: black; */
-  padding: 3px 4px;
-}
-.navbar ul{
-  /* margin-top:25px; */
-  display:flex;
-  flex-direction: row;
-  justify-content: center;
-}
-.navbar li{
-  list-style-type: none;
-}
-.navbar li a{
-  text-decoration: none;
-  color:white;
-  padding: 5px 50px;
-  margin:5px;
-  border: 1px solid white;
-}
-.t{
-  text-align: center;
-}
-.upload{
-  width:50%;
-  margin:auto;
-  border: 2px solid black;
-  padding: 20px;
+body > .container {
+  padding: 60px 15px 0;
 }
 
-.fileUpload{
-  padding:5px;
-}
-
-.submit-btn{
+/* .submit-btn{
   padding:5px;
   margin:5px;
   color: #fff;
@@ -60,7 +14,7 @@
   font-size: 1 rem;
   margin-left:355px;
   margin-top:20px;
-}
+} */
 .drop-zone {
   max-width: 200px;
   height: 200px;
@@ -110,11 +64,4 @@
   text-align: center;
 }
 
-/* body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
 
-a {
-  color: #00B7FF;
-} */

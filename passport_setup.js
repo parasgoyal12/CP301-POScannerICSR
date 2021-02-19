@@ -8,7 +8,7 @@ module.exports= passport =>{
     });
     passport.deserializeUser((id,done)=>{
         User.findById(id).then(user=>{
-            done(null,User);
+            done(null,user);
         });
     });
     passport.use(
