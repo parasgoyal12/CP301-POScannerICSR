@@ -3,6 +3,7 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="shortcut icon" href="/assets/favicon.ico">
   </head>
   <body>
   <div class="image"></div>
@@ -16,12 +17,19 @@
   <div class="t">
   <h2>Welcome to the Purchase Order filing application</h2>
   </div>
+  </head>
+
+  <body>
   <div class="upload">
-  <form method="POST" action="/uploadPage" enctype="multipart/form-data">
-    <input type="file" name="document" />
-    <br>
-    <input type="submit" />
-  </form>
-  </div>
+    <form method="POST" action="/uploadPage" enctype="multipart/form-data">
+      <div class="drop-zone">
+        <span class="drop-zone__prompt">Drop file here or click to upload</span>
+        <input type="file" name="myFile" class="drop-zone__input">
+      </div>    
+      <br>
+      <input type="submit" class="submit-btn"/>
+    </form>
+  </div> 
+  <script src="/javascripts/upload.js"></script>
   </body>
 </html>
