@@ -12,6 +12,7 @@
     "express": "~4.16.1",
     "express-session": "^1.17.1",
     "formidable": "^1.2.2",
+    "googleapis": "^39.2.0",
     "http-errors": "^1.8.0",
     "ig": "0.0.5",
     "mongoose": "^5.11.16",

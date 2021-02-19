@@ -28,7 +28,7 @@ body > .container {
   font-size: 20px;
   cursor: pointer;
   color:black;
-  border: 4px dashed #009578;
+  border: 8px dashed grey;
   border-radius: 10px;
   margin:auto;
 }

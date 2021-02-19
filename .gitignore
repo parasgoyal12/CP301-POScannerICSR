@@ -1,3 +1,4 @@
 node_modules
 config/keys.js
 public/uploads/*.pdf
+config/googleKeyApi.json
