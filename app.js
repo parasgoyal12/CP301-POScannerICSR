@@ -31,7 +31,12 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 app.get("/auth/google",passport.authenticate("google",{scope:["profile","email"]}));
-app.get("/auth/google/redirect",passport.authenticate('google',{failureRedirect:'/auth/google',successRedirect:'/',failureFlash:true}));
+app.get("/auth/google/redirect",passport.authenticate('google',{failureRedirect:'/auth/google',failureFlash:true}),(req,res)=>{
+  let rdrTo= req.session.redirectTo || '/';
+  req.session.redirectTo=null;
+  delete req.session.redirectTo;
+  res.redirect(rdrTo);
+});
 app.get('/auth/logout',(req,res)=>{
   req.logout();
   req.session.destroy();
