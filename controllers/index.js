@@ -17,3 +17,13 @@ exports.submitUploadPage = (req,res,next)=>{
     });	
     res.render("index",{title:"Home",user:req.user});
 };
+
+exports.getConfirmationPage=(req,res,next)=>{
+    res.render('confirmationPage',{title:'ConfirmationPage',user:req.user});
+};
+
+exports.submitConfirmationPage=(req,res,next)=>{
+
+    res.send(req.body);
+    // Add Sheets API logic here
+};
