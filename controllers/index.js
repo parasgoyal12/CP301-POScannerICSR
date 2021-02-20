@@ -2,7 +2,7 @@ let formidable = require('formidable');
 let path = require('path');
 const {google} = require('googleapis');
 var keys=require('./../config/keys');
-keys = keys.googleSheet;
+const { response } = require('express');
 exports.home_page = (req,res,next)=>{
     res.render('index',{title:'Home',user:req.user});
 };
@@ -28,40 +28,40 @@ exports.getConfirmationPage=(req,res,next)=>{
 exports.submitConfirmationPage=(req,res,next)=>{
 
     // Add Sheets API logic here
-    const client = new google.auth.JWT(
-        keys.client_email,
-        null,
-        keys.private_key,
-        ['https://www.googleapis.com/auth/spreadsheets']
-        );
-        client.authorize(function(err,tokens){
-            if(err)
-            {
-                console.log(err);
-            }
-            else
-            {
-                console.log("connected");
-            }
-        });
-        let formResponse = req.body;
-        let resArr=[]
-        for (var i in formResponse)
+    const client = new google.auth.JWT(keys.google_sheet.client_email,null,keys.google_sheet.private_key,['https://www.googleapis.com/auth/spreadsheets']);
+    client.authorize(function(err,tokens){
+        if(err)
         {
-            resArr.push([i, formResponse[i]]);
+            console.log(err);
         }
-        console.log(resArr);
-        async function gApiRun(client){
-            const gsapi = google.sheets({version : 'v4',auth : client});
-            const options = {
-                spreadsheetId : '14iSnufwf8Kppir7LWZIq9YMXSOYSAZv6-ObjQQfMOfU',
-                range : 'Sheet1!A1:B20',
-                valueInputOption : 'USER_ENTERED',
-                resource : {values : resArr}
-            }
-        await gsapi.spreadsheets.values.update(options);
+        else
+        {
+            console.log("connected");
         }
-        let x = gApiRun(client);
-        console.log(x);
-        res.send(req.body);
+    });
+    let formResponse = req.body;
+    let resArr=Object.values(formResponse);
+    // for (var i in formResponse)
+    // {
+    //     resArr.push([i, formResponse[i]]);
+    // }
+    console.log(resArr);
+    async function gApiRun(client){
+        const gsapi = google.sheets({version : 'v4',auth : client});
+        const options = {
+            spreadsheetId : keys.google_sheet.sheetID,
+            range : 'Sheet1!A1',
+            valueInputOption : 'USER_ENTERED',
+            resource : {values : [resArr]}
+        }
+    await gsapi.spreadsheets.values.append(options);
+    }
+    gApiRun(client).then(result=>{
+        console.log(result);
+        res.send("Success")
+    }).catch(err=>{
+        console.log(err);
+        res.send("Failed");
+    });
+        // console.log(x);
 };

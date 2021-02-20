@@ -13,7 +13,7 @@
     </header>
 
     <!-- Begin page content -->
-    <main role="main" class="container">
+    <main role="main" class="container-fluid w-90">
         
         <div class="py-5 my-3 text-center">
             <h2>Confirmation form</h2>
@@ -21,9 +21,11 @@
         </div>
 
         <div class="row">
-            <div class="col-md-4 order-md-2 mb-4">
+            <div class="col-md-5 order-md-2 mb-4">
+                <h4 class="mb-3">Preview</h4>
+                <iframe src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" class='w-100 h-50 my-4'></iframe>
             </div>
-            <div class="col-md-8 order-md-1">
+            <div class="col-md-7 order-md-1">
             <h4 class="mb-3">Purchase Order Details</h4>
             <form class="needs-validation my-4 w-100" action="/confirmationPage" method="POST" novalidate>
                 <div class="row">
