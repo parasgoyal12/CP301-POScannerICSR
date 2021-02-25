@@ -26,8 +26,6 @@ exports.getConfirmationPage=(req,res,next)=>{
 };
 
 exports.submitConfirmationPage=(req,res,next)=>{
-
-    // Add Sheets API logic here
     const client = new google.auth.JWT(keys.google_sheet.client_email,null,keys.google_sheet.private_key,['https://www.googleapis.com/auth/spreadsheets']);
     client.authorize(function(err,tokens){
         if(err)
@@ -41,10 +39,6 @@ exports.submitConfirmationPage=(req,res,next)=>{
     });
     let formResponse = req.body;
     let resArr=Object.values(formResponse);
-    // for (var i in formResponse)
-    // {
-    //     resArr.push([i, formResponse[i]]);
-    // }
     console.log(resArr);
     async function gApiRun(client){
         const gsapi = google.sheets({version : 'v4',auth : client});
@@ -63,5 +57,9 @@ exports.submitConfirmationPage=(req,res,next)=>{
         console.log(err);
         res.send("Failed");
     });
-        // console.log(x);
+};
+
+exports.continueLater= (req,res,next)=>{
+    res.send(req.body);
+    // Add Saving Logic Here
 };

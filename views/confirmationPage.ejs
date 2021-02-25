@@ -13,7 +13,7 @@
     </header>
 
     <!-- Begin page content -->
-    <main role="main" class="container-fluid w-90">
+    <main role="main" class="container-fluid w-75">
         
         <div class="py-5 my-3 text-center">
             <h2>Confirmation form</h2>
@@ -29,120 +29,119 @@
             <h4 class="mb-3">Purchase Order Details</h4>
             <form class="needs-validation my-4 w-100" action="/confirmationPage" method="POST" novalidate>
                 <div class="row">
-                <div class="col-md-3 mb-3">
-                    <label for="serialNo">Sr.No.</label>
-                    <input type="number" class="form-control" id="serialNo" placeholder="" value="" name="serialNo" required>
+                    <div class="col-md-3 mb-3">
+                        <label for="serialNo">Sr.No.</label>
+                        <input type="number" class="form-control" id="serialNo" placeholder="" value="" name="serialNo" required>
+                        <div class="invalid-feedback">
+                        Valid Sr.no. is required.
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="indentNo">Indent No.</label>
+                        <input type="number" class="form-control" id="indentNo" placeholder="" value="" name="indentNo" required>
+                        <div class="invalid-feedback">
+                        Valid indent number is required.
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="datePrepared">Date</label>
+                        <input type="date" class="form-control" id="datePrepared" placeholder="" value="" name="datePrepared" required>
+                        <div class="invalid-feedback">
+                        Valid Date is required.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="mb-3 col-md-6">
+                        <label for="fileNo">File No.</label>
+                            <input type="text" class="form-control" id="fileNo" placeholder="File Number" name="fileNo" required>
+                            <div class="invalid-feedback" style="width: 100%;">
+                            File Number is required.
+                        </div> 
+                    </div>
+
+                    <div class="mb-3 col-md-6">
+                        <label for="indenter">Name of Indenter</label>
+                        <input type="indenter" class="form-control" id="indenter" name="indenter" placeholder="Dr. Harpreet Singh" required>
+                        <div class="invalid-feedback">
+                            Please enter a valid Name of indenter.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="department">Department</label>
+                    <input type="text" class="form-control" id="department" placeholder="Mechanical Engg." name="department" required>
                     <div class="invalid-feedback">
-                    Valid Sr.no. is required.
+                        Please enter Department Name.
                     </div>
                 </div>
-                <div class="col-md-3 mb-3">
-                    <label for="indentNo">Indent No.</label>
-                    <input type="number" class="form-control" id="indentNo" placeholder="" value="" name="indentNo" required>
-                    <div class="invalid-feedback">
-                    Valid indent number is required.
+                <div class="row">
+                    <div class="mb-3 col-md-4">
+                        <label for="fundingAgency">Funding Agency<span class="text-muted">(Optional)</span></label>
+                        <input type="text" class="form-control" id="fundingAgency" placeholder="" name="fundingAgency">
+                    </div>
+
+                    <div class="mb-3 col-md-4">
+                        <label for="projectName">Project Name<span class="text-muted">(Optional)</span></label>
+                        <input type="text" class="form-control" id="projectName" placeholder="" name="projectName">
+                    </div>
+
+                    <div class="mb-3 col-md-4">
+                        <label for="itemName">Item Name</label>
+                        <input type="text" class="form-control" id="itemName" placeholder="" name="itemName" required>
+                        <div class="invalid-feedback">
+                            Please enter Item Name.
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6 mb-3">
-                    <label for="datePrepared">Date</label>
-                    <input type="date" class="form-control" id="datePrepared" placeholder="" value="" name="datePrepared" required>
-                    <div class="invalid-feedback">
-                    Valid Date is required.
-                    </div>
-                </div>
-                </div>
-
-                <div class="mb-3">
-                <label for="fileNo">File No.</label>
-                <div class="input-group">
-                    <!-- <div class="input-group-prepend">
-                    <span class="input-group-text">@</span>
-                    </div> -->
-                    <input type="text" class="form-control" id="fileNo" placeholder="File Number" name="fileNo" required>
-                    <div class="invalid-feedback" style="width: 100%;">
-                    File Number is required.
-                    </div>
-                </div>
-                </div>
-
-                <div class="mb-3">
-                <label for="indenter">Name of Indenter</label>
-                <input type="indenter" class="form-control" id="indenter" name="indenter" placeholder="Dr. Harpreet Singh" required>
-                <div class="invalid-feedback">
-                    Please enter a valid Name of indenter.
-                </div>
-                </div>
-
-                <div class="mb-3">
-                <label for="department">Department</label>
-                <input type="text" class="form-control" id="department" placeholder="Mechanical Engg." name="department" required>
-                <div class="invalid-feedback">
-                    Please enter Department Name.
-                </div>
-                </div>
-
-                <div class="mb-3">
-                <label for="fundingAgency">Funding Agency<span class="text-muted">(Optional)</span></label>
-                <input type="text" class="form-control" id="fundingAgency" placeholder="" name="fundingAgency">
-                </div>
-
-                <div class="mb-3">
-                    <label for="projectName">Project Name<span class="text-muted">(Optional)</span></label>
-                    <input type="text" class="form-control" id="projectName" placeholder="" name="projectName">
-                </div>
-
-                <div class="mb-3">
-                    <label for="itemName">Item Name</label>
-                    <input type="text" class="form-control" id="itemName" placeholder="" name="itemName" required>
-                    <div class="invalid-feedback">
-                        Please enter Item Name.
-                    </div>
-                </div>
-
-                <div class="d-block my-3">
-                    <div class="custom-control custom-radio">
+                <div class="row my-3">
+                    <div class="custom-control custom-radio col-md-4">
                         <input id="indian" name="indianImported" type="radio" class="custom-control-input" value="Indian" checked required>
                         <label class="custom-control-label" for="indian">Indian</label>
                     </div>
-                    <div class="custom-control custom-radio">
+                    <div class="custom-control custom-radio col-md-4">
                         <input id="imported" name="indianImported" type="radio" class="custom-control-input" value="Imported" required>
                         <label class="custom-control-label" for="imported">Imported</label>
                     </div>
                 </div>
+                <div class="row">
 
-                <div class="mb-3">
-                    <label for="amount">Amount</label>
-                    <input type="number" class="form-control" id="amount" placeholder="" name="amount" required>
-                    <div class="invalid-feedback">
-                        Please enter Amount.
+                    <div class="mb-3 col-md-6">
+                        <label for="amount">Amount</label>
+                        <input type="number" class="form-control" id="amount" placeholder="" name="amount" required>
+                        <div class="invalid-feedback">
+                            Please enter Amount.
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3 col-md-6">
+                        <label for="importAmount"> Import Amount <span class="text-muted">(Optional)</span></label>
+                        <input type="number" class="form-control" id="importAmount" placeholder="" name="importAmount" >
                     </div>
                 </div>
-                
-                <div class="mb-3">
-                    <label for="importAmount"> Import Amount <span class="text-muted">(Optional)</span></label>
-                    <input type="number" class="form-control" id="importAmount" placeholder="" name="importAmount" >
-                </div>
-
-                <div class="form-group mb-3">
-                    <label for="category">Category</label>
-                    <select class="form-control" id="category" name="category" required>
-                      <option value="Consumable">Consumable</option>
-                      <option value="Non Consumable">Non Consumable</option>
-                      <option value="Both">Both</option>
-                    </select>
-                    <div class="invalid-feedback">
-                        Please Select Category.
+                <div class="row">
+                    <div class="form-group mb-3 col-md-6">
+                        <label for="category">Category</label>
+                        <select class="form-control" id="category" name="category" required>
+                        <option value="Consumable">Consumable</option>
+                        <option value="Non Consumable">Non Consumable</option>
+                        <option value="Both">Both</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please Select Category.
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3 col-md-6">
+                        <label for="modeofPurchase">Mode of Purchase</label>
+                        <input type="text" class="form-control" id="modeofPurchase" placeholder="" name="modeofPurchase" required>
+                        <div class="invalid-feedback">
+                            Please enter mode of purchase.
+                        </div>
                     </div>
                 </div>
-                
-                <div class="mb-3">
-                    <label for="modeofPurchase">Mode of Purchase</label>
-                    <input type="text" class="form-control" id="modeofPurchase" placeholder="" name="modeofPurchase" required>
-                    <div class="invalid-feedback">
-                        Please enter mode of purchase.
-                    </div>
-                </div>
-                
                 <hr class="mb-4">
 
                 <h4 class="mb-3">PO Details</h4>
@@ -194,10 +193,17 @@
                     <input type="text" class="form-control" id="remarks" placeholder="" name="remarks" >
                 </div>
                 <hr class="mb-4">
-                <!-- <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button> -->
-                <input type="submit" class="btn btn-primary btn-lg btn-block">
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="submit" class="btn  btn-outline-success btn-lg btn-block" name="submit" value="Submit">
+                    </div>
+                    <div class="col-md-6">
+                        <input type="submit" class="btn btn-primary btn-outline-primary btn-lg btn-block" name="submit" value="Continue Later" formaction="/continueLater" formmethod="POST">
+                    </div>
+                </div>
             </form>
             </div>
+        
         </div>
         
     </main>
@@ -215,7 +221,8 @@
             // Loop over them and prevent submission
             var validation = Array.prototype.filter.call(forms, function(form) {
               form.addEventListener('submit', function(event) {
-                if (form.checkValidity() === false) {
+                //   console.log(event.submitter.name);
+                if (form.checkValidity() === false && event.submitter.value!=='Continue Later') {
                   event.preventDefault();
                   event.stopPropagation();
                 }
