@@ -26,25 +26,25 @@
                 <iframe src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" class='w-100 h-50 my-4'></iframe>
             </div>
             <div class="col-md-7 order-md-1">
-            <h4 class="mb-3">Purchase Order Details</h4>
+            <h4 class="mb-3">Purchase Order Details <span class='text-muted'>( <span style="color:red;"><strong>*</strong></span> ) <em>Validation Needed</em></span></h4>
             <form class="needs-validation my-4 w-100" action="/confirmationPage" method="POST" novalidate>
                 <div class="row">
                     <div class="col-md-3 mb-3">
-                        <label for="serialNo">Sr.No.</label>
+                        <label for="serialNo" class="required">Sr.No.</label>
                         <input type="number" class="form-control" id="serialNo" placeholder="" value="" name="serialNo" required>
                         <div class="invalid-feedback">
                         Valid Sr.no. is required.
                         </div>
                     </div>
                     <div class="col-md-3 mb-3">
-                        <label for="indentNo">Indent No.</label>
+                        <label for="indentNo" class="required">Indent No.</label>
                         <input type="number" class="form-control" id="indentNo" placeholder="" value="" name="indentNo" required>
                         <div class="invalid-feedback">
                         Valid indent number is required.
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="datePrepared">Date</label>
+                        <label for="datePrepared" class="required">Date</label>
                         <input type="date" class="form-control" id="datePrepared" placeholder="" value="" name="datePrepared" required>
                         <div class="invalid-feedback">
                         Valid Date is required.
@@ -54,7 +54,7 @@
                 
                 <div class="row">
                     <div class="mb-3 col-md-6">
-                        <label for="fileNo">File No.</label>
+                        <label for="fileNo" class="required">File No.</label>
                             <input type="text" class="form-control" id="fileNo" placeholder="File Number" name="fileNo" required>
                             <div class="invalid-feedback" style="width: 100%;">
                             File Number is required.
@@ -62,7 +62,7 @@
                     </div>
 
                     <div class="mb-3 col-md-6">
-                        <label for="indenter">Name of Indenter</label>
+                        <label for="indenter" class="required">Name of Indenter</label>
                         <input type="indenter" class="form-control" id="indenter" name="indenter" placeholder="Dr. Harpreet Singh" required>
                         <div class="invalid-feedback">
                             Please enter a valid Name of indenter.
@@ -71,25 +71,25 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="department">Department</label>
+                    <label for="department" class="required">Department</label>
                     <input type="text" class="form-control" id="department" placeholder="Mechanical Engg." name="department" required>
                     <div class="invalid-feedback">
                         Please enter Department Name.
                     </div>
                 </div>
                 <div class="row">
-                    <div class="mb-3 col-md-4">
+                    <div class="mb-3 col-md-4" >
                         <label for="fundingAgency">Funding Agency<span class="text-muted">(Optional)</span></label>
                         <input type="text" class="form-control" id="fundingAgency" placeholder="" name="fundingAgency">
                     </div>
 
-                    <div class="mb-3 col-md-4">
+                    <div class="mb-3 col-md-4" >
                         <label for="projectName">Project Name<span class="text-muted">(Optional)</span></label>
                         <input type="text" class="form-control" id="projectName" placeholder="" name="projectName">
                     </div>
 
-                    <div class="mb-3 col-md-4">
-                        <label for="itemName">Item Name</label>
+                    <div class="mb-3 col-md-4" class="required">
+                        <label for="itemName" class="required">Item Name</label>
                         <input type="text" class="form-control" id="itemName" placeholder="" name="itemName" required>
                         <div class="invalid-feedback">
                             Please enter Item Name.
@@ -97,9 +97,12 @@
                     </div>
                 </div>
                 <div class="row my-3">
+                    <div class="col-md-4 ">
+                        Origin :
+                    </div>
                     <div class="custom-control custom-radio col-md-4">
                         <input id="indian" name="indianImported" type="radio" class="custom-control-input" value="Indian" checked required>
-                        <label class="custom-control-label" for="indian">Indian</label>
+                        <label class="custom-control-label " for="indian">Indian</label>
                     </div>
                     <div class="custom-control custom-radio col-md-4">
                         <input id="imported" name="indianImported" type="radio" class="custom-control-input" value="Imported" required>
@@ -109,7 +112,7 @@
                 <div class="row">
 
                     <div class="mb-3 col-md-6">
-                        <label for="amount">Amount</label>
+                        <label for="amount" class="required">Amount</label>
                         <input type="number" class="form-control" id="amount" placeholder="" name="amount" required>
                         <div class="invalid-feedback">
                             Please enter Amount.
@@ -117,13 +120,13 @@
                     </div>
                     
                     <div class="mb-3 col-md-6">
-                        <label for="importAmount"> Import Amount <span class="text-muted">(Optional)</span></label>
+                        <label for="importAmount" > Import Amount <span class="text-muted">(Optional)</span></label>
                         <input type="number" class="form-control" id="importAmount" placeholder="" name="importAmount" >
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group mb-3 col-md-6">
-                        <label for="category">Category</label>
+                        <label for="category" class="required">Category</label>
                         <select class="form-control" id="category" name="category" required>
                         <option value="Consumable">Consumable</option>
                         <option value="Non Consumable">Non Consumable</option>
@@ -135,7 +138,7 @@
                     </div>
                     
                     <div class="mb-3 col-md-6">
-                        <label for="modeofPurchase">Mode of Purchase</label>
+                        <label for="modeofPurchase" class="required">Mode of Purchase</label>
                         <input type="text" class="form-control" id="modeofPurchase" placeholder="" name="modeofPurchase" required>
                         <div class="invalid-feedback">
                             Please enter mode of purchase.
@@ -149,14 +152,14 @@
                 
                 <div class="row">
                 <div class="col-md-9 mb-3">
-                    <label for="poNumber">PO Number</label>
+                    <label for="poNumber" class="required">PO Number</label>
                     <input type="text" class="form-control" id="poNumber" placeholder="" name="poNumber" required>
                     <div class="invalid-feedback">
                     PO Number is required
                     </div>
                 </div>
                 <div class="col-md-3 mb-3">
-                    <label for="poDate">PO Date</label>
+                    <label for="poDate" class="required">PO Date</label>
                     <input type="date" class="form-control" id="date" placeholder="" name="poDate" required>
                     <div class="invalid-feedback">
                     PO Date is required
@@ -165,7 +168,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="supplier">Supplier</label>
+                    <label for="supplier" class="required">Supplier</label>
                     <input type="supplier" class="form-control" id="supplier" placeholder="" name="supplier" required>
                     <div class="invalid-feedback">
                     Supplier is required
@@ -174,14 +177,14 @@
 
                 <div class="row">
                 <div class="col-md-9 mb-3">
-                    <label for="materialDescription">Material Description</label>
+                    <label for="materialDescription" class="required">Material Description</label>
                     <input type="text" class="form-control" id="materialDescription" name="materialDescription" placeholder="" required>
                     <div class="invalid-feedback">
                     Material Description required
                     </div>
                 </div>
                 <div class="col-md-3 mb-3">
-                    <label for="poAmount">PO Amount</label>
+                    <label for="poAmount" class="required">PO Amount</label>
                     <input type="number" class="form-control" id="poAmount" name="poAmount" placeholder="" required>
                     <div class="invalid-feedback">
                     PO Amount is required
@@ -231,6 +234,18 @@
             });
           }, false);
         })();
+        document.querySelectorAll("input:required").forEach(ele=>{
+            ele.addEventListener('focusout',(e)=>{
+                if(e.target.value.length > 0){
+                    e.target.classList.add('is-valid');
+                    e.target.classList.remove('is-invalid');
+                    }
+                else {
+                    e.target.classList.remove('is-valid');
+                    e.target.classList.add('is-invalid');
+                }
+            })
+        })
       </script>
   </body>
 </html>
