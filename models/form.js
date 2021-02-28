@@ -7,16 +7,16 @@ const formSchema = new Schema({
         required : true
     },
     serialNo : {
-        type : Number,
+        type : String,
     },
     indentNo : {
-        type : Number,
+        type : String,
     },
     datePrepared : {
         type : String,
     },
     fileNo : {
-        type : Number,
+        type : String,
     },
     indenter : {
         type : String,
@@ -37,10 +37,10 @@ const formSchema = new Schema({
         type : String,
     },
     amount : {
-        type : Number,
+        type : String,
     },
     importAmount : {
-        type : Number,
+        type : String,
     },
     category : {
         type : String,
@@ -49,7 +49,7 @@ const formSchema = new Schema({
         type : String,
     },
     poNumber : {
-        type : Number,
+        type : String,
     },
     poDate : {
         type : String,
@@ -61,7 +61,7 @@ const formSchema = new Schema({
         type : String,
     },
     poAmount : {
-        type : Number,
+        type : String,
     },
     remarks : {
         type : String,
