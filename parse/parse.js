@@ -1,17 +1,18 @@
-const fs = require('fs');
-
-fs.readFile('res2.json', (err, data) => {
-    if (err) throw err;
-
-    // res1
-    // let str = JSON.parse(data).text;
-
-    // rest
-    let str = JSON.parse(data).fullTextAnnotation.text;
-//     console.log(str);
+function parse (data) {
+    let str = data.fullTextAnnotation.text;
+    // let str = data.text;
 
     // Assumptions for rgx in comments, won't work without these
 
+    
+    const GSTINrgx = /03AAAT17702D128/i;
+    let GST = str.match(GSTINrgx);
+    if (GST == null) {
+        // 
+        // 
+        // return
+    }
+    
     // xx.xx.xxxx format, First instance is always date (as in samples)
     const dateRgx = /\d{2}[.]\d{2}[.]\d{4}/;
     let date = str.match(dateRgx);
@@ -59,23 +60,35 @@ fs.readFile('res2.json', (err, data) => {
         supplier = supplier[0];
     }
 
-    // CC to : Indentator   
+    // CC to : indenter   
     const indRgx = /cc[" "]*to[" ":]*\n1.[" "\w.]*/i;
-    let indentator = str.match(indRgx);
-    if (indentator != null) {
-        indentator = indentator[0];
-        indentator = indentator.substring(indentator.match(/cc[" "]*to[" ":]*\n1.[" "]*/i)[0].length, indentator.length);
+    let indenter = str.match(indRgx);
+    if (indenter != null) {
+        indenter = indenter[0];
+        indenter = indenter.substring(indenter.match(/cc[" "]*to[" ":]*\n1.[" "]*/i)[0].length, indenter.length);
     }
-    
-    let info = {
-        date: date,
-        amount: amount,
-        PO: PO,
-        item: item,
-        dept: dept,
-        supplier: supplier,
-        indentator: indentator
-    };
-    console.log(info);
 
-});
+    serialNo = PO.substring(0, PO.match('-').index);
+    
+    let fileNo = PO.substring(0, PO.lastIndexOf('/') + 1);
+
+    let info = {
+        datePrepared: date,
+        poDate: date,
+        amount: amount,
+        poNumber: PO,
+        itemName: item,
+        department: dept,
+        supplier: supplier,
+        indenter: indenter,
+        serialNo: serialNo,
+        indentNo: serialNo,
+        fileNo: fileNo
+    };
+    // console.log(info);
+    return info;
+}
+
+module.exports = {
+    parse: parse
+};

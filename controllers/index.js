@@ -3,7 +3,7 @@ let path = require('path');
 const {google} = require('googleapis');
 var keys=require('./../config/keys');
 const { response } = require('express');
-const { batchAnnotateFiles } = require('./util');
+const { batchAnnotateFiles,parse } = require('./util');
 
 var Form = require('./../models/form');
 exports.home_page = (req,res,next)=>{
@@ -21,14 +21,14 @@ exports.submitUploadPage = (req,res,next)=>{
     {
         file.path=path.join(path.resolve(__dirname,'..'),'public/uploads',file.name);
         batchAnnotateFiles(file.path).then(resp=>{
-            res.send(resp);
+            formData=parse(resp);
+            formData.pdfLink="/uploads/"+file.name;
+            res.render("confirmationPage",{title:"ConfirmationPage",user:req.user,formData});
         }).catch(err=>{
             console.log(err.message);
             res.send(err);
         })
-    });	
-    // res.render("index",{title:"Home",user:req.user});
-    
+    });	    
 };
 
 exports.getConfirmationPage=(req,res,next)=>{
@@ -61,18 +61,10 @@ exports.getConfirmationPage=(req,res,next)=>{
 exports.submitConfirmationPage=(req,res,next)=>{
     const client = new google.auth.JWT(keys.google_sheet.client_email,null,keys.google_sheet.private_key,['https://www.googleapis.com/auth/spreadsheets']);
     client.authorize(function(err,tokens){
-        if(err)
-        {
-            console.log(err);
-        }
-        else
-        {
-            console.log("connected");
-        }
+        if(err)console.log(err);
     });
     let formResponse = req.body;
     let resArr=Object.values(formResponse);
-    console.log(resArr);
     async function gApiRun(client){
         const gsapi = google.sheets({version : 'v4',auth : client});
         const options = {
@@ -81,7 +73,7 @@ exports.submitConfirmationPage=(req,res,next)=>{
             valueInputOption : 'USER_ENTERED',
             resource : {values : [resArr]}
         }
-    await gsapi.spreadsheets.values.append(options);
+        await gsapi.spreadsheets.values.append(options);
     }
     gApiRun(client).then(result=>{
         console.log(result);
@@ -114,10 +106,8 @@ exports.savedPOPage = (req,res,next)=>{
         }
     ).then((result) => {
         res.render('savedPo',{pos:result,user:req.user,title:"Saved PO Page"});
-        // res.send(result)
     })
     .catch((err) => {
         console.log(err)
     });
-    // res.send(req.body);
 };
