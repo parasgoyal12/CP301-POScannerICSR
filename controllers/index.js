@@ -3,6 +3,7 @@ let path = require('path');
 const {google} = require('googleapis');
 var keys=require('./../config/keys');
 const { response } = require('express');
+var Form = require('./../models/form');
 exports.home_page = (req,res,next)=>{
     res.render('index',{title:'Home',user:req.user});
 };
@@ -59,7 +60,19 @@ exports.submitConfirmationPage=(req,res,next)=>{
     });
 };
 
-exports.continueLater= (req,res,next)=>{
-    res.send(req.body);
+exports.continueLater = (req,res,next)=>{
+    let obj = req.body;
+    obj.User = req.user._id;
+    const form = new Form(
+        obj
+    )
+    form.save()
+        .then((result)=>{
+            res.send(result)
+        })
+        .catch((err)=>{
+            console.log(err)
+        });
+    // res.send(req.body);
     // Add Saving Logic Here
 };
