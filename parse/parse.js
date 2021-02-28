@@ -5,7 +5,7 @@ function parse (data) {
     // Assumptions for rgx in comments, won't work without these
 
     
-    const GSTINrgx = /GSTIN/i;
+    const GSTINrgx = /03AAAT17702D128/i;
     let GST = str.match(GSTINrgx);
     if (GST == null) {
         // 
