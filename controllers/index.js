@@ -17,18 +17,24 @@ exports.getUploadPage = (req,res,next)=>{
 exports.submitUploadPage = (req,res,next)=>{
     var form = new formidable.IncomingForm();
     form.parse(req);
+    let filename='';
+    let filePath='';
     form.on('fileBegin',function(name,file)
     {
         file.path=path.join(path.resolve(__dirname,'..'),'public/uploads',file.name);
-        batchAnnotateFiles(file.path).then(resp=>{
+        filename=file.name;
+        filePath=file.path;
+    });	    
+    form.on('end',()=>{
+        batchAnnotateFiles(filePath).then(resp=>{
             formData=parse(resp);
-            formData.pdfLink="/uploads/"+file.name;
+            formData.pdfLink="/uploads/"+filename;
             res.render("confirmationPage",{title:"ConfirmationPage",user:req.user,formData});
         }).catch(err=>{
             console.log(err.message);
             res.send(err);
         })
-    });	    
+    });
 };
 
 exports.getConfirmationPage=(req,res,next)=>{
