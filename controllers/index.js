@@ -23,6 +23,30 @@ exports.submitUploadPage = (req,res,next)=>{
 };
 
 exports.getConfirmationPage=(req,res,next)=>{
+    let obj ={
+    User : "",
+    serialNo : "",
+    indentNo : "",
+    datePrepared : "",
+    fileNo : "",
+    indenter : "",
+    department : "",
+    fundingAgency : "",
+    projectName : "",
+    itemName : "",
+    indianImported : "",
+    amount : "",
+    importAmount : "",
+    category : "",
+    modeofPurchase : "",
+    poNumber : "",
+    poDate : "",
+    supplier : "",
+    materialDescription : "",
+    poAmount : "",
+    remarks : ""
+}
+    
     res.render('confirmationPage',{title:'ConfirmationPage',user:req.user});
 };
 
