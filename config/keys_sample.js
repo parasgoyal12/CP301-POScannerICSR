@@ -26,4 +26,4 @@ module.exports= {
     }
 };
 
-process.env.GOOGLE_APPLICATION_CREDENTIALS = path.join(__dirname,'name of json file');
+process.env.GOOGLE_APPLICATION_CREDENTIALS = path.join(__dirname,'googleKeyApi.json');

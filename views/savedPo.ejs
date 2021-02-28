@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <%- include('./common/head') %>
+    <link rel="stylesheet" href="stylesheets/index.css">
+  </head>
+
+  <body>
+
+    <header>
+      <%- include('./common/navbar') %>
+    </header>
+
+    <!-- Begin page content -->
+    <main style="margin-top: 60px;">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Serial No</th>
+                <th scope="col">Indent No</th>
+                <th scope="col">Date Prepared</th>
+                <th scope="col">File No</th>
+              </tr>
+            </thead>
+            <tbody>
+                <% pos.forEach(po => { %> 
+              <tr>
+                <!-- <th scope="row">1</th> -->
+                <td><%=po.serialNo %></td>
+                <td><%=po.indentNo %></td>
+                <td><%=po.datePrepared %></td>
+                <td><%=po.fileNo %></td>
+              </tr>
+           <% }); %>
+            </tbody>
+          </table>
+    </main>
+    
+    <%- include('./common/footer') %>
+    
+  </body>
+</html>

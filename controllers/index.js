@@ -23,6 +23,7 @@ exports.submitUploadPage = (req,res,next)=>{
         batchAnnotateFiles(file.path).then(resp=>{
             res.send(resp);
         }).catch(err=>{
+            console.log(err.message);
             res.send(err);
         })
     });	
@@ -31,30 +32,29 @@ exports.submitUploadPage = (req,res,next)=>{
 };
 
 exports.getConfirmationPage=(req,res,next)=>{
-    let obj ={
-    User : "",
-    serialNo : "",
-    indentNo : "",
-    datePrepared : "",
-    fileNo : "",
-    indenter : "",
-    department : "",
-    fundingAgency : "",
-    projectName : "",
-    itemName : "",
-    indianImported : "",
-    amount : "",
-    importAmount : "",
-    category : "",
-    modeofPurchase : "",
-    poNumber : "",
-    poDate : "",
-    supplier : "",
-    materialDescription : "",
-    poAmount : "",
-    remarks : ""
-}
-    
+//     let obj ={
+//     User : "",
+//     serialNo : "",
+//     indentNo : "",
+//     datePrepared : "",
+//     fileNo : "",
+//     indenter : "",
+//     department : "",
+//     fundingAgency : "",
+//     projectName : "",
+//     itemName : "",
+//     indianImported : "",
+//     amount : "",
+//     importAmount : "",
+//     category : "",
+//     modeofPurchase : "",
+//     poNumber : "",
+//     poDate : "",
+//     supplier : "",
+//     materialDescription : "",
+//     poAmount : "",
+//     remarks : ""
+// }
     res.render('confirmationPage',{title:'ConfirmationPage',user:req.user});
 };
 
@@ -105,6 +105,19 @@ exports.continueLater = (req,res,next)=>{
         .catch((err)=>{
             console.log(err)
         });
+};
+
+exports.savedPOPage = (req,res,next)=>{
+    Form.find(
+        {
+            User : req.user._id
+        }
+    ).then((result) => {
+        res.render('savedPo',{pos:result,user:req.user,title:"Saved PO Page"});
+        // res.send(result)
+    })
+    .catch((err) => {
+        console.log(err)
+    });
     // res.send(req.body);
-    // Add Saving Logic Here
 };
