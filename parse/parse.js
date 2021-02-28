@@ -5,7 +5,7 @@ function parse (data) {
     // Assumptions for rgx in comments, won't work without these
 
     
-    const GSTINrgx = /GSTIN/i;
+    const GSTINrgx = /03AAAT17702D128/i;
     let GST = str.match(GSTINrgx);
     if (GST == null) {
         // 
@@ -70,6 +70,8 @@ function parse (data) {
 
     serialNo = PO.substring(0, PO.match('-').index);
     
+    let fileNo = PO.substring(0, PO.lastIndexOf('/') + 1);
+
     let info = {
         datePrepared: date,
         poDate: date,
@@ -80,7 +82,8 @@ function parse (data) {
         supplier: supplier,
         indenter: indenter,
         serialNo: serialNo,
-        indentNo: serialNo
+        indentNo: serialNo,
+        fileNo: fileNo
     };
     // console.log(info);
     return info;
