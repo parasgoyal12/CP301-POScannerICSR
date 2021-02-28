@@ -31,21 +31,21 @@
                 <div class="row">
                     <div class="col-md-3 mb-3">
                         <label for="serialNo" class="required">Sr.No.</label>
-                        <input type="number" class="form-control" id="serialNo" placeholder="" value="" name="serialNo" required>
+                        <input type="number" class="form-control" id="serialNo" placeholder="" value="<%= formData.serialNo %>" name="serialNo" required>
                         <div class="invalid-feedback">
                         Valid Sr.no. is required.
                         </div>
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="indentNo" class="required">Indent No.</label>
-                        <input type="number" class="form-control" id="indentNo" placeholder="" value="" name="indentNo" required>
+                        <input type="number" class="form-control" id="indentNo" placeholder="" value="<%= formData.indentNo %>" name="indentNo" required>
                         <div class="invalid-feedback">
                         Valid indent number is required.
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="datePrepared" class="required">Date</label>
-                        <input type="date" class="form-control" id="datePrepared" placeholder="" value="" name="datePrepared" required>
+                        <input type="date" class="form-control" id="datePrepared" placeholder="" value="<%= formData.datePrepared %>" name="datePrepared" required>
                         <div class="invalid-feedback">
                         Valid Date is required.
                         </div>
@@ -55,7 +55,7 @@
                 <div class="row">
                     <div class="mb-3 col-md-6">
                         <label for="fileNo" class="required">File No.</label>
-                            <input type="text" class="form-control" id="fileNo" placeholder="File Number" name="fileNo" required>
+                            <input type="text" class="form-control" id="fileNo" placeholder="File Number" name="fileNo" value="<%= formData.fileNo %>" required>
                             <div class="invalid-feedback" style="width: 100%;">
                             File Number is required.
                         </div> 
@@ -63,7 +63,7 @@
 
                     <div class="mb-3 col-md-6">
                         <label for="indenter" class="required">Name of Indenter</label>
-                        <input type="indenter" class="form-control" id="indenter" name="indenter" placeholder="Dr. Harpreet Singh" required>
+                        <input type="indenter" class="form-control" id="indenter" name="indenter" placeholder="Dr. Harpreet Singh" value="<%= formData.indenter %>" required>
                         <div class="invalid-feedback">
                             Please enter a valid Name of indenter.
                         </div>
@@ -72,7 +72,7 @@
 
                 <div class="mb-3">
                     <label for="department" class="required">Department</label>
-                    <input type="text" class="form-control" id="department" placeholder="Mechanical Engg." name="department" required>
+                    <input type="text" class="form-control" id="department" placeholder="Mechanical Engg." name="department" value="<%= formData.department %>" required>
                     <div class="invalid-feedback">
                         Please enter Department Name.
                     </div>
@@ -90,7 +90,7 @@
 
                     <div class="mb-3 col-md-4" class="required">
                         <label for="itemName" class="required">Item Name</label>
-                        <input type="text" class="form-control" id="itemName" placeholder="" name="itemName" required>
+                        <input type="text" class="form-control" id="itemName" placeholder="" name="itemName" value="<%= formData.itemName %>" required>
                         <div class="invalid-feedback">
                             Please enter Item Name.
                         </div>
@@ -113,7 +113,7 @@
 
                     <div class="mb-3 col-md-6">
                         <label for="amount" class="required">Amount</label>
-                        <input type="number" class="form-control" id="amount" placeholder="" name="amount" required>
+                        <input type="number" class="form-control" id="amount" placeholder="" name="amount" value="<%= formData.amount %>" required>
                         <div class="invalid-feedback">
                             Please enter Amount.
                         </div>
@@ -153,14 +153,14 @@
                 <div class="row">
                 <div class="col-md-9 mb-3">
                     <label for="poNumber" class="required">PO Number</label>
-                    <input type="text" class="form-control" id="poNumber" placeholder="" name="poNumber" required>
+                    <input type="text" class="form-control" id="poNumber" placeholder="" name="poNumber" value="<%= formData.poNumber %>" required>
                     <div class="invalid-feedback">
                     PO Number is required
                     </div>
                 </div>
                 <div class="col-md-3 mb-3">
                     <label for="poDate" class="required">PO Date</label>
-                    <input type="date" class="form-control" id="date" placeholder="" name="poDate" required>
+                    <input type="date" class="form-control" id="date" placeholder="" name="poDate" value="<%= formData.poDate %>" required>
                     <div class="invalid-feedback">
                     PO Date is required
                     </div>
@@ -169,7 +169,7 @@
 
                 <div class="mb-3">
                     <label for="supplier" class="required">Supplier</label>
-                    <input type="supplier" class="form-control" id="supplier" placeholder="" name="supplier" required>
+                    <input type="supplier" class="form-control" id="supplier" placeholder="" name="supplier" value="<%= formData.supplier %>" required>
                     <div class="invalid-feedback">
                     Supplier is required
                     </div>
@@ -178,14 +178,14 @@
                 <div class="row">
                 <div class="col-md-9 mb-3">
                     <label for="materialDescription" class="required">Material Description</label>
-                    <input type="text" class="form-control" id="materialDescription" name="materialDescription" placeholder="" required>
+                    <input type="text" class="form-control" id="materialDescription" name="materialDescription" value="<%= formData.materialDescription %>" required>
                     <div class="invalid-feedback">
                     Material Description required
                     </div>
                 </div>
                 <div class="col-md-3 mb-3">
                     <label for="poAmount" class="required">PO Amount</label>
-                    <input type="number" class="form-control" id="poAmount" name="poAmount" placeholder="" required>
+                    <input type="number" class="form-control" id="poAmount" name="poAmount" placeholder="" value="<%= formData.poAmount %>" required>
                     <div class="invalid-feedback">
                     PO Amount is required
                     </div>

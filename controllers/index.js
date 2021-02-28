@@ -3,7 +3,7 @@ let path = require('path');
 const {google} = require('googleapis');
 var keys=require('./../config/keys');
 const { response } = require('express');
-const { batchAnnotateFiles } = require('./util');
+const { batchAnnotateFiles,parse } = require('./util');
 
 var Form = require('./../models/form');
 exports.home_page = (req,res,next)=>{
@@ -21,7 +21,8 @@ exports.submitUploadPage = (req,res,next)=>{
     {
         file.path=path.join(path.resolve(__dirname,'..'),'public/uploads',file.name);
         batchAnnotateFiles(file.path).then(resp=>{
-            res.send(resp);
+            // res.send(parse());
+            res.render("confirmationPage",{title:"ConfirmationPage",user:req.user,formData:parse(resp)});
         }).catch(err=>{
             res.send(err);
         })
