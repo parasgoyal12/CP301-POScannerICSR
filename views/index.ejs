@@ -24,22 +24,27 @@
           <a href="#" class="btn btn-secondary btn-lg">View Previously Uploaded PO</a>
         </div>
       </div> -->
-    <div id="dock-container">
-      <div id="dock">
-        <ul>
-           <li>
-             <span>Upload a new PO</span>
-             <a href="/uploadPage"><img src="images/du1.png"/></a>
-           </li>
-           <li>
-             <span>View Previously Uploaded PO</span>
-             <a href="#"><img src="images/dv.png"/></a>
-           </li>
-        </ul>
-      </div> 
-     </div>
+    <div class="container h-100">
+      <div id="dock-container">
+        <div id="dock">
+          <ul>
+            <li>
+              <span>Upload a new PO</span>
+              <a href="/uploadPage"><img src="images/du1.png"/></a>
+            </li>
+            <li>
+              <span>View Previously Uploaded PO</span>
+              <a href="#"><img src="images/dv.png"/></a>
+            </li>
+          </ul>
+        </div>
+        <% if(user) { %>
+        <iframe class="mt-4 w-100 h-100" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQp2z0stPhyH256UltThLB9LHid42QALok4sBIQOx8GSBgAzKM5KAkzgJtKzaaOAcfj8MopDYDOqWo_/pubhtml?gid=0&amp;widget=true&amp;headers=false"></iframe>
+          <% } %>
+      </div>
+    </div>
     </main>
-
+    
     <%- include('./common/footer') %>
     
   </body>

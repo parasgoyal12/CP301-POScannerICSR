@@ -84,10 +84,10 @@ code {
 
 #dock-container {
     position: fixed;
-    /* bottom: 40%; */
     text-align: center;
     background: rgba(255,255,255,0.2);
     border-radius: 10px 10px 0 0;
+    height: 300px;
   }
   #dock-container li {
     list-style-type: none;
@@ -97,15 +97,12 @@ code {
   #dock-container li img {
     position:relative;
     height: auto;
-    /* width: 50%; */
-    /* -webkit-box-reflect: below 2px */
               -webkit-gradient: (linear, left top, left bottom, from(transparent),
               color-stop(0.7, transparent), to(rgba(255,255,255,.5)));
     -webkit-transition: all 0.3s;
     -webkit-transform-origin: 50% 100%;
   }
   #dock-container li span {
-    /* display: none; */
     position: absolute;
     bottom: 0%;
     left: 0;
