@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports= {
     mongodb:{
         dbURI:"DB URI"
@@ -23,3 +25,5 @@ module.exports= {
         sheetID:"1_ocBC1ZivRtrCScKbuKX4mMX_ECEqpDq2VcoeyuuL3E"
     }
 };
+
+process.env.GOOGLE_APPLICATION_CREDENTIALS = path.join(__dirname,'name of json file');
