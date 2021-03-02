@@ -13,6 +13,13 @@
 
     <!-- Begin page content -->
     <main style="margin-top: 60px;">
+      <div class="py-5 my-3 text-center">
+        <h2>POs saved for later.</h2>
+        <p class="lead">Select some of the POs to contiue working on...</p>
+      </div>
+
+      <div class="container my-3">
+        <% if(pos.length>0) { %>
         <table class="table">
             <thead>
               <tr>
@@ -20,6 +27,7 @@
                 <th scope="col">Indent No</th>
                 <th scope="col">Date Prepared</th>
                 <th scope="col">File No</th>
+                <th scope="col">Workon</th>
               </tr>
             </thead>
             <tbody>
@@ -30,10 +38,15 @@
                 <td><%=po.indentNo %></td>
                 <td><%=po.datePrepared %></td>
                 <td><%=po.fileNo %></td>
+                <td><button class="btn btn-outline-primary"><a href="/confirmationPage/<%= po._id %>">Edit</a></button></td>
               </tr>
            <% }); %>
             </tbody>
           </table>
+          <% } else { %>
+            <p class="lead text-center">Wohoo... All Done for now!</p>
+            <% } %>
+        </div>
     </main>
     
     <%- include('./common/footer') %>

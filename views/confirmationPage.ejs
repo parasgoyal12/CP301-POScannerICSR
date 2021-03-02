@@ -3,7 +3,7 @@
   <head>
     <%- include('./common/head') %>
     <!-- <link rel="stylesheet" href="stylesheets/index.js"> -->
-    <link rel="stylesheet" href="stylesheets/form-validation.css">
+    <link rel="stylesheet" href="/stylesheets/form-validation.css">
   </head>
 
   <body>
@@ -23,11 +23,11 @@
         <div class="row">
             <div class="col-md-5 order-md-2 mb-4">
                 <h4 class="mb-3">Preview</h4>
-                <iframe src="<%= formData.pdfLink %>" class='w-100 h-75 my-4'></iframe>
+                <iframe src="/uploads/<%= formData.fileName %>" class='w-100 h-75 my-4'></iframe>
             </div>
             <div class="col-md-7 order-md-1">
             <h4 class="mb-3">Purchase Order Details <span class='text-muted'>( <span style="color:red;"><strong>*</strong></span> ) <em>Validation Needed</em></span></h4>
-            <form class="needs-validation my-4 w-100" action="/confirmationPage" method="POST" novalidate>
+            <form class="needs-validation my-4 w-100" action="/confirmationPage/<%= formData._id %>" method="POST" novalidate>
                 <div class="row">
                     <div class="col-md-3 mb-3">
                         <label for="serialNo" class="required">Sr.No.</label>
@@ -191,6 +191,10 @@
                     </div>
                 </div>
                 </div>
+                <div class="mb-3 d-none">
+                    <label for="fileName"> File Name <span class="text-muted">(Disabled)</span></label>
+                    <input type="text" class="form-control" id="fileName" placeholder="" name="fileName" value="<%= formData.fileName %>" >
+                </div>
                 <div class="mb-3">
                     <label for="remarks"> Remarks <span class="text-muted">(Optional)</span></label>
                     <input type="text" class="form-control" id="remarks" placeholder="" name="remarks" >
@@ -201,7 +205,7 @@
                         <input type="submit" class="btn  btn-outline-success btn-lg btn-block" name="submit" value="Submit">
                     </div>
                     <div class="col-md-6">
-                        <input type="submit" class="btn btn-primary btn-outline-primary btn-lg btn-block" name="submit" value="Continue Later" formaction="/continueLater" formmethod="POST">
+                        <input type="submit" class="btn btn-primary btn-outline-primary btn-lg btn-block" name="submit" value="Continue Later" formaction="/continueLater/<%= formData._id %>" formmethod="POST">
                     </div>
                 </div>
             </form>

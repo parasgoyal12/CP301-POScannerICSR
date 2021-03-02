@@ -65,6 +65,9 @@ const formSchema = new Schema({
     },
     remarks : {
         type : String,
+    },
+    fileName :{
+        type : String
     }
 });
 

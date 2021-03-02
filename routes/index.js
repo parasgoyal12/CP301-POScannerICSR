@@ -6,9 +6,9 @@ let {isLoggedIn} = require("../middleware/hasAuth");
 /* GET home page. */
 router.get('/',indexPage.home_page);
 router.get('/uploadPage',isLoggedIn,indexPage.getUploadPage);
-router.get('/confirmationPage',isLoggedIn,indexPage.getConfirmationPage);
+router.get('/confirmationPage/:id',isLoggedIn,indexPage.getConfirmationPage);
 router.post('/uploadPage',isLoggedIn,indexPage.submitUploadPage);
-router.post('/confirmationPage',isLoggedIn,indexPage.submitConfirmationPage);
-router.post('/continueLater',isLoggedIn,indexPage.continueLater);
+router.post('/confirmationPage/:id',isLoggedIn,indexPage.submitConfirmationPage);
+router.post('/continueLater/:id',isLoggedIn,indexPage.continueLater);
 router.get('/savedPOPage',isLoggedIn,indexPage.savedPOPage);
 module.exports = router;
