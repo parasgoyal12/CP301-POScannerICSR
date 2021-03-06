@@ -9,6 +9,13 @@
 
     <header>
       <%- include('./common/navbar') %>
+      <% if(successFlash.length>0) { %>
+        <div class="container mt-1">
+          <div class="alert alert-info">
+            <%= successFlash %>
+          </div>
+        </div>
+      <% } %>
     </header>
 
     <!-- Begin page content -->
@@ -38,7 +45,7 @@
                 <td><%=po.indentNo %></td>
                 <td><%=po.datePrepared %></td>
                 <td><%=po.fileNo %></td>
-                <td><button class="btn btn-outline-primary"><a href="/confirmationPage/<%= po._id %>">Edit</a></button></td>
+                <td><a class="btn btn-outline-primary" href="/confirmationPage/<%= po._id %>">Edit</a></td>
               </tr>
            <% }); %>
             </tbody>

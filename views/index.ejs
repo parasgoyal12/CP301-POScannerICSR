@@ -9,11 +9,18 @@
 
     <header>
       <%- include('./common/navbar') %>
+      <% if(successFlash.length>0) { %>
+        <div class="container mt-1">
+          <div class="alert alert-info">
+            <%= successFlash %>
+          </div>
+        </div>
+        <% } %>
     </header>
 
     <!-- Begin page content -->
     <main role="main" class="container">
-      <div class="jumbotron mt-3">
+      <div class="jumbotron ">
         <h1 class="display-5">ICSR, IIT Ropar</h1>
         <p class="lead">Welcome to the Purchase Order Filing Site.</p>
         <hr class="my-4">

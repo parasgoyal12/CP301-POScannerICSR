@@ -70,7 +70,7 @@
     }
  }
 body > .container {
-    padding: 60px 15px 0;
+    padding: 10px;
 }
 
 .footer > .container {
@@ -83,13 +83,13 @@ code {
 }
 
 #dock-container {
-    position: relative;
+    /* position: relative; */
     text-align: center;
     background: rgba(255,255,255,0.2);
     /* border-radius: 10px 10px 0 0; */
     /* height: 300px; */
     height:75%;
-    width:75%;
+    width:100%;
   }
   #dock-container li {
     list-style-type: none;

@@ -6,6 +6,7 @@ var logger = require('morgan');
 let passport = require('passport');
 let session = require('express-session');
 let mongoose = require('mongoose');
+let flash = require('connect-flash');
 
 require('./passport_setup')(passport);
 var indexRouter = require('./routes/index');
@@ -24,6 +25,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({secret:keys.session.cookieKey,resave:false,saveUninitialized:true}));
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -39,7 +41,8 @@ app.get("/auth/google/redirect",passport.authenticate('google',{failureRedirect:
 });
 app.get('/auth/logout',(req,res)=>{
   req.logout();
-  req.session.destroy();
+  // req.session.destroy();
+  req.flash("success","Logged Out Succesfully!");
   res.redirect('/');
 });
 

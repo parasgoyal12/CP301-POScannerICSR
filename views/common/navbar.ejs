@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light fixed-top " style="background-color: #e3f2fd;">
+<nav class="navbar navbar-expand-md navbar-light " style="background-color: #e3f2fd;">
   <div class="container">  
   <a class="navbar-brand" href="/">
     <img src="/images/logo.png" width="35" height="35" class="d-inline-block align-top" alt="">
@@ -21,7 +21,7 @@
       </ul>
     </div>
     <% if(user) { %>
-      <p class='mx-1 my-1' style="color:aliceblue;">Hello, <%= user.name %></p> 
+      <p class='mx-1 my-1' style="color:coral;">Hello, <%= user.name %></p> 
       <a class="btn btn-outline-primary my-2 my-sm-0" href="/auth/logout">Logout</a>
     <% } else { %>
     <a class="btn btn-outline-primary my-2 my-sm-0" href="/auth/google">Login</a>

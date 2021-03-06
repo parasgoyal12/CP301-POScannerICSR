@@ -7,7 +7,8 @@ const { batchAnnotateFiles,parse } = require('./util');
 const fs = require('fs');
 var Form = require('./../models/form');
 exports.home_page = (req,res,next)=>{
-    res.render('index',{title:'Home',user:req.user});
+
+    res.render('index',{title:'Home',user:req.user,successFlash:req.flash("success")});
 };
 
 exports.getUploadPage = (req,res,next)=>{
@@ -88,18 +89,26 @@ exports.submitConfirmationPage=(req,res,next)=>{
         await gsapi.spreadsheets.values.append(options);
     }
     gApiRun(client).then(result=>{
-        console.log(result);
+        // console.log(result);
         return Form.findByIdAndDelete(req.params.id);
     })
-    .then(result=>res.send("Success"))
+    .then(result=>{
+        req.flash("success",`PO ${result.poNumber} Added Succesfully!`);
+        res.redirect("/");
+    })
     .catch(err=>{
-        console.log(err);
-        res.send("Failed");
+        req.flash("success",`PO ${result.poNumber} Addition Failed!`);
+        res.redirect("/");
     });
 };
 
 exports.continueLater = (req,res,next)=>{
-    Form.findByIdAndUpdate(req.params.id,{$set:req.body}).then(result=>res.send(result)).catch(err=>res.send(err.message));
+    Form.findByIdAndUpdate(req.params.id,{$set:req.body})
+    .then(result=>{
+        req.flash("success",`PO ${result.poNumber} saved Succesfully! You can now edit it later.`);
+        res.redirect('/savedPOPage');
+    })
+    .catch(err=>res.send(err.message));
 };
 
 exports.savedPOPage = (req,res,next)=>{
@@ -108,7 +117,7 @@ exports.savedPOPage = (req,res,next)=>{
             User : req.user._id
         }
     ).then((result) => {
-        res.render('savedPo',{pos:result,user:req.user,title:"Saved PO Page"});
+        res.render('savedPo',{pos:result,user:req.user,title:"Saved PO Page",successFlash:req.flash("success")});
     })
     .catch((err) => {
         console.log(err)
