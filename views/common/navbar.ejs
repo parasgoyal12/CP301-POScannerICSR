@@ -1,5 +1,9 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand" href="/">PO Scanner</a>
+<nav class="navbar navbar-expand-md navbar-light fixed-top " style="background-color: #e3f2fd;">
+  <div class="container">  
+  <a class="navbar-brand" href="/">
+    <img src="/images/logo.png" width="35" height="35" class="d-inline-block align-top" alt="">
+    PO Scanner
+  </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -18,9 +22,9 @@
     </div>
     <% if(user) { %>
       <p class='mx-1 my-1' style="color:aliceblue;">Hello, <%= user.name %></p> 
-      <a class="btn btn-outline-success my-2 my-sm-0" href="/auth/logout">Logout</a>
+      <a class="btn btn-outline-primary my-2 my-sm-0" href="/auth/logout">Logout</a>
     <% } else { %>
-    <a class="btn btn-outline-success my-2 my-sm-0" href="/auth/google">Login</a>
+    <a class="btn btn-outline-primary my-2 my-sm-0" href="/auth/google">Login</a>
     <% } %>
-    
+  </div>
   </nav>
