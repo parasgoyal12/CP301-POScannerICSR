@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <%- include('./common/head') %>
+    <link rel="stylesheet" href="stylesheets/index.css">
+  </head>
+
+  <body>
+
+    <header>
+      <%- include('./common/navbar') %>
+      <% if(successFlash.length>0) { %>
+        <div class="container mt-1">
+          <div class="alert alert-info">
+            <%= successFlash %>
+          </div>
+        </div>
+        <% } %>
+    </header>
+
+    <!-- Begin page content -->
+    <main role="main" class="container">
+      <div class="jumbotron ">
+        <h1 class="display-5">ICSR, IIT Ropar</h1>
+        <p class="lead">Welcome to the Purchase Order Filing Site.</p>
+        <hr class="my-4">
+        <p>This page contains the steps required to upload a new PO and view existing ones.</p>
+      </div>
+      <h2 class="font-weight-bold">Steps to Upload a new PO</h2>
+      <br>
+      <div class="jumbotron ">
+        <h1 class="font-weight-bold" >Step 1</h1>
+        <hr class="my-4">
+        <img style="width:100%" src="images/step1.png">
+        <br>
+        <br>
+        <p class="lead">Click on the login button in the top right corner and login with your .iitrpr.ac.in account.</p>
+        <br>
+        <br>
+        <h1 class="font-weight-bold">Step 2</h1>
+        <hr class="my-4">
+        <img style="width:100%" src="images/step2.png">
+        <br>
+        <br>
+        <p class="lead">Click on the <b>Upload New PO</b> button.</p>
+        <br>
+        <br>
+        <h1 class="font-weight-bold">Step 3</h1>
+        <hr class="my-4">
+        <img style="width:100%" src="images/step3.png">
+        <br>
+        <br>
+        <p class="lead">Click anywhere inside the upload section and choose the PO file from your computer and click submit</p>
+        <br>
+        <br>
+        <h1 class="font-weight-bold">Step 4</h1>
+        <hr class="my-4">
+        <img style="width:100%" src="images/step4.png">
+        <br>
+        <br>
+        <p class="lead">After filling in all the details you can either submit it or save the progress till now.</p>
+      </div>
+      <h2 class="font-weight-bold">Steps to work on an existing PO</h2>
+      <br>
+      <div class="jumbotron ">
+        <h1 class="font-weight-bold" >Step 1</h1>
+        <hr class="my-4">
+        <img style="width:100%" src="images/step2.png">
+        <br>
+        <br>
+        <p class="lead">Click on the <b>View Saved PO button</b>.</p>
+        <br>
+        <br>
+        <h1 class="font-weight-bold">Step 2</h1>
+        <hr class="my-4">
+        <img style="width:100%" src="images/step5.png">
+        <br>
+        <br>
+        <p class="lead">Click on the <b>View</b> button to open the PO and on the <b>Edit</b> button to continue working on that PO.</p>
+        
+      </div>
+      <br>
+      
+
+      <!-- <div class="row">
+        <div class="col-6">
+          <a href="/uploadPage" class="btn btn-secondary btn-lg">Upload a new PO</a>
+        </div>
+        <div class="col-6">
+          <a href="#" class="btn btn-secondary btn-lg">View Previously Uploaded PO</a>
+        </div>
+      </div> -->
+      <!-- <div class="container">
+      <div id="dock-container">
+        <div id="dock">
+          <ul>
+            <li>
+              <span>Upload a new PO</span>
+              <a href="/uploadPage"><img src="images/du1.png"/></a>
+            </li>
+            <li>
+              <span>View Saved PO</span>
+              <a href="/savedPOPage"><img src="images/dv.png"/></a>
+            </li>
+          </ul>
+        </div>
+        
+      </div>
+    </div> -->
+      <!-- <% if(user) { %>
+        <iframe class="mt-4 w-100" style="height:200px" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQp2z0stPhyH256UltThLB9LHid42QALok4sBIQOx8GSBgAzKM5KAkzgJtKzaaOAcfj8MopDYDOqWo_/pubhtml?gid=0&amp;widget=true&amp;headers=false"></iframe>
+          <% } %> -->
+    </main>
+    
+    <%- include('./common/footer') %>
+    
+  </body>
+</html>

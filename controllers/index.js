@@ -131,3 +131,7 @@ exports.savedPOPage = (req,res,next)=>{
         console.log(err)
     });
 };
+
+exports.getHelpPage = (req,res,next)=>{
+    res.render('helpPage',{title:'Help',user:req.user,successFlash:req.flash("success")});
+};

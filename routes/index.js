@@ -11,4 +11,5 @@ router.post('/uploadPage',isLoggedIn,indexPage.submitUploadPage);
 router.post('/confirmationPage/:id',isLoggedIn,indexPage.submitConfirmationPage);
 router.post('/continueLater/:id',isLoggedIn,indexPage.continueLater);
 router.get('/savedPOPage',isLoggedIn,indexPage.savedPOPage);
+router.get('/help',indexPage.getHelpPage);
 module.exports = router;
