@@ -1,4 +1,5 @@
 let formidable = require('formidable');
+let nodemailer = require('nodemailer');
 let path = require('path');
 const {google} = require('googleapis');
 var keys=require('./../config/keys');
@@ -6,6 +7,8 @@ const { response } = require('express');
 const { batchAnnotateFiles,parse } = require('./util');
 const fs = require('fs');
 var Form = require('./../models/form');
+let mail = require('./mail.js');
+
 exports.home_page = (req,res,next)=>{
 
     res.render('index',{title:'Home',user:req.user,successFlash:req.flash("success")});
@@ -93,6 +96,7 @@ exports.submitConfirmationPage=(req,res,next)=>{
         return Form.findByIdAndDelete(req.params.id);
     })
     .then(result=>{
+        mail.sendMail(formResponse, req.user.email);
         req.flash("success",`PO ${result.poNumber} Added Succesfully!`);
         res.redirect("/");
     })
