@@ -4,10 +4,9 @@ let path = require('path');
 const {google} = require('googleapis');
 var keys=require('./../config/keys');
 const { response } = require('express');
-const { batchAnnotateFiles,parse } = require('./util');
+const { batchAnnotateFiles,parse,sendMail,saveToDrive } = require('./util');
 const fs = require('fs');
 var Form = require('./../models/form');
-let mail = require('./mail.js');
 
 exports.home_page = (req,res,next)=>{
 
@@ -71,7 +70,7 @@ exports.getConfirmationPage=(req,res,next)=>{
 };
 
 exports.submitConfirmationPage=(req,res,next)=>{
-    const client = new google.auth.JWT(keys.google_sheet.client_email,null,keys.google_sheet.private_key,['https://www.googleapis.com/auth/spreadsheets']);
+    const client = new google.auth.JWT(keys.google_sheet.client_email,null,keys.google_sheet.private_key,['https://www.googleapis.com/auth/spreadsheets','https://www.googleapis.com/auth/drive']);
     client.authorize(function(err,tokens){
         if(err)console.log(err);
     });
@@ -96,12 +95,17 @@ exports.submitConfirmationPage=(req,res,next)=>{
         return Form.findByIdAndDelete(req.params.id);
     })
     .then(result=>{
-        mail.sendMail(formResponse, req.user.email);
         req.flash("success",`PO ${result.poNumber} Added Succesfully!`);
+        return saveToDrive(client,result.fileName);
+    })
+    .then(result=>{
+        formResponse.driveLink="https://drive.google.com/file/d/"+result.data.id;
+        sendMail(formResponse, req.user.email);
         res.redirect("/");
     })
     .catch(err=>{
-        req.flash("success",`PO ${result.poNumber} Addition Failed!`);
+        console.log(err);
+        req.flash("success",`PO Addition Failed!`);
         res.redirect("/");
     });
 };

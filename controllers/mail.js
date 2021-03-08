@@ -1,4 +1,4 @@
-const { gmail } = require("googleapis/build/src/apis/gmail");
+// const { gmail } = require("googleapis/build/src/apis/gmail");
 let nodemailer = require('nodemailer');
 var keys=require('./../config/keys');
 
@@ -33,8 +33,8 @@ function sendMail(formResponse, to) {
         `<ul><li><b>poAmount: </b>${formResponse.poAmount}</li></ul></div>`+
         `<ul><li><b>fileName: </b>${formResponse.fileName}</li></ul></div>`+
         `<ul><li><b>remarks: </b>${formResponse.remarks}</li></ul></div>`+
-        `<ul><li><b>poAmount: </b>${formResponse.poAmount}</li></ul></div>`
-
+        `<ul><li><b>poAmount: </b>${formResponse.poAmount}</li></ul></div>`+
+        `<ul><li><b>driveLink: </b>${formResponse.driveLink}</li></ul></div>`
     }
     transporter.sendMail(mailOptions, function(err, info){
         if (err) {
