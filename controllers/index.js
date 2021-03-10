@@ -23,6 +23,7 @@ exports.submitUploadPage = (req,res,next)=>{
     let filename='';
     let filePath='';
     let isError = false;
+    let docText=null;
     form.on('aborted',()=>{
         isError=true;
         res.status(413).send("File Already Exists!");
@@ -36,21 +37,34 @@ exports.submitUploadPage = (req,res,next)=>{
             this.emit('aborted')
         }
     });
-        
+    form.on('field', (fieldName, fieldValue) => {
+        if(fieldName==="docText"){
+            docText=fieldValue;
+        }
+    });
     form.on('end',()=>{
         if(!isError){
-            batchAnnotateFiles(filePath).then(resp=>{
-                formData=parse(resp);
-                // formData.pdfLink="/uploads/"+filename;
-                formData.fileName = filename;
+            if(docText){
+                formData=parse(docText);
+                formData.fileName=filename;
                 formData.User=req.user._id;
-                const form = new Form(formData);
+                const form=new Form(formData);
                 form.save().then(result=>{res.redirect(`/confirmationPage/${result._id}`);}).catch(err=>{res.send(err.message);});
-                // res.render("confirmationPage",{title:"ConfirmationPage",user:req.user,formData});
-            }).catch(err=>{
-                console.log(err.message);
-                res.send(err);
-            })
+            }
+            else{
+                batchAnnotateFiles(filePath).then(resp=>{
+                    formData=parse(resp.fullTextAnnotation.text);
+                    // formData.pdfLink="/uploads/"+filename;
+                    formData.fileName = filename;
+                    formData.User=req.user._id;
+                    const form = new Form(formData);
+                    form.save().then(result=>{res.redirect(`/confirmationPage/${result._id}`);}).catch(err=>{res.send(err.message);});
+                    // res.render("confirmationPage",{title:"ConfirmationPage",user:req.user,formData});
+                }).catch(err=>{
+                    console.log(err.message);
+                    res.send(err);
+                });
+            }
         }
     });
 };

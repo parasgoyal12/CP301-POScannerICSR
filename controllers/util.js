@@ -40,7 +40,7 @@ async function batchAnnotateFiles(fileName) {
 }
 
 function parse(data) {
-  let str = data.fullTextAnnotation.text;
+  let str = data;
   // let str = data.text;
 
   // Assumptions for rgx in comments, won't work without these
@@ -52,7 +52,7 @@ function parse(data) {
       // 
       // 
       // return
-      return -1;
+      return {};
   }
   
   // xx.xx.xxxx format, First instance is always date (as in samples)
@@ -103,11 +103,11 @@ function parse(data) {
   }
 
   // CC to : indenter   
-  const indRgx = /cc[" "]*to[" ":]*\n1.[" "\w.]*/i;
+  const indRgx = /cc[" "]*to[" ":]*\s*\n\s*1.[" "\w.]*/i;
   let indenter = str.match(indRgx);
   if (indenter != null) {
       indenter = indenter[0];
-      indenter = indenter.substring(indenter.match(/cc[" "]*to[" ":]*\n1.[" "]*/i)[0].length, indenter.length);
+      indenter = indenter.substring(indenter.match(/cc[" "]*to[" ":]*\s*\n\s*1.[" "]*/i)[0].length, indenter.length);
   }
 
   serialNo = PO.substring(0, PO.match('-').index);

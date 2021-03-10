@@ -10,16 +10,13 @@
     </header>
     <main role='main' class='container'>
         <div class="upload border border-dark mt-4 p-4 mx-auto w-50 ">
-          <form method="POST" action="/uploadPage" enctype="multipart/form-data" class='text-center'>
-            <div class="drop-zone">
+          <form method="POST" action="/uploadPage" enctype="multipart/form-data" class='text-center' style="display:flex;flex-wrap: wrap;align-items: center; justify-content: center;">
+            <div class="drop-zone my-2">
               <span class="drop-zone__prompt">Drop file here or click to upload</span>
               <input type="file" name="myFile" class="drop-zone__input" required>
             </div>    
-            <br>
-            <button class="btn btn-outline-primary mx-auto" onclick="toggleTextBox()">Toggle Text Area</button>
-            <br>
-            <br>
-            <input type="submit" class="btn btn-outline-primary mx-auto " value="Submit">
+            <input type="submit" class="btn btn-outline-primary mx-auto w-50 my-2" value="Submit">
+            <button class="btn btn-outline-primary mx-auto w-50 my-2" onclick="toggleTextBox(this)">Text Detect: ON</button>
           </form>
         </div> 
     </main>

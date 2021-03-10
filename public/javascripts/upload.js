@@ -70,7 +70,7 @@ document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
     }
   }
   
-  function toggleTextBox()
+  function toggleTextBox(target)
   {
     // textAreas = document.getElementsByTagName("textarea");
     // textArea = textAreas[0];
@@ -85,14 +85,18 @@ document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
     if(document.getElementsByTagName('textarea').length==0){
     const textArea = document.createElement('textarea');
     textArea.placeholder="Add text here";
+    textArea.required=true;
     const formsInPage = document.getElementsByTagName("form");
     const form1 = formsInPage[0];
     form1.insertBefore(textArea,form1.firstElementChild);
+    target.innerText="Text Detect:OFF";
+    textArea.name="docText";
   }
     else
     {
       textAreas = document.getElementsByTagName("textarea");
       textArea = textAreas[0];
       textArea.remove();
+      target.innerText="Text Detect :ON"
     }
   }
