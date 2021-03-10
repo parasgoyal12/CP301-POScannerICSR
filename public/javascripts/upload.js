@@ -70,3 +70,29 @@ document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
     }
   }
   
+  function toggleTextBox()
+  {
+    // textAreas = document.getElementsByTagName("textarea");
+    // textArea = textAreas[0];
+    // if(textArea.style.visibility=="hidden")
+    // {
+    //   textArea.style.visibility="";
+    // }
+    // else
+    // {
+    //   textArea.style.visibility="hidden";
+    // }
+    if(document.getElementsByTagName('textarea').length==0){
+    const textArea = document.createElement('textarea');
+    textArea.placeholder="Add text here";
+    const formsInPage = document.getElementsByTagName("form");
+    const form1 = formsInPage[0];
+    form1.insertBefore(textArea,form1.firstElementChild);
+  }
+    else
+    {
+      textAreas = document.getElementsByTagName("textarea");
+      textArea = textAreas[0];
+      textArea.remove();
+    }
+  }
