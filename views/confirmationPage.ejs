@@ -4,6 +4,11 @@
     <%- include('./common/head') %>
     <!-- <link rel="stylesheet" href="stylesheets/index.js"> -->
     <link rel="stylesheet" href="/stylesheets/form-validation.css">
+    <style>
+        label{
+            font-weight: bold;
+        }
+    </style>
   </head>
 
   <body>
@@ -13,17 +18,26 @@
     </header>
 
     <!-- Begin page content -->
-    <main role="main" class="container-fluid w-75">
+    <main role="main" class="container-fluid" style="max-width:90%;">
         
-        <div class="py-5 my-3 text-center">
+        <div class="py-2 my-1 text-center">
             <h2>Confirmation form</h2>
             <p class="lead">Kindly confirm and fill the form below.</p>
+
         </div>
 
         <div class="row">
             <div class="col-md-5 order-md-2 mb-4">
                 <h4 class="mb-3">Preview</h4>
                 <iframe src="/uploads/<%= formData.fileName %>" class='w-100 h-75 my-4 sticky-top'></iframe>
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="submit" class="btn  btn-outline-success btn-lg btn-block" name="submit" value="Submit">
+                    </div>
+                    <div class="col-md-6">
+                        <input type="submit" class="btn btn-primary btn-outline-primary btn-lg btn-block" name="submit" value="Continue Later" formaction="/continueLater/<%= formData._id %>" formmethod="POST">
+                    </div>
+                </div>
             </div>
             <div class="col-md-7 order-md-1">
             <h4 class="mb-3">Purchase Order Details <span class='text-muted'>( <span style="color:red;"><strong>*</strong></span> ) <em>Validation Needed</em></span></h4>
@@ -111,7 +125,7 @@
                 </div>
                 <div class="row">
 
-                    <div class="mb-3 col-md-6">
+                    <div class="mb-3 col-md-3">
                         <label for="amount" class="required">Amount</label>
                         <input type="number" class="form-control" id="amount" placeholder="" name="amount" value="<%= formData.amount %>" required>
                         <div class="invalid-feedback">
@@ -119,13 +133,12 @@
                         </div>
                     </div>
                     
-                    <div class="mb-3 col-md-6">
-                        <label for="importAmount" > Import Amount <span class="text-muted">(Optional)</span></label>
-                        <input type="number" class="form-control" id="importAmount" placeholder="" name="importAmount" >
+                    <div class="mb-3 col-md-3">
+                        <label for="importAmount" > Import Amount </label>
+                        <input type="number" class="form-control" id="importAmount" placeholder="" name="importAmount" value="0">
                     </div>
-                </div>
-                <div class="row">
-                    <div class="form-group mb-3 col-md-6">
+
+                    <div class="form-group mb-3 col-md-3">
                         <label for="category" class="required">Category</label>
                         <select class="form-control" id="category" name="category" required>
                         <option value="Consumable">Consumable</option>
@@ -137,7 +150,7 @@
                         </div>
                     </div>
                     
-                    <div class="mb-3 col-md-6">
+                    <div class="mb-3 col-md-3">
                         <label for="modeofPurchase" class="required">Mode of Purchase</label>
                         <input type="text" class="form-control" id="modeofPurchase" placeholder="" name="modeofPurchase" required>
                         <div class="invalid-feedback">
@@ -145,13 +158,16 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    
+                </div>
                 <hr class="mb-4">
 
                 <h4 class="mb-3">PO Details</h4>
 
                 
                 <div class="row">
-                <div class="col-md-9 mb-3">
+                <div class="col-md-6 mb-3">
                     <label for="poNumber" class="required">PO Number</label>
                     <input type="text" class="form-control" id="poNumber" placeholder="" name="poNumber" value="<%= formData.poNumber %>" required>
                     <div class="invalid-feedback">
@@ -165,24 +181,6 @@
                     PO Date is required
                     </div>
                 </div>
-                </div>
-
-                <div class="mb-3">
-                    <label for="supplier" class="required">Supplier</label>
-                    <input type="supplier" class="form-control" id="supplier" placeholder="" name="supplier" value="<%= formData.supplier %>" required>
-                    <div class="invalid-feedback">
-                    Supplier is required
-                    </div>
-                </div>
-
-                <div class="row">
-                <div class="col-md-9 mb-3">
-                    <label for="materialDescription" class="required">Material Description</label>
-                    <input type="text" class="form-control" id="materialDescription" name="materialDescription" value="<%= formData.materialDescription %>" required>
-                    <div class="invalid-feedback">
-                    Material Description required
-                    </div>
-                </div>
                 <div class="col-md-3 mb-3">
                     <label for="poAmount" class="required">PO Amount</label>
                     <input type="number" class="form-control" id="poAmount" name="poAmount" placeholder="" value="<%= formData.poAmount %>" required>
@@ -190,6 +188,26 @@
                     PO Amount is required
                     </div>
                 </div>
+                </div>
+
+                
+
+                <div class="row">
+                <div class="mb-3 col-md-6">
+                    <label for="supplier" class="required">Supplier</label>
+                    <input type="supplier" class="form-control" id="supplier" placeholder="" name="supplier" value="<%= formData.supplier %>" required>
+                    <div class="invalid-feedback">
+                    Supplier is required
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="materialDescription" class="required">Material Description</label>
+                    <input type="text" class="form-control" id="materialDescription" name="materialDescription" value="<%= formData.materialDescription %>" required>
+                    <div class="invalid-feedback">
+                    Material Description required
+                    </div>
+                </div>
+                
                 </div>
                 <div class="mb-3 d-none">
                     <label for="fileName"> File Name <span class="text-muted">(Disabled)</span></label>
@@ -200,14 +218,7 @@
                     <input type="text" class="form-control" id="remarks" placeholder="" name="remarks" value="<%= formData.remarks %>">
                 </div>
                 <hr class="mb-4">
-                <div class="row">
-                    <div class="col-md-6">
-                        <input type="submit" class="btn  btn-outline-success btn-lg btn-block" name="submit" value="Submit">
-                    </div>
-                    <div class="col-md-6">
-                        <input type="submit" class="btn btn-primary btn-outline-primary btn-lg btn-block" name="submit" value="Continue Later" formaction="/continueLater/<%= formData._id %>" formmethod="POST">
-                    </div>
-                </div>
+                
             </form>
             </div>
         </div>
