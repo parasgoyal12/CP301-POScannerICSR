@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./common/head') %>
+  </head>
+  <style>
+      #selected-files-list progress{
+        margin-left: 10px;
+        }
+  </style>
+  <body>
+    <%- include('./common/navbar') %>
+    <div class="container">
+        <h2 class='text-center py-3 my-2'>Batch Upload PO(In Development)</h1>
+
+        <div class="w-100 border border-secondary my-3" style="overflow-y: scroll;height: 45vh;">
+                <ul id="selected-files-list">
+                <!-- populated by JavaScript on file input change event -->
+                </ul>
+        
+        </div>
+        <form id="file-upload-form" action="/batchUpload" method="post" enctype="multipart/form-data" > 
+            <input id="file-upload" name="fileUpload" type="file" multiple="multiple" class="form-control"/>
+            
+            <input id="submit-button" type="submit" value="Submit" class="btn btn-outline-success"/> 
+            
+        </form>
+            
+            
+    </div>
+    <footer>
+        <%- include('./common/footer')  %>
+    </footer>
+    <!-- JavaScripts -->
+    <script type="text/javascript" src="/javascripts/batchUpload/AsyncSequenceIterator.js"></script>
+    <script type="text/javascript" src="/javascripts/batchUpload/uploader.js"></script>
+  </body>
+</html>

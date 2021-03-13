@@ -30,14 +30,7 @@
             <div class="col-md-5 order-md-2 mb-4">
                 <h4 class="mb-3">Preview</h4>
                 <iframe src="/uploads/<%= formData.fileName %>" class='w-100 h-75 my-4 sticky-top'></iframe>
-                <div class="row">
-                    <div class="col-md-6">
-                        <input type="submit" class="btn  btn-outline-success btn-lg btn-block" name="submit" value="Submit">
-                    </div>
-                    <div class="col-md-6">
-                        <input type="submit" class="btn btn-primary btn-outline-primary btn-lg btn-block" name="submit" value="Continue Later" formaction="/continueLater/<%= formData._id %>" formmethod="POST">
-                    </div>
-                </div>
+                
             </div>
             <div class="col-md-7 order-md-1">
             <h4 class="mb-3">Purchase Order Details <span class='text-muted'>( <span style="color:red;"><strong>*</strong></span> ) <em>Validation Needed</em></span></h4>
@@ -218,7 +211,14 @@
                     <input type="text" class="form-control" id="remarks" placeholder="" name="remarks" value="<%= formData.remarks %>">
                 </div>
                 <hr class="mb-4">
-                
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="submit" class="btn  btn-outline-success btn-lg btn-block" name="submit" value="Submit">
+                    </div>
+                    <div class="col-md-6">
+                        <input type="submit" class="btn btn-primary btn-outline-primary btn-lg btn-block" name="submit" value="Continue Later" formaction="/continueLater/<%= formData._id %>" formmethod="POST">
+                    </div>
+                </div>
             </form>
             </div>
         </div>

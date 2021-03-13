@@ -3,6 +3,11 @@
   <head>
     <%- include('./common/head') %>
     <link rel="stylesheet" href="stylesheets/index.css">
+    <style>
+      th:hover{
+        background-color: #ccc;
+      }
+    </style>
   </head>
 
   <body>
@@ -30,17 +35,18 @@
         <table class="table">
             <thead>
               <tr>
-                <th scope="col">Serial No</th>
-                <th scope="col">Indent No</th>
-                <th scope="col">Date Prepared</th>
-                <th scope="col">File No</th>
+                <th scope="col" onclick="w3.sortHTML('.table','.item', 'td:nth-child(1)')">Serial No <i class="fa fa-sort"></i></th>
+                <th scope="col" onclick="w3.sortHTML('.table','.item', 'td:nth-child(2)')">Indent No <i class="fa fa-sort"></i></th>
+                <th scope="col" onclick="w3.sortHTML('.table','.item', 'td:nth-child(3)')">Date Prepared <i class="fa fa-sort"></i></th>
+                <th scope="col" onclick="w3.sortHTML('.table','.item', 'td:nth-child(4)')">File No <i class="fa fa-sort"></i></th>
                 <th scope="col">View this PO</th>
                 <th scope="col">Workon</th>
+                <th scope="col">Delete</th>
               </tr>
             </thead>
             <tbody>
                 <% pos.forEach(po => { %> 
-              <tr>
+              <tr class='item'>
                 <!-- <th scope="row">1</th> -->
                 <td><%=po.serialNo %></td>
                 <td><%=po.indentNo %></td>
@@ -48,6 +54,7 @@
                 <td><%=po.fileNo %></td>
                 <td><button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModal" data-whatever="<%= po.fileName %>">View</button></td>
                 <td><a class="btn btn-outline-primary" href="/confirmationPage/<%= po._id %>">Edit</a></td>
+                <td><a href="/deleteSaved/<%= po._id %>" class="btn btn-outline-danger">Delete</a></td>
               </tr>
            <% }); %>
             </tbody>
@@ -89,6 +96,7 @@
     </div>
     <%- include('./common/footer') %>
     <script src="//mozilla.github.io/pdf.js/build/pdf.js"></script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
     <script>
       pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
       $('#exampleModal').on('show.bs.modal', function (event) {

@@ -12,4 +12,9 @@ router.post('/confirmationPage/:id',isLoggedIn,indexPage.submitConfirmationPage)
 router.post('/continueLater/:id',isLoggedIn,indexPage.continueLater);
 router.get('/savedPOPage',isLoggedIn,indexPage.savedPOPage);
 router.get('/help',indexPage.getHelpPage);
+
+router.get('/batchUpload',isLoggedIn,indexPage.getBatchUpload);
+router.post('/batchUpload',indexPage.postBatchUpload);
+
+router.get('/deleteSaved/:id',indexPage.deleteSaved);
 module.exports = router;

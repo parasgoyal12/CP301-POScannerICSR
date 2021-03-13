@@ -149,3 +149,59 @@ exports.savedPOPage = (req,res,next)=>{
 exports.getHelpPage = (req,res,next)=>{
     res.render('helpPage',{title:'Help',user:req.user,successFlash:req.flash("success")});
 };
+
+exports.getBatchUpload = (req,res,next)=>{
+    res.render('batchUpload',{title:'Batch Upload',user:req.user});
+};
+
+exports.postBatchUpload = (req,res,next)=>{
+    var form = new formidable.IncomingForm();
+    form.parse(req);
+    let filename='';
+    let filePath='';
+    let isError = false;
+    form.on('aborted',()=>{
+        isError=true;
+        res.status(413).send("File Already Exists!");
+    });	
+    form.on('fileBegin',function(name,file)
+    {
+        file.path=path.join(path.resolve(__dirname,'..'),'public/uploads',file.name);
+        filename=file.name;
+        filePath=file.path;
+        if(fs.existsSync(filePath)){
+            this.emit('aborted')
+        }
+    });
+    form.on('end',()=>{
+        if(!isError){
+                batchAnnotateFiles(filePath).then(resp=>{
+                    formData=parse(resp.fullTextAnnotation.text);
+                    // formData.pdfLink="/uploads/"+filename;
+                    formData.fileName = filename;
+                    formData.User=req.user._id;
+                    const form = new Form(formData);
+                    form.save().then(result=>{res.send({message:"File Uploaded Succesfully"});}).catch(err=>{res.send(err.message);});
+                    // res.render("confirmationPage",{title:"ConfirmationPage",user:req.user,formData});
+                }).catch(err=>{
+                    console.log(err.message);
+                    res.send(err);
+                });
+            }
+    });
+};
+
+exports.deleteSaved = (req,res,next)=>{
+    Form.findByIdAndDelete(req.params.id)
+    .then(resp=>{
+        // console.log(resp);
+        req.flash("success",`${resp.fileNo} Deleted Succesfully!`);
+        fs.unlinkSync(path.join(path.resolve(__dirname,'..'),'public/uploads',resp.fileName));
+        res.redirect('/savedPOPage');
+    })
+    .catch((err)=>{
+        console.log(err);
+        req.flash("success","Delete Failed");
+        res.redirect("/savedPOPage");
+    })
+};
