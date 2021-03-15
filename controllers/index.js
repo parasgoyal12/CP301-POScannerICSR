@@ -114,7 +114,7 @@ exports.submitConfirmationPage=(req,res,next)=>{
     })
     .then(result=>{
         formResponse.driveLink="https://drive.google.com/file/d/"+result.data.id;
-        sendMail(formResponse, req.user.email);
+        if(formResponse.sendEmail==="1")sendMail(formResponse, req.user.email);
         res.redirect("/");
     })
     .catch(err=>{
@@ -162,7 +162,7 @@ exports.postBatchUpload = (req,res,next)=>{
     let isError = false;
     form.on('aborted',()=>{
         isError=true;
-        res.status(413).send("File Already Exists!");
+        
     });	
     form.on('fileBegin',function(name,file)
     {
@@ -188,6 +188,7 @@ exports.postBatchUpload = (req,res,next)=>{
                     res.send(err);
                 });
             }
+            else res.status(413).send("File Already Exists!");
     });
 };
 

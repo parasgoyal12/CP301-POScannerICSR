@@ -7,24 +7,36 @@
       #selected-files-list progress{
         margin-left: 10px;
         }
+        .dropzone:hover{
+          background-color: #ccc;
+          cursor:pointer;
+        }
+        .dropzone{
+          border: 3px dashed grey;
+          /* border-radius: 3px; */
+        }
   </style>
   <body>
     <%- include('./common/navbar') %>
     <div class="container">
-        <h2 class='text-center py-3 my-2'>Batch Upload PO(In Development)</h1>
+        <h2 class='text-center py-3 my-2'>Batch Upload PO</h1>
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%">0%</div>
+          </div>
 
-        <div class="w-100 border border-secondary my-3" style="overflow-y: scroll;height: 45vh;">
-                <ul id="selected-files-list">
+        <div class="w-100 my-3 dropzone rounded" style="overflow-y: scroll;height: 45vh;">
+                <ul id="selected-files-list" class="list-group">
                 <!-- populated by JavaScript on file input change event -->
                 </ul>
         
-        </div>
-        <form id="file-upload-form" action="/batchUpload" method="post" enctype="multipart/form-data" > 
-            <input id="file-upload" name="fileUpload" type="file" multiple="multiple" class="form-control"/>
-            
-            <input id="submit-button" type="submit" value="Submit" class="btn btn-outline-success"/> 
-            
-        </form>
+              </div>
+
+                <form id="file-upload-form" class="d-flex justify-content-end" action="/batchUpload" method="post" enctype="multipart/form-data" > 
+                  <input id="file-upload" name="fileUpload" type="file" class="d-none" multiple="multiple" accept="application/pdf" class="form-control"/>
+                  <label for="file-upload" class="btn btn-outline-primary m-1">Upload Files</label>
+                  <input id="submit-button" type="submit" value="Submit" class="btn btn-outline-success m-1"/> 
+                  
+                </form>
             
             
     </div>

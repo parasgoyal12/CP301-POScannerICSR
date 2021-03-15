@@ -211,6 +211,8 @@
                     <input type="text" class="form-control" id="remarks" placeholder="" name="remarks" value="<%= formData.remarks %>">
                 </div>
                 <hr class="mb-4">
+                <input type="checkbox" name="sendEmail" id="sendEmail" value="1">
+                <label for="sendEmail">Receive Confirmation Email? </label>
                 <div class="row">
                     <div class="col-md-6">
                         <input type="submit" class="btn  btn-outline-success btn-lg btn-block" name="submit" value="Submit">
@@ -252,10 +254,14 @@
             ele.addEventListener('focusout',(e)=>{
                 if(e.target.value.length > 0){
                     e.target.classList.add('is-valid');
+                    e.target.previousElementSibling.style.color="green";
+                    e.target.style.color="green";
                     e.target.classList.remove('is-invalid');
                     }
                 else {
                     e.target.classList.remove('is-valid');
+                    e.target.previousElementSibling.style.color="red";
+                    e.target.style.color="black";
                     e.target.classList.add('is-invalid');
                 }
             })
