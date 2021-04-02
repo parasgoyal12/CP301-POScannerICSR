@@ -6,6 +6,8 @@ var keys=require('./../config/keys');
 const {google} = require('googleapis');
 const fsasync = require('fs');
 const path = require('path');
+const convertRupeesIntoWords = require('convert-rupees-into-words');
+
 async function batchAnnotateFiles(fileName) {
   const inputConfig = {
     mimeType: 'application/pdf',
@@ -70,7 +72,22 @@ function parse(data) {
       amount = amount[amount.length - 1];
       amount = amount.substring(amount.match(/[\d]/).index, amount.length);
   }
-
+  const verifyAmtRgx = /\(rupees[\s\S]*only\)/gi;
+  let verifyAmt = str.match(verifyAmtRgx);
+  verifyAmt = verifyAmt[0];
+  verifyAmt = verifyAmt.substring(8, verifyAmt.length - 6);
+  let verifyAmt_float = "";
+  for (let i = 0 ; i < amount.length ; i++) {
+      if (amount[i] != ',') {
+          verifyAmt_float += amount[i];
+      }
+  }
+  verifyAmt_float = parseFloat(verifyAmt_float)
+  let check = convertRupeesIntoWords(verifyAmt_float);
+  check = check.substring(0, check.length - 7);
+  if (verifyAmt.toLowerCase() != check.toLowerCase()) {
+    amount = amount.substring(1, amount.length);
+  }
   // PO number starts with digit and ??
   const PONoRgx = /po[" "]*no[^\d]*[\d-,/\w]*/i;
   let PO = str.match(PONoRgx);

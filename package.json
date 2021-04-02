@@ -8,6 +8,7 @@
   "dependencies": {
     "@google-cloud/vision": "^2.3.1",
     "connect-flash": "^0.1.1",
+    "convert-rupees-into-words": "^1.0.6",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "ejs": "~2.6.1",
