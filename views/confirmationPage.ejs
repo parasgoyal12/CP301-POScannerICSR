@@ -62,7 +62,7 @@
                 <div class="row">
                     <div class="mb-3 col-md-6">
                         <label for="fileNo" class="required">File No.</label>
-                            <input type="text" class="form-control" id="fileNo" placeholder="File Number" name="fileNo" value="<%= formData.fileNo %>" required>
+                            <input type="text" class="form-control" id="fileNo" placeholder="File Number" name="fileNo" value="<%= formData.fileNo %>" required style="border-color:yellow;">
                             <div class="invalid-feedback" style="width: 100%;">
                             File Number is required.
                         </div> 
@@ -120,7 +120,7 @@
 
                     <div class="mb-3 col-md-3">
                         <label for="amount" class="required">Amount</label>
-                        <input type="number" class="form-control" id="amount" placeholder="" name="amount" value="<%= formData.amount %>" required>
+                        <input type="number" class="form-control" id="amount" placeholder="" name="amount" value="<%= formData.amount %>" required style="border-color:yellow;">
                         <div class="invalid-feedback">
                             Please enter Amount.
                         </div>
@@ -145,7 +145,7 @@
                     
                     <div class="mb-3 col-md-3">
                         <label for="modeofPurchase" class="required">Mode of Purchase</label>
-                        <input type="text" class="form-control" id="modeofPurchase" placeholder="" name="modeofPurchase" required>
+                        <input type="text" class="form-control" id="modeofPurchase" placeholder="" name="modeofPurchase" value="<%= formData.modeofPurchase %>" required>
                         <div class="invalid-feedback">
                             Please enter mode of purchase.
                         </div>
@@ -162,7 +162,7 @@
                 <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="poNumber" class="required">PO Number</label>
-                    <input type="text" class="form-control" id="poNumber" placeholder="" name="poNumber" value="<%= formData.poNumber %>" required>
+                    <input type="text" class="form-control" id="poNumber" placeholder="" name="poNumber" value="<%= formData.poNumber %>" required style="border-color:yellow;">
                     <div class="invalid-feedback">
                     PO Number is required
                     </div>
@@ -176,7 +176,7 @@
                 </div>
                 <div class="col-md-3 mb-3">
                     <label for="poAmount" class="required">PO Amount</label>
-                    <input type="number" class="form-control" id="poAmount" name="poAmount" placeholder="" value="<%= formData.poAmount %>" required>
+                    <input type="number" class="form-control" id="poAmount" name="poAmount" placeholder="" value="<%= formData.poAmount %>" required style="border-color:yellow;">
                     <div class="invalid-feedback">
                     PO Amount is required
                     </div>

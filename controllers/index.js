@@ -83,7 +83,7 @@ exports.getConfirmationPage=(req,res,next)=>{
     // res.render('confirmationPage',{title:'ConfirmationPage',user:req.user});
 };
 
-exports.submitConfirmationPage=(req,res,next)=>{
+exports.submitConfirmationPage= async (req,res,next)=>{
     const client = new google.auth.JWT(keys.google_sheet.client_email,null,keys.google_sheet.private_key,['https://www.googleapis.com/auth/spreadsheets','https://www.googleapis.com/auth/drive']);
     client.authorize(function(err,tokens){
         if(err)console.log(err);
@@ -93,8 +93,21 @@ exports.submitConfirmationPage=(req,res,next)=>{
     formResponse.fileName = `http://localhost:3000/uploads/${formResponse.fileName}`;
     formResponse.user = req.user.name;
     delete formResponse.submit;
-    let resArr=Object.values(formResponse);
-    async function gApiRun(client){
+    try{
+        
+        
+        let result = await Form.findByIdAndDelete(req.params.id);
+        
+        
+        req.flash("success",`PO ${result.poNumber} Added Succesfully!`);
+        result = await saveToDrive(client,result.fileName);
+        
+        formResponse.driveLink="https://drive.google.com/file/d/"+result.data.id;
+        if(formResponse.sendEmail==="1"){
+            sendMail(formResponse, req.user.email);
+            delete formResponse.sendEmail;
+        }
+        let resArr=Object.values(formResponse);
         const gsapi = google.sheets({version : 'v4',auth : client});
         const options = {
             spreadsheetId : keys.google_sheet.sheetID,
@@ -103,25 +116,13 @@ exports.submitConfirmationPage=(req,res,next)=>{
             resource : {values : [resArr]}
         }
         await gsapi.spreadsheets.values.append(options);
-    }
-    gApiRun(client).then(result=>{
-        // console.log(result);
-        return Form.findByIdAndDelete(req.params.id);
-    })
-    .then(result=>{
-        req.flash("success",`PO ${result.poNumber} Added Succesfully!`);
-        return saveToDrive(client,result.fileName);
-    })
-    .then(result=>{
-        formResponse.driveLink="https://drive.google.com/file/d/"+result.data.id;
-        if(formResponse.sendEmail==="1")sendMail(formResponse, req.user.email);
         res.redirect("/");
-    })
-    .catch(err=>{
+    }
+    catch(err){
         console.log(err);
         req.flash("success",`PO Addition Failed!`);
         res.redirect("/");
-    });
+    }
 };
 
 exports.continueLater = (req,res,next)=>{
