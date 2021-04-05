@@ -5,8 +5,8 @@ module.exports= {
         dbURI:"mongodb+srv://paras:test1234@cluster0.bcbrh.mongodb.net/POTEST?retryWrites=true&w=majority"
     },
     google:{
-        clientID:"551028046594-nbb2u2l8i832n4hsfn02e8be1ks1u5c3.apps.googleusercontent.com",
-        clientSecret:"8Eq1l1owy4dYOjr1xERBtD_R",
+        clientID:"551028046594-iepv7ijboj80o2fafrc7sekero2rfp6u.apps.googleusercontent.com",
+        clientSecret:"wSam8e_lsormfl87wGnfBPJ3",
         
     },
     session:{
