@@ -1,5 +1,7 @@
 let passport = require('passport');
 const {User}  = require('../models/users');
+const {sendRegistrationDetails} = require('./util');
+const crypto = require('crypto');
 
 exports.getLoginPage = (req,res,next)=>{
     if(req.user){
@@ -7,8 +9,11 @@ exports.getLoginPage = (req,res,next)=>{
         res.redirect("/");
     }
     else{
-        res.render('users/login',{title:'Home',user:req.user,successFlash:req.flash("success")});
+        res.render('users/login',{title:'Login',user:req.user,successFlash:req.flash("success")});
     }
+};
+exports.getRegisterPage = (req,res,next)=>{
+    res.render('users/register',{title:'Register',user:req.user,successFlash:req.flash("success")});
 };
 exports.login = (req,res,next)=>{
     passport.authenticate('local',(err,user,info)=>{
@@ -42,8 +47,18 @@ exports.logout= (req,res,next)=>{
     res.redirect('/');
 };
 
+
 exports.register = (req,res,next)=>{
-    User.register(new User({email:"paras123@iitrpr.ac.in",name:"paras"}),"test123");
-    req.flash("success","Registered Succefully");
-    res.redirect('/');
+    let randomString = crypto.randomBytes(32).toString('base64').slice(0,8);
+    console.log(randomString);
+    User.register(new User(req.body),randomString).then(result=>{
+        req.flash("success",`${result.name} Registered Succesfully!`);
+        sendRegistrationDetails({email: result.email, password:randomString},result.email);
+        res.redirect('/');
+    }).catch(err=>{
+        req.flash("success",err.message);
+        res.redirect('/users/register');
+    });
+    // req.flash("success","Registered Succefully");
+    // res.redirect('/');
 }

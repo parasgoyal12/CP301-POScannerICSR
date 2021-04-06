@@ -9,3 +9,12 @@ exports.isLoggedIn=(req,res,next)=>{
         res.redirect('/users/login');
     }
 };
+exports.isAdmin = (req,res,next)=>{
+    if(req.isAuthenticated&&req.user.isAdmin){
+        next();
+    }
+    else{
+        req.flash("success","Unauthorized. Only Admin can access");
+        res.redirect('/');
+    }
+};

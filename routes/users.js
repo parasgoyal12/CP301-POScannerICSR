@@ -6,5 +6,6 @@ var users = require('../controllers/users');
 router.get('/login',users.getLoginPage);
 router.post('/login', users.login);
 router.get('/logout',users.logout);
-router.get('/register',users.register);
+router.get('/register',users.getRegisterPage);
+router.post('/register',users.register);
 module.exports = router;

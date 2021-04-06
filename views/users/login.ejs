@@ -20,32 +20,23 @@
 
     <!-- Begin page content -->
     <main role="main" class="container">
-      <div class="jumbotron ">
-        <h1 class="display-5">Login Here</h1>
-        <p class="lead">Welcome to the Purchase Order Filing Site.</p>
-        <hr class="my-4">
-        <p>Use only IIT Ropar Email ID.</p>
-      </div>
-
-      
-
-      <!-- <div class="row">
-        <div class="col-6">
-          <a href="/uploadPage" class="btn btn-secondary btn-lg">Upload a new PO</a>
-        </div>
-        <div class="col-6">
-          <a href="#" class="btn btn-secondary btn-lg">View Previously Uploaded PO</a>
-        </div>
-      </div> -->
-      <div class="container d-flex align-items-center justify-content-center" style="height:100vh;">
-        <form action="/users/login" method="post">
-        <label for="email">Email:</label>
-        <input type="email" name="email" id="email" required/>
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" required />
-        <input id="submit" type="submit" name="submit">
+      <div class="container d-flex align-items-center justify-content-center" style="height:80vh;">
+      <div class="bg-light border border-dark rounded w-50">
+        <form action="/users/login" class="mx-4 my-4" method="post">
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class='form-control w-100' name="email" id="email" placeholder="example@iitrpr.ac.in" required/>
+          </div>
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <input class="form-control w-100" type="password" name="password" id="password" placeholder="Password" required />
+          </div>
+          <button class="btn btn-outline-primary" type="submit">Submit</button>
+          <hr>
+          <a href="#" class="text-decoration-none">Reset Password</span></a>
         </form>
         </div>
+      </div>
     </main>
     
     <%- include('../common/footer') %>

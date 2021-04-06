@@ -156,8 +156,6 @@ function sendMail(formResponse, to) {
           pass: keys.test.password
       }
   });
-
-  console.log(keys.test.id, keys.test.password)
   let mailOptions = {
       from: keys.test.id,
       to: to,
@@ -214,5 +212,30 @@ function saveToDrive(client,filename){
         }
       });
   });
+};
+
+function sendRegistrationDetails(formResponse, to){
+  let transporter = nodemailer.createTransport({
+    service:'gmail',
+    auth: {
+        user: keys.test.id,
+        pass: keys.test.password
+    }
+  });
+  let mailOptions = {
+      from: keys.test.id,
+      to: to,
+      subject: 'Successfully Registed on PO upload Portal',
+      html: `<div><b>Please use the following credentials to log In </b>`+
+      `<ul><li><b>Email: </b>${formResponse.email}</li></ul></div>`+
+      `<ul><li><b>Password: </b>${formResponse.password}</li></ul></div>`+
+      `<br> It is Strongly Recommended to change your password Immediately.`
+  };
+  transporter.sendMail(mailOptions, function(err, info){
+      if (err) {
+          // console.log(mailOptions);
+          console.log(err);
+      }
+  });
 }
-module.exports = {batchAnnotateFiles,parse,sendMail,saveToDrive};
+module.exports = {batchAnnotateFiles,parse,sendMail,saveToDrive,sendRegistrationDetails};

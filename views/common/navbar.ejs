@@ -23,6 +23,9 @@
     <% if(user) { %>
       <p class='mx-1 my-1' style="color:#116fd2;">Hello, <%= user.name %></p> 
       <a class="btn btn-outline-primary my-2 my-sm-0" href="/users/logout">Logout</a>
+      <% if(user.isAdmin) {%>
+        <a href="/admin" class="btn btn-outline-primary my-2 mx-1">Admin</a>
+      <% } %>
     <% } else { %>
     <a class="btn btn-outline-primary my-2 my-sm-0" href="/users/login">Login</a>
     <% } %>

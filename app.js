@@ -11,6 +11,8 @@ const {User} = require('./models/users');
 // require('./passport_setup')(passport);
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var adminRouter = require('./routes/admin');
+
 const keys = require('./config/keys');
 
 var app = express();
@@ -35,6 +37,7 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/admin',adminRouter);
 
 // app.get("/auth/google",passport.authenticate("google",{scope:["profile","email"]}));
 // app.get("/auth/google/redirect",passport.authenticate('google',{failureRedirect:'/auth/google',failureFlash:true}),(req,res)=>{
