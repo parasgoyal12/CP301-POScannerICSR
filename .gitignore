@@ -1,3 +1,5 @@
 node_modules
 public/uploads/*.pdf
 .env
+config/keys.js
+config/*.json
