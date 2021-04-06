@@ -90,7 +90,7 @@ exports.submitConfirmationPage= async (req,res,next)=>{
     });
     let formResponse = req.body;
     // console.log(req.body);
-    formResponse.fileName = `http://localhost:3000/uploads/${formResponse.fileName}`;
+    formResponse.fileName = `${keys.clientURL}/uploads/${formResponse.fileName}`;
     formResponse.user = req.user.name;
     delete formResponse.submit;
     try{

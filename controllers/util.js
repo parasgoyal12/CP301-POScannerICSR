@@ -212,7 +212,7 @@ function saveToDrive(client,filename){
         }
       });
   });
-};
+}
 
 function sendRegistrationDetails(formResponse, to){
   let transporter = nodemailer.createTransport({
@@ -238,4 +238,29 @@ function sendRegistrationDetails(formResponse, to){
       }
   });
 }
-module.exports = {batchAnnotateFiles,parse,sendMail,saveToDrive,sendRegistrationDetails};
+
+function sendResetToken(formResponse, to){
+  let transporter = nodemailer.createTransport({
+    service:'gmail',
+    auth: {
+        user: keys.test.id,
+        pass: keys.test.password
+    }
+  });
+  let mailOptions = {
+      from: keys.test.id,
+      to: to,
+      subject: 'Password Reset Request Received',
+      html: `<div><b>Please use the below link to reset your password </b>`+
+      `<ul><li><b>Link: </b>${formResponse}</li></ul></div>`+
+      `<br> This link expires in 3 hours.`
+  };
+  transporter.sendMail(mailOptions, function(err, info){
+      if (err) {
+          // console.log(mailOptions);
+          console.log(err);
+      }
+  });
+}
+
+module.exports = {batchAnnotateFiles,parse,sendMail,saveToDrive,sendRegistrationDetails,sendResetToken};
