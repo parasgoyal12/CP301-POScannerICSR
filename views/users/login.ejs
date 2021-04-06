@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <%- include('../common/head') %>
+    <link rel="stylesheet" href="stylesheets/index.css">
+  </head>
+
+  <body>
+
+    <header>
+      <%- include('../common/navbar') %>
+      <% if(successFlash.length>0) { %>
+        <div class="container mt-1">
+          <div class="alert alert-info">
+            <%= successFlash %>
+          </div>
+        </div>
+        <% } %>
+    </header>
+
+    <!-- Begin page content -->
+    <main role="main" class="container">
+      <div class="jumbotron ">
+        <h1 class="display-5">Login Here</h1>
+        <p class="lead">Welcome to the Purchase Order Filing Site.</p>
+        <hr class="my-4">
+        <p>Use only IIT Ropar Email ID.</p>
+      </div>
+
+      
+
+      <!-- <div class="row">
+        <div class="col-6">
+          <a href="/uploadPage" class="btn btn-secondary btn-lg">Upload a new PO</a>
+        </div>
+        <div class="col-6">
+          <a href="#" class="btn btn-secondary btn-lg">View Previously Uploaded PO</a>
+        </div>
+      </div> -->
+      <div class="container d-flex align-items-center justify-content-center" style="height:100vh;">
+        <form action="/users/login" method="post">
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" required/>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required />
+        <input id="submit" type="submit" name="submit">
+        </form>
+        </div>
+    </main>
+    
+    <%- include('../common/footer') %>
+    
+  </body>
+</html>

@@ -7,8 +7,8 @@ let passport = require('passport');
 let session = require('express-session');
 let mongoose = require('mongoose');
 let flash = require('connect-flash');
-
-require('./passport_setup')(passport);
+const {User} = require('./models/users');
+// require('./passport_setup')(passport);
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const keys = require('./config/keys');
@@ -29,22 +29,26 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-app.get("/auth/google",passport.authenticate("google",{scope:["profile","email"]}));
-app.get("/auth/google/redirect",passport.authenticate('google',{failureRedirect:'/auth/google',failureFlash:true}),(req,res)=>{
-  let rdrTo= req.session.redirectTo || '/';
-  req.session.redirectTo=null;
-  delete req.session.redirectTo;
-  res.redirect(rdrTo);
-});
-app.get('/auth/logout',(req,res)=>{
-  req.logout();
-  // req.session.destroy();
-  req.flash("success","Logged Out Succesfully!");
-  res.redirect('/');
-});
+// app.get("/auth/google",passport.authenticate("google",{scope:["profile","email"]}));
+// app.get("/auth/google/redirect",passport.authenticate('google',{failureRedirect:'/auth/google',failureFlash:true}),(req,res)=>{
+//   let rdrTo= req.session.redirectTo || '/';
+//   req.session.redirectTo=null;
+//   delete req.session.redirectTo;
+//   res.redirect(rdrTo);
+// });
+// app.get('/auth/logout',(req,res)=>{
+//   req.logout();
+//   // req.session.destroy();
+//   req.flash("success","Logged Out Succesfully!");
+//   res.redirect('/');
+// });
 
 
 // catch 404 and forward to error handler
