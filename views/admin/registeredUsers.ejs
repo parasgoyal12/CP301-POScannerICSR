@@ -28,7 +28,7 @@
             <thead>
               <tr>
                 <th scope="col" onclick="w3.sortHTML('.table','.item', 'td:nth-child(1)')">Name <i class="fa fa-sort"></i></th>
-                <th scope="col" onclick="w3.sortHTML('.table','.item', 'td:nth-child(2)')">EMail <i class="fa fa-sort"></i></th>
+                <th scope="col" onclick="w3.sortHTML('.table','.item', 'td:nth-child(2)')">Email <i class="fa fa-sort"></i></th>
                 <!-- <th scope="col" onclick="w3.sortHTML('.table','.item', 'td:nth-child(3)')">Date Prepared <i class="fa fa-sort"></i></th> -->
                 <th scope="col">Delete</th>
               </tr>
@@ -36,8 +36,8 @@
             <tbody>
                 <% users.forEach(user => { %> 
               <tr class='item'>
-                <td><%=user.email %></td>
                 <td><%=user.name %></td>
+                <td><%=user.email %></td>
                 <td><a href="/admin/deleteUser/<%= user._id %>" class="btn btn-outline-danger">Delete</a></td>
               </tr>
            <% }); %>

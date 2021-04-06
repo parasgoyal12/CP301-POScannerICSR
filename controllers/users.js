@@ -1,7 +1,9 @@
 let passport = require('passport');
-const {User}  = require('../models/users');
-const {sendRegistrationDetails} = require('./util');
+const {User,Token}  = require('../models/users');
+const {sendRegistrationDetails,sendResetToken} = require('./util');
 const crypto = require('crypto');
+const bcrypt = require('bcrypt');
+const keys = require('../config/keys');
 
 exports.getLoginPage = (req,res,next)=>{
     if(req.user){
@@ -61,4 +63,66 @@ exports.register = (req,res,next)=>{
     });
     // req.flash("success","Registered Succefully");
     // res.redirect('/');
+}
+
+const requestPasswordReset = async (email)=>{
+    const user = await User.findOne({email});
+    if(!user)throw new Error("User does not exists");
+    let token = await Token.findOne({userId : user._id});
+    if(token) await token.deleteOne();
+    let resetToken = crypto.randomBytes(32).toString("hex");
+
+    await new Token({
+        userId: user._id,
+        token: resetToken,
+        createdAt: Date.now(),
+    }).save();
+
+    const link = `${keys.clientURL}/passwordReset?token=${resetToken}&id=${user._id}`;
+    sendResetToken(link,user.email);
+    return link;
+};
+
+const resetPassword = async (userId, token, password) => {
+    let passwordResetToken = await Token.findOne({ userId });
+    if (!passwordResetToken) {
+      throw new Error("Invalid or expired password reset token");
+    }
+    if(passwordResetToken.token != token){
+        throw new Error("Invalid or expired password reset token");
+    }
+    const user = await User.findById({ _id: userId });
+    await user.setPassword(password);
+    await passwordResetToken.deleteOne();
+    return true;
+  };
+
+exports.getResetRequestPage = (req,res,next) =>{
+    res.render('users/passwordResetRequest',{title:'Password Reset',user:req.user,successFlash:req.flash("success")});
+}
+exports.passwordResetRequest = (req,res,next)=>{
+    requestPasswordReset(req.body.email).then(result=>{
+        console.log(result);
+        req.flash("success","Password Reset Token Sent to your email.");
+        res.redirect('/');
+    })
+    .catch(err=>{
+        req.flash("success","Email ID Does not exists!");
+        res.redirect('/users/passwordResetRequest');
+    });
+};
+
+exports.getResetPasswordPage = (req,res,next)=>{
+    res.render('users/resetPassword',{title:'Password Reset',user:req,user,successFlash:req.flash("success")});
+};
+
+exports.resetPasswordPage = (req,res,next)=>{
+    console.log(req.body);
+    resetPassword(req.body.id,req.body.token,req.body.password),then(result=>{
+        req.flash("success","Password Reset Succesfully");
+        res.redirect('/');
+    }).catch(err=>{
+        req.flash("success",err.message);
+        res.redirect('/');
+    });
 }

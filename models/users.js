@@ -20,4 +20,22 @@ const UsersScehma= new mongoose.Schema(
 UsersScehma.plugin(passportLocalMongoose,{usernameField:'email'});
 
 const User = mongoose.model('User',UsersScehma);
-module.exports = {User};
+
+const tokenSchema = new mongoose.Schema({
+  userId: {
+    type: mongoose.Types.ObjectId,
+    required: true,
+    ref: "User",
+  },
+  token: {
+    type: String,
+    required: true,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+    expires: 3600*3,// this is the expiry time in seconds
+  },
+});
+const Token = mongoose.model("Token", tokenSchema);
+module.exports = {User,Token};
