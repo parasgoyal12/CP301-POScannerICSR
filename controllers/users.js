@@ -78,7 +78,7 @@ const requestPasswordReset = async (email)=>{
         createdAt: Date.now(),
     }).save();
 
-    const link = `${keys.clientURL}/passwordReset?token=${resetToken}&id=${user._id}`;
+    const link = `${keys.clientURL}/users/passwordReset?token=${resetToken}&id=${user._id}`;
     sendResetToken(link,user.email);
     return link;
 };
@@ -93,6 +93,7 @@ const resetPassword = async (userId, token, password) => {
     }
     const user = await User.findById({ _id: userId });
     await user.setPassword(password);
+    await user.save();
     await passwordResetToken.deleteOne();
     return true;
   };
@@ -113,12 +114,12 @@ exports.passwordResetRequest = (req,res,next)=>{
 };
 
 exports.getResetPasswordPage = (req,res,next)=>{
-    res.render('users/resetPassword',{title:'Password Reset',user:req,user,successFlash:req.flash("success")});
+    res.render('users/resetPassword',{title:'Password Reset',user:req.user,successFlash:req.flash("success")});
 };
 
 exports.resetPasswordPage = (req,res,next)=>{
     console.log(req.body);
-    resetPassword(req.body.id,req.body.token,req.body.password),then(result=>{
+    resetPassword(req.body.id,req.body.token,req.body.password).then(result=>{
         req.flash("success","Password Reset Succesfully");
         res.redirect('/');
     }).catch(err=>{
