@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <%- include('../common/head') %>
+    <link rel="stylesheet" href="stylesheets/index.css">
+    <style>
+      th:hover{
+        background-color: #ccc;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+        <%- include('../common/navbar') %>
+      </header>
+
+    <!-- Begin page content -->
+    <main style="margin-top: 60px;">
+      <div class="py-5 my-3 text-center">
+        <h2>Registered Users :</h2>
+        <!-- <p class="lead">Select some of the POs to contiue working on...</p> -->
+      </div>
+
+      <div class="container my-3">
+        <% if(users.length>0) { %>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" onclick="w3.sortHTML('.table','.item', 'td:nth-child(1)')">Name <i class="fa fa-sort"></i></th>
+                <th scope="col" onclick="w3.sortHTML('.table','.item', 'td:nth-child(2)')">EMail <i class="fa fa-sort"></i></th>
+                <!-- <th scope="col" onclick="w3.sortHTML('.table','.item', 'td:nth-child(3)')">Date Prepared <i class="fa fa-sort"></i></th> -->
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+                <% users.forEach(user => { %> 
+              <tr class='item'>
+                <td><%=user.email %></td>
+                <td><%=user.name %></td>
+                <td><a href="/admin/deleteUser/<%= user._id %>" class="btn btn-outline-danger">Delete</a></td>
+              </tr>
+           <% }); %>
+            </tbody>
+          </table>
+          <% } else { %>
+            <p class="lead text-center">Please add atleast one user.</p>
+            <% } %>
+        </div>
+    </main>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">View PO</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!-- <form>
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Recipient:</label>
+                <input type="text" class="form-control" id="recipient-name">
+              </div>
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">Message:</label>
+                <textarea class="form-control" id="message-text"></textarea>
+              </div>
+            </form> -->
+            <canvas id="target-section" height="100px" width="100px">
+              <p>PO Here</p>
+            </canvas>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%- include('../common/footer') %>
+    <script src="//mozilla.github.io/pdf.js/build/pdf.js"></script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+  </body>
+</html>
