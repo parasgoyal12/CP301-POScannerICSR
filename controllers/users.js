@@ -78,7 +78,7 @@ const requestPasswordReset = async (email)=>{
         createdAt: Date.now(),
     }).save();
 
-    const link = `${keys.clientURL}/users/passwordReset?token=${resetToken}&id=${user._id}`;
+    const link = `${keys.clientUrl}/users/passwordReset?token=${resetToken}&id=${user._id}`;
     sendResetToken(link,user.email);
     return link;
 };
@@ -117,8 +117,46 @@ exports.getResetPasswordPage = (req,res,next)=>{
     res.render('users/resetPassword',{title:'Password Reset',user:req.user,successFlash:req.flash("success")});
 };
 
+validation = (pw, confirm_pw) => {
+    if (pw != confirm_pw) {
+        return -1;
+    } else {
+        if (pw.length < 6) {
+            return -2;  
+        }
+        let count_lower = 0;
+        let count_upper = 0;
+        let count_digit = 0;
+        for (let i = 0 ; i < pw.length ; i++) {
+            if (pw[i] >= 'A' && pw[i] <= 'Z') {
+            count_upper++;
+            } else if (pw[i] >= 'a' && pw[i] <= 'z') {
+            count_lower++;
+            } else if (pw[i] >= '0' && pw[i] <= '9') {
+            count_digit++;
+            }
+        }
+        if ((count_lower == 0) || (count_upper == 0) || (count_digit == 0)) {
+            return -3;  
+        }
+        return 1;
+    }
+}
+
 exports.resetPasswordPage = (req,res,next)=>{
     console.log(req.body);
+    let valid = validation(req.body.password, req.body.confirm_password); 
+    if (valid != 1) {
+        const link = `${keys.clientUrl}/users/passwordReset?token=${req.body.token}&id=${req.body.id}`;
+        if (valid == -1) {
+            req.flash("success", "Passwords do not match");
+        } else if (valid == -2) {
+            req.flash("success", "Password should have atleast 6 characters");
+        } else {
+            req.flash("success", "Password should have atleast 1 uppercase character, 1 lowercase character and 1 digit");
+        }
+        res.redirect(link);
+    }
     resetPassword(req.body.id,req.body.token,req.body.password).then(result=>{
         req.flash("success","Password Reset Succesfully");
         res.redirect('/');
