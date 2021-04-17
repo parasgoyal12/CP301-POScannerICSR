@@ -73,7 +73,7 @@ app.use(function(err, req, res, next) {
 PORT= process.env.PORT || 3000;
 mongoose.connect(keys.mongodb.dbURI,{useNewUrlParser: true,useUnifiedTopology:true, useCreateIndex:true})
 .then(result=>{
-  app.listen(PORT,()=>{
+  app.listen(PORT,'localhost',()=>{
     console.log("Listening on PORT 3000");
   });
 })
