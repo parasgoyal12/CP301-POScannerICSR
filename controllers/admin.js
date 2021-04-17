@@ -7,7 +7,7 @@ exports.getIndex = (req,res,next) =>{
 exports.getRegUsers = (req,res,next) =>{
     User.find()
         .then((result) =>{
-            res.render('admin/registeredUsers',{title:'Registered Users',users:result,user:req.user});
+            res.render('admin/registeredUsers',{title:'Registered Users',users:result,user:req.user,successFlash:req.flash("success")});
         })
 };
 
