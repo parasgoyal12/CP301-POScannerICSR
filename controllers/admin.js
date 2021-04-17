@@ -24,3 +24,22 @@ exports.deleteUser = (req,res,next)=>{
         res.redirect("/admin/registeredUsers");
     })
 };
+
+exports.getUserToUpdate = (req,res,next) =>{
+    User.findById(req.params.id).then(result=>{
+        if(result)
+        res.render('admin/updateUser',{title:"Update User",user_info:result,user:req.user,successFlash:req.flash("success")});
+        else next();
+    }).catch(err=>{
+        console.log(err);
+        next();
+    });
+}
+
+exports.updateUser = (req,res,next) =>{
+    console.log(req.params,req.body);
+    User.findByIdAndUpdate(req.params.id,{$set:req.body}).then(result=>{
+        req.flash("success",`User ${result.email} Updated Successfully!`);
+        res.redirect('/');
+    }).catch(err=>res.send(err.message));
+}

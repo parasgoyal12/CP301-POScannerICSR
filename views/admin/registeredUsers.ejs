@@ -37,6 +37,7 @@
                 <th scope="col" onclick="w3.sortHTML('.table','.item', 'td:nth-child(1)')">Name <i class="fa fa-sort"></i></th>
                 <th scope="col" onclick="w3.sortHTML('.table','.item', 'td:nth-child(2)')">Email <i class="fa fa-sort"></i></th>
                 <th scope="col" onclick="w3.sortHTML('.table','.item', 'td:nth-child(3)')">Admin <i class="fa fa-sort"></i></th>
+                <th scope="col">Edit</th>
                 <th scope="col">Delete</th>
               </tr>
             </thead>
@@ -50,7 +51,8 @@
                 <% } else { %>
                     <td>No</td>
                 <% } %>
-                <td><a href="/admin/deleteUser/<%= user._id %>" class="btn btn-outline-danger">Delete</a></td>
+                <td><a href="/admin/updateUser/<%= user._id %>" class="btn btn-outline-info"><i class="fa fa-edit"></i></a></td>
+                <td><a href="/admin/deleteUser/<%= user._id %>" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
               </tr>
            <% }); %>
             </tbody>

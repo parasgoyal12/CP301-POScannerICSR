@@ -52,9 +52,9 @@
                 <td><%=po.indentNo %></td>
                 <td><%=po.datePrepared %></td>
                 <td><%=po.fileNo %></td>
-                <td><button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModal" data-whatever="<%= po.fileName %>">View</button></td>
-                <td><a class="btn btn-outline-primary" href="/confirmationPage/<%= po._id %>">Edit</a></td>
-                <td><a href="/deleteSaved/<%= po._id %>" class="btn btn-outline-danger">Delete</a></td>
+                <td><button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModal" data-whatever="<%= po.fileName %>"><i class="fa fa-eye"></i></button></td>
+                <td><a class="btn btn-outline-primary" href="/confirmationPage/<%= po._id %>"><i class="fa fa-edit"></i></a></td>
+                <td><a href="/deleteSaved/<%= po._id %>" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
               </tr>
            <% }); %>
             </tbody>

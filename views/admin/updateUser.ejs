@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <%- include('../common/head') %>
+    <link rel="stylesheet" href="stylesheets/index.css">
+  </head>
+
+  <body>
+
+    <header>
+      <%- include('../common/navbar') %>
+      <% if(successFlash.length>0) { %>
+        <div class="container mt-1">
+          <div class="alert alert-info">
+            <%= successFlash %>
+          </div>
+          
+        </div>
+        <% } %>
+    </header>
+
+    <!-- Begin page content -->
+    <main role="main" class="container">
+      <!-- <h3 class="lead text-center">
+        Add a New User to the System
+      </h3> -->
+        <div class="container d-flex align-items-center justify-content-center" style="height:80vh;">
+        <div class="bg-light border border-dark rounded w-50">
+          <p class="lead text-center">Update User </p>
+          <form action="/admin/updateUser/<%= user_info._id %>" class="mx-4 my-4" method="post">
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" class='form-control w-100' pattern="^[A-Za-z0-9._%+-]+@iitrpr.ac.in$" title="Please Enter a valid IIT ROPAR Email ID" name="email" id="email" value="<%= user_info.email%>" placeholder="example@iitrpr.ac.in" disabled required/>
+            </div>
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input class="form-control w-100" type="text" name="name" id="name" placeholder="Name" value="<%= user_info.name %>" required />
+            </div>
+            <div class="form-group">
+              <label for="isAdmin" class="bg-danger text-white">Make Admin?</label>
+              <select id="isAdmin" name="isAdmin" class="form-control">
+                <% if(user_info.isAdmin) { %>
+                <option value="false">No</option>
+                <option selected value="true" >Yes</option>
+                <% } else { %>
+                  <option value="false" selected>No</option>
+                  <option value="true">Yes</option>
+                <% } %>
+              </select>
+            </div>
+            <button class="btn btn-outline-primary" type="submit">Submit</button>
+          </form>
+          </div>
+        </div>
+      </main>
+    
+    <%- include('../common/footer') %>
+    
+  </body>
+</html>
