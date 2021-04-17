@@ -23,7 +23,9 @@
         <div class="py-2 my-1 text-center">
             <h2>Confirmation form</h2>
             <p class="lead">Kindly confirm and fill the form below.</p>
-
+            <p class="lead text-danger">
+                Please Check the fileds highlighted <span class="bg-warning">yellow</span> very carefully.
+            </p>
         </div>
 
         <div class="row">
@@ -61,7 +63,7 @@
                 
                 <div class="row">
                     <div class="mb-3 col-md-6">
-                        <label for="fileNo" class="required">File No.</label>
+                        <label for="fileNo" class="required bg-warning">File No.</label>
                             <input type="text" class="form-control" id="fileNo" placeholder="File Number" name="fileNo" value="<%= formData.fileNo %>" required style="border-color:yellow;">
                             <div class="invalid-feedback" style="width: 100%;">
                             File Number is required.
@@ -119,7 +121,7 @@
                 <div class="row">
 
                     <div class="mb-3 col-md-3">
-                        <label for="amount" class="required">Amount</label>
+                        <label for="amount"  class=" bg-warning required">Amount</label>
                         <input type="number" class="form-control" id="amount" placeholder="" name="amount" value="<%= formData.amount %>" required style="border-color:yellow;">
                         <div class="invalid-feedback">
                             Please enter Amount.
@@ -161,7 +163,7 @@
                 
                 <div class="row">
                 <div class="col-md-6 mb-3">
-                    <label for="poNumber" class="required">PO Number</label>
+                    <label for="poNumber" class="required bg-warning">PO Number</label>
                     <input type="text" class="form-control" id="poNumber" placeholder="" name="poNumber" value="<%= formData.poNumber %>" required style="border-color:yellow;">
                     <div class="invalid-feedback">
                     PO Number is required
@@ -175,7 +177,7 @@
                     </div>
                 </div>
                 <div class="col-md-3 mb-3">
-                    <label for="poAmount" class="required">PO Amount</label>
+                    <label for="poAmount" class="required bg-warning">PO Amount</label>
                     <input type="number" class="form-control" id="poAmount" name="poAmount" placeholder="" value="<%= formData.poAmount %>" required style="border-color:yellow;">
                     <div class="invalid-feedback">
                     PO Amount is required

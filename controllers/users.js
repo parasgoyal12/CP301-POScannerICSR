@@ -52,7 +52,7 @@ exports.logout= (req,res,next)=>{
 
 exports.register = (req,res,next)=>{
     let randomString = crypto.randomBytes(32).toString('base64').slice(0,8);
-    console.log(randomString);
+    console.log(req.body);
     User.register(new User(req.body),randomString).then(result=>{
         req.flash("success",`${result.name} Registered Succesfully!`);
         sendRegistrationDetails({email: result.email, password:randomString},result.email);
