@@ -1,4 +1,5 @@
 const {User}  = require('../models/users');
+const Form = require('../models/form');
 
 exports.getIndex = (req,res,next) =>{
     res.render('admin/index',{title:'Admin',user:req.user,successFlash:req.flash("success")});
@@ -12,16 +13,39 @@ exports.getRegUsers = (req,res,next) =>{
 };
 
 exports.deleteUser = (req,res,next)=>{
-    User.findByIdAndDelete(req.params.id)
-    .then(resp=>{
-        console.log(resp);
-        req.flash("success",`${resp.name} Deleted Succesfully!`);
-        res.redirect('/admin/registeredUsers');
-    })
-    .catch((err)=>{
-        console.log(err);
-        req.flash("success","Delete Failed");
-        res.redirect("/admin/registeredUsers");
+    var userID = req.params.id;
+    var savedFormsExist = false;
+    var x = Form.find({User:userID})
+        .then(
+            (result)=>{
+                if(result.length>0)
+                {
+                    savedFormsExist=true;
+                }
+            }
+        )
+        .catch((err)=>{
+            savedFormsExist=false;
+        })
+    Promise.all([x]).then((result)=>{
+        if(savedFormsExist)
+        {
+            req.flash("success","Delete Failed since user has unfinished forms");
+            res.redirect("/admin/registeredUsers");
+        }
+        else{
+            User.findByIdAndDelete(req.params.id)
+            .then(resp=>{
+                req.flash("success",`${resp.name} Deleted Succesfully!`);
+                res.redirect('/admin/registeredUsers');
+            })
+            .catch((err)=>{
+                console.log(err);
+                req.flash("success","Delete Failed");
+                res.redirect("/admin/registeredUsers");
+            })
+            console.log("Deleted");
+        }   
     })
 };
 
