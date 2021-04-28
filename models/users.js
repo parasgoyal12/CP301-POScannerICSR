@@ -14,7 +14,9 @@ const UsersScehma= new mongoose.Schema(
             type:String,
             required:true
         },
-        isAdmin:{type:Boolean,default:false}
+        isAdmin:{type:Boolean,default:false},
+        googleSheetLink :{type:String, required:true},
+        driveFolderLink:{type:String,required:true}
     }
 );
 UsersScehma.plugin(passportLocalMongoose,{usernameField:'email'});

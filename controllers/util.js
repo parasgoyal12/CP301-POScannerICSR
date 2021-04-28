@@ -263,4 +263,60 @@ function sendResetToken(formResponse, to){
   });
 }
 
-module.exports = {batchAnnotateFiles,parse,sendMail,saveToDrive,sendRegistrationDetails,sendResetToken};
+function getFinancialYear() {
+  var fiscalyear = "";
+  var today = new Date();
+  if ((today.getMonth() + 1) <= 3) {
+    fiscalyear = (today.getFullYear() - 1) + "-" + today.getFullYear()
+  } else {
+    fiscalyear = today.getFullYear() + "-" + (today.getFullYear() + 1)
+  }
+  return fiscalyear
+}
+
+async function getDriveFolder(client,financialYear){
+  const gsapi = google.drive({version : 'v3',auth : client});
+  let folderID = keys.driveFolder;
+  let files = await new Promise(function(resolve,reject){
+    gsapi.files.list({
+      q: `mimeType='application/vnd.google-apps.folder' and name='${financialYear}' and parents in '${folderID}'`,
+        fields: 'files(id,name)',
+        
+      }, function (err, file) {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(file);
+        }
+      });
+  });
+  // return files.data.files;
+  if(files.data.files.length){
+    return files.data.files[0].id;
+  }
+  else{
+    console.log("Folder not found!");
+    var fileMetadata = {
+      'name': financialYear,
+      'mimeType': 'application/vnd.google-apps.folder',
+      parents:[folderID]
+    };
+    return await new Promise(function(resolve,reject){
+      gsapi.files.create({
+        resource: fileMetadata,
+        fields: 'id'
+      }, function (err, file) {
+        if (err) {
+          // Handle error
+          console.error(err);
+        } else {
+          // console.log(file);
+          resolve(file.data.id);
+        }
+      });
+    });
+    
+    
+  }
+}
+module.exports = {batchAnnotateFiles,parse,sendMail,saveToDrive,sendRegistrationDetails,sendResetToken,getFinancialYear,getDriveFolder};

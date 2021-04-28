@@ -4,7 +4,7 @@ let path = require('path');
 const {google} = require('googleapis');
 var keys=require('./../config/keys');
 const { response } = require('express');
-const { batchAnnotateFiles,parse,sendMail,saveToDrive } = require('./util');
+const { batchAnnotateFiles,parse,sendMail,saveToDrive,getFinancialYear,getDriveFolder } = require('./util');
 const fs = require('fs');
 var Form = require('./../models/form');
 
@@ -98,7 +98,7 @@ exports.submitConfirmationPage= async (req,res,next)=>{
         
         let result = await Form.findByIdAndDelete(req.params.id);
         
-        
+        console.log(await getDriveFolder(client,getFinancialYear()));
         req.flash("success",`PO ${result.poNumber} Added Succesfully!`);
         result = await saveToDrive(client,result.fileName);
         
@@ -111,7 +111,7 @@ exports.submitConfirmationPage= async (req,res,next)=>{
         const gsapi = google.sheets({version : 'v4',auth : client});
         const options = {
             spreadsheetId : keys.google_sheet.sheetID,
-            range : 'Sheet1!A1',
+            range : `'${getFinancialYear()}'!A1`,
             valueInputOption : 'USER_ENTERED',
             resource : {values : [resArr]}
         }
