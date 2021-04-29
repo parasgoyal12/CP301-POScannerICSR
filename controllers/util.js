@@ -230,7 +230,7 @@ function saveToDrive(client,filename,folderId){
   };
   var media = {
   mimeType: 'application/pdf',
-  body: fsasync.createReadStream(path.join(path.resolve(__dirname,'..'),'public/uploads',filename))
+  body: fsasync.createReadStream(path.join(path.resolve(__dirname,'..'),'public/gemUploads',filename))
   };
   return new Promise(function(resolve,reject){
     gsapi.files.create({

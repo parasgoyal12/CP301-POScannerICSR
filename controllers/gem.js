@@ -31,7 +31,7 @@ exports.submitGemUploadPage = (req,res,next)=>{
     });	
     form.on('fileBegin',function(name,file)
     {
-        file.path=path.join(path.resolve(__dirname,'..'),'public/uploads/gemUploads',file.name);
+        file.path=path.join(path.resolve(__dirname,'..'),'public/gemUploads',file.name);
         filename=file.name;
         // console.log(filename);
         filePath=file.path;
@@ -51,7 +51,7 @@ exports.submitGemUploadPage = (req,res,next)=>{
                 formData.fileName=filename;
                 formData.User=req.user._id;
                 const form=new Form(formData);
-                form.save().then(result=>{res.redirect(`/confirmationPage/${result._id}`);}).catch(err=>{res.send(err.message);});
+                form.save().then(result=>{res.redirect(`/gem/gemConfirmationPage/${result._id}`);}).catch(err=>{res.send(err.message);});
             }
             else{
                 pdfParser(filePath).then(resp =>{
@@ -59,7 +59,7 @@ exports.submitGemUploadPage = (req,res,next)=>{
                     formData.fileName = filename;
                     formData.User=req.user._id;
                     const form = new Form(formData);
-                    form.save().then(result=>{res.redirect(`/confirmationPage/${result._id}`);}).catch(err=>{res.send(err.message);});
+                    form.save().then(result=>{res.redirect(`/gem/gemConfirmationPage/${result._id}`);}).catch(err=>{res.send(err.message);});
                 }).catch(err=>{
                     console.log(err.message);
                     res.send(err);
@@ -67,4 +67,61 @@ exports.submitGemUploadPage = (req,res,next)=>{
             }
         }
     });
+};
+
+exports.getGemConfirmationPage=(req,res,next)=>{
+    Form.findById(req.params.id)
+    .then(result=>{
+        if(result)
+        res.render('gem/gemConfirmationPage',{title:'Gem PO ConfirmationPage',user:req.user,formData:result});
+        else next();
+    })
+    .catch(err=>{
+        console.log(err);
+        next();
+    });
+    // res.render('confirmationPage',{title:'ConfirmationPage',user:req.user});
+};
+
+exports.submitGemConfirmationPage= async (req,res,next)=>{
+    const client = new google.auth.JWT(keys.google_sheet.client_email,null,keys.google_sheet.private_key,['https://www.googleapis.com/auth/spreadsheets','https://www.googleapis.com/auth/drive']);
+    client.authorize(function(err,tokens){
+        if(err)console.log(err);
+    });
+    let formResponse = req.body;
+    // console.log(req.body);
+    formResponse.fileName = `${keys.clientUrl}/gemUploads/${formResponse.fileName}`;
+    formResponse.user = req.user.name;
+    delete formResponse.submit;
+    try{
+        console.log(req.user.googleSheetLink);
+        let sheetTitle = await getSheetTitle(client,getFinancialYear(),req.user.googleSheetLink);
+        let result = await Form.findByIdAndDelete(req.params.id);
+        console.log(sheetTitle);
+        let driveFolderID = await getDriveFolder(client,getFinancialYear(),req.user.driveFolderLink);
+        console.log(driveFolderID);
+        req.flash("success",`PO ${result.poNumber} Added Succesfully!`);
+        result = await saveToDrive(client,result.fileName,driveFolderID);
+        
+        formResponse.driveLink="https://drive.google.com/file/d/"+result.data.id;
+        if(formResponse.sendEmail==="1"){
+            sendMail(formResponse, req.user.email);
+            delete formResponse.sendEmail;
+        }
+        let resArr=Object.values(formResponse);
+        const gsapi = google.sheets({version : 'v4',auth : client});
+        const options = {
+            spreadsheetId : req.user.googleSheetLink,
+            range : `'${sheetTitle}'!A1`,
+            valueInputOption : 'USER_ENTERED',
+            resource : {values : [resArr]}
+        }
+        await gsapi.spreadsheets.values.append(options);
+        res.redirect("/");
+    }
+    catch(err){
+        console.log(err);
+        req.flash("success",`PO Addition Failed!`);
+        res.redirect("/");
+    }
 };

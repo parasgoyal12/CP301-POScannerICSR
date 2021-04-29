@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <%- include('./common/head') %>
+    <%- include('../common/head') %>
     <!-- <link rel="stylesheet" href="stylesheets/index.js"> -->
     <link rel="stylesheet" href="/stylesheets/form-validation.css">
     <style>
@@ -14,7 +14,7 @@
   <body>
 
     <header>
-      <%- include('./common/navbar') %>
+      <%- include('../common/navbar') %>
     </header>
 
     <!-- Begin page content -->
@@ -31,12 +31,12 @@
         <div class="row">
             <div class="col-md-5 order-md-2 mb-4">
                 <h4 class="mb-3">Preview</h4>
-                <iframe src="/uploads/<%= formData.fileName %>" class='w-100 h-75 my-4 sticky-top'></iframe>
+                <iframe src="/gemUploads/<%= formData.fileName %>" class='w-100 h-75 my-4 sticky-top'></iframe>
                 
             </div>
             <div class="col-md-7 order-md-1">
             <h4 class="mb-3">Purchase Order Details <span class='text-muted'>( <span style="color:red;"><strong>*</strong></span> ) <em>Validation Needed</em></span></h4>
-            <form class="needs-validation my-4 w-100" action="/confirmationPage/<%= formData._id %>" method="POST" novalidate>
+            <form class="needs-validation my-4 w-100" action="/gem/gemConfirmationPage/<%= formData._id %>" method="POST" novalidate>
                 <div class="row">
                     <div class="col-md-3 mb-3">
                         <label for="serialNo" class="required">Sr.No.</label>
@@ -229,7 +229,7 @@
         
     </main>
 
-    <%- include('./common/footer') %>
+    <%- include('../common/footer') %>
     <script>
         // Example starter JavaScript for disabling form submissions if there are invalid fields
         (function() {
