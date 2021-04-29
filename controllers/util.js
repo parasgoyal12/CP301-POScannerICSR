@@ -7,6 +7,7 @@ const {google} = require('googleapis');
 const fsasync = require('fs');
 const path = require('path');
 const convertRupeesIntoWords = require('convert-rupees-into-words');
+const pdf = require('pdf-parse');
 
 async function batchAnnotateFiles(fileName) {
   const inputConfig = {
@@ -147,6 +148,38 @@ function parse(data) {
   // console.log(info);
   return info;
 }
+
+function gemPoParser(data){
+  let info = {
+    datePrepared: "",
+    poDate: "",
+    amount: 1000,
+    poAmount: 10,
+    poNumber: 1,
+    fileNo: 12,
+    itemName: "Jalebi",
+    department: "CSE",
+    supplier: "Vijay Mallya",
+    indenter: "whatIsThis",
+    serialNo: 123,
+    indentNo: 456,
+    materialDescription: "material bery gud",
+};
+// console.log(info);
+return info;
+}
+
+async function pdfParser(filePath){
+console.log(filePath);
+let pdfText = "";
+dataRead = await fs.readFile(filePath);
+await pdf(dataRead).then((data)=> {
+    // console.log(data.text); 
+    pdfText=data.text;
+  });
+  return pdfText;
+}
+
 
 function sendMail(formResponse, to) {
   let transporter = nodemailer.createTransport({
@@ -339,4 +372,4 @@ async function getSheetTitle(client,financialYear,sheetID){
     return financialYear;
   }
 }
-module.exports = {batchAnnotateFiles,parse,sendMail,saveToDrive,sendRegistrationDetails,sendResetToken,getFinancialYear,getDriveFolder,getSheetTitle};
+module.exports = {batchAnnotateFiles,parse,sendMail,saveToDrive,sendRegistrationDetails,sendResetToken,getFinancialYear,getDriveFolder,getSheetTitle,pdfParser,gemPoParser};
