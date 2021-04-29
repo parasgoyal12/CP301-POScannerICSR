@@ -319,4 +319,24 @@ async function getDriveFolder(client,financialYear,folderID){
     
   }
 }
-module.exports = {batchAnnotateFiles,parse,sendMail,saveToDrive,sendRegistrationDetails,sendResetToken,getFinancialYear,getDriveFolder};
+async function getSheetTitle(client,financialYear,sheetID){
+  const gsapi = google.sheets({version : 'v4',auth : client});
+  // let folderID = keys.driveFolder;
+  const request = {
+    spreadsheetId: sheetID,
+    includeGridData:false
+  };
+  let sheets = await gsapi.spreadsheets.get(request);
+  let titles = sheets.data.sheets.map(ele=>ele.properties.title);
+  if(titles.includes(financialYear)){
+    return financialYear;
+  }else{
+    console.log("Sheet Not Found");
+    let response = await gsapi.spreadsheets.batchUpdate ({ 
+      spreadsheetId: sheetID, 
+      resource: {requests: [ {addSheet: {properties: {title: financialYear }}}]}});
+    // console.log(response);
+    return financialYear;
+  }
+}
+module.exports = {batchAnnotateFiles,parse,sendMail,saveToDrive,sendRegistrationDetails,sendResetToken,getFinancialYear,getDriveFolder,getSheetTitle};

@@ -4,7 +4,7 @@ let path = require('path');
 const {google} = require('googleapis');
 var keys=require('./../config/keys');
 const { response } = require('express');
-const { batchAnnotateFiles,parse,sendMail,saveToDrive,getFinancialYear,getDriveFolder } = require('./util');
+const { batchAnnotateFiles,parse,sendMail,saveToDrive,getFinancialYear,getDriveFolder,getSheetTitle } = require('./util');
 const fs = require('fs');
 var Form = require('./../models/form');
 
@@ -95,7 +95,7 @@ exports.submitConfirmationPage= async (req,res,next)=>{
     delete formResponse.submit;
     try{
         
-        
+        let sheetTitle = await getSheetTitle(client,getFinancialYear(),req.user.googleSheetLink);
         let result = await Form.findByIdAndDelete(req.params.id);
         
         let driveFolderID = await getDriveFolder(client,getFinancialYear(),req.user.driveFolderLink);
@@ -111,7 +111,7 @@ exports.submitConfirmationPage= async (req,res,next)=>{
         const gsapi = google.sheets({version : 'v4',auth : client});
         const options = {
             spreadsheetId : req.user.googleSheetLink,
-            range : `'${getFinancialYear()}'!A1`,
+            range : `'${sheetTitle}'!A1`,
             valueInputOption : 'USER_ENTERED',
             resource : {values : [resArr]}
         }
