@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <%- include('../common/head') %>
+    <link rel="stylesheet" href="stylesheets/index.css">
+  </head>
+
+  <body>
+
+    <header>
+      <%- include('../common/navbar') %>
+      <% if(successFlash.length>0) { %>
+        <div class="container mt-1">
+          <div class="alert alert-info">
+            <%= successFlash %>
+          </div>
+        </div>
+        <% } %>
+    </header>
+
+    <!-- Begin page content -->
+    <main role="main" class="container">
+      <div class="jumbotron ">
+        <h1 class="display-5">ICSR, IIT Ropar</h1>
+        <p class="lead">Welcome to the Purchase Order Filing Site.</p>
+        <hr class="my-4">
+        <p>This portal can only be accessed using IIT Ropar Email ID. You can upload GeM PO Only here.</p>
+      </div>
+
+      
+      <div class="container">
+      <div id="dock-container">
+        <div id="dock">
+          <ul>
+            <li>
+              <span>Upload a new GEM PO</span>
+              <a href="/gem/uploadPage"><img src="images/du1.png"/></a>
+            </li>
+            <li>
+              <span>View Saved GEM PO</span>
+              <a href="/gem/savedPOPage"><img src="images/dv.png"/></a>
+            </li>
+          </ul>
+        </div>
+        
+      </div>
+    </div>
+    </main>
+    
+    <%- include('../common/footer') %>
+    
+  </body>
+</html>

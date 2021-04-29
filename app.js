@@ -12,6 +12,7 @@ const {User} = require('./models/users');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var adminRouter = require('./routes/admin');
+var GEMRouter = require('./routes/gem');
 
 const keys = require('./config/keys');
 
@@ -38,6 +39,7 @@ passport.deserializeUser(User.deserializeUser());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/admin',adminRouter);
+app.use('/gem',GEMRouter);
 
 // app.get("/auth/google",passport.authenticate("google",{scope:["profile","email"]}));
 // app.get("/auth/google/redirect",passport.authenticate('google',{failureRedirect:'/auth/google',failureFlash:true}),(req,res)=>{
