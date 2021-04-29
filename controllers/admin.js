@@ -61,6 +61,10 @@ exports.getUserToUpdate = (req,res,next) =>{
 }
 
 exports.updateUser = (req,res,next) =>{
+    const driveRegex = /(?<=\/folders\/)[^\\/]*/;
+    const sheetRegex = /\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/;
+    req.body.driveFolderLink=req.body.driveFolderLink.match(driveRegex)[0];
+    req.body.googleSheetLink=req.body.googleSheetLink.match(sheetRegex)[1];
     console.log(req.params,req.body);
     User.findByIdAndUpdate(req.params.id,{$set:req.body}).then(result=>{
         req.flash("success",`User ${result.email} Updated Successfully!`);

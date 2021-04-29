@@ -98,9 +98,9 @@ exports.submitConfirmationPage= async (req,res,next)=>{
         
         let result = await Form.findByIdAndDelete(req.params.id);
         
-        console.log(await getDriveFolder(client,getFinancialYear()));
+        let driveFolderID = await getDriveFolder(client,getFinancialYear(),req.user.driveFolderLink);
         req.flash("success",`PO ${result.poNumber} Added Succesfully!`);
-        result = await saveToDrive(client,result.fileName);
+        result = await saveToDrive(client,result.fileName,driveFolderID);
         
         formResponse.driveLink="https://drive.google.com/file/d/"+result.data.id;
         if(formResponse.sendEmail==="1"){
@@ -110,7 +110,7 @@ exports.submitConfirmationPage= async (req,res,next)=>{
         let resArr=Object.values(formResponse);
         const gsapi = google.sheets({version : 'v4',auth : client});
         const options = {
-            spreadsheetId : keys.google_sheet.sheetID,
+            spreadsheetId : req.user.googleSheetLink,
             range : `'${getFinancialYear()}'!A1`,
             valueInputOption : 'USER_ENTERED',
             resource : {values : [resArr]}

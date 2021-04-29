@@ -188,9 +188,9 @@ function sendMail(formResponse, to) {
   })
 }
 
-function saveToDrive(client,filename){
+function saveToDrive(client,filename,folderId){
   const gsapi = google.drive({version : 'v3',auth : client});
-  var folderId = keys.driveFolder;
+  // var folderId = keys.driveFolder;
   var fileMetadata = {
   'name': filename,
   parents: [folderId]
@@ -274,9 +274,9 @@ function getFinancialYear() {
   return fiscalyear
 }
 
-async function getDriveFolder(client,financialYear){
+async function getDriveFolder(client,financialYear,folderID){
   const gsapi = google.drive({version : 'v3',auth : client});
-  let folderID = keys.driveFolder;
+  // let folderID = keys.driveFolder;
   let files = await new Promise(function(resolve,reject){
     gsapi.files.list({
       q: `mimeType='application/vnd.google-apps.folder' and name='${financialYear}' and parents in '${folderID}'`,
