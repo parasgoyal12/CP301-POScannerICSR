@@ -1,5 +1,6 @@
 node_modules
 public/uploads/*.pdf
+public/gemUploads/*.pdf
 .env
 config/keys.js
 config/*.json
