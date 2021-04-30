@@ -163,7 +163,6 @@ function gemPoParser(data){
         // return
         return {};
     }
-    console.log(GST);
     // // xx.xx.xxxx format, First instance is always date (as in samples)
     // const dateRgx = /\d{2}[.]\d{2}[.]\d{4}/;
     // let date = str.match(dateRgx);
@@ -237,24 +236,25 @@ function gemPoParser(data){
     // serialNo = PO.substring(0, PO.match('-').index);
 
   let info = {
-    contractNo : "",
-    gstin : "",
-    GeMSellerId : "",
+    contractNo : "1",
+    gstin : "12",
+    GeMSellerId : "123",
     datePrepared : "",
-    department : "",
-    fundingAgency : "",
-    projectName : "",
-    itemName : "",
+    department : "CSE",
+    fundingAgency : "GoI",
+    projectName : "DEP",
+    itemName : "xyz",
     indianImported : "",
-    amount : "",
-    importAmount : "",
-    category : "",
-    modeofPurchase : "",
-    sanctionNumber : "",
+    amount : "1234",
+    importAmount : "0",
+    category : "abc",
+    modeofPurchase : "CoD",
+    sanctionNumber : "123ABC",
     poDate : "",
-    companyName : "",
+    companyName : "MS",
     materialDescription : "",
-    poAmount : ""
+    poAmount : "12",
+    indenter : "Puneet"
 };
 // console.log(info);
 return info;

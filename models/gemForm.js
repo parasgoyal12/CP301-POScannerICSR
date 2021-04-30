@@ -2,56 +2,59 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const gemFormSchema = new Schema({
-    User : {            //done
+    User : {            
         type : String,
         required : true
     },
-    contractNo : {      //done
+    contractNo : {      
         type : String,
     },
-    gstin : {           //done
+    indenter : {
         type : String,
     },
-    GeMSellerId : {     //done
+    gstin : {           
         type : String,
     },
-    datePrepared : {    //done
+    GeMSellerId : {     
         type : String,
     },
-    department : {      //done
+    datePrepared : {    
         type : String,
     },
-    fundingAgency : {   //done
+    department : {      
         type : String,
     },
-    projectName : {     //done
+    fundingAgency : {   
         type : String,
     },
-    itemName : {        //done
+    projectName : {     
         type : String,
     },
-    indianImported : {  //done
+    itemName : {        
         type : String,
     },
-    amount : {          //done
+    indianImported : {  
         type : String,
     },
-    importAmount : {    //done
+    amount : {          
         type : String,
     },
-    category : {        //done
+    importAmount : {    
         type : String,
     },
-    modeofPurchase : {  //done
+    category : {        
         type : String,
     },
-    sanctionNumber : {  //done
+    modeofPurchase : {  
         type : String,
     },
-    poDate : {          //done
+    sanctionNumber : {  
         type : String,
     },
-    companyName : {     //done
+    poDate : {          
+        type : String,
+    },
+    companyName : {     
         type : String,
     },
     materialDescription : {

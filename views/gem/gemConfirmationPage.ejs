@@ -40,16 +40,16 @@
                 <div class="row">
                     <div class="col-md-3 mb-3">
                         <label for="serialNo" class="required">Contract No.</label>
-                        <input type="number" class="form-control" id="serialNo" placeholder="" value="<%= formData.serialNo %>" name="serialNo" required>
+                        <input type="number" class="form-control" id="contractNo" placeholder="" value="<%= formData.contractNo %>" name="serialNo" required>
                         <div class="invalid-feedback">
-                        Valid Sr.no. is required.
+                        Valid Contract Number is required.
                         </div>
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="indentNo" class="required">GSTIN</label>
-                        <input type="number" class="form-control" id="indentNo" placeholder="" value="<%= formData.indentNo %>" name="indentNo" required>
+                        <input type="number" class="form-control" id="GSTIN" placeholder="" value="<%= formData.GSTIN %>" name="GSTIN" required>
                         <div class="invalid-feedback">
-                        Valid indent number is required.
+                        Valid GSTIN number is required.
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
@@ -64,14 +64,14 @@
                 <div class="row">
                     <div class="mb-3 col-md-6">
                         <label for="fileNo" class="required bg-warning">GeM seller ID</label>
-                            <input type="text" class="form-control" id="fileNo" placeholder="File Number" name="fileNo" value="<%= formData.fileNo %>" required style="border-color:yellow;">
+                            <input type="text" class="form-control" id="GeMID" placeholder="GeM seller ID" name="GeMID" value="<%= formData.GeMSellerID%>" required style="border-color:yellow;">
                             <div class="invalid-feedback" style="width: 100%;">
-                            File Number is required.
+                            GeM seller ID is required.
                         </div> 
                     </div>
 
                     <div class="mb-3 col-md-6">
-                        <label for="indenter" class="required">Seller Company</label>
+                        <label for="indenter" class="required">Name of Indenter</label>
                         <input type="indenter" class="form-control" id="indenter" name="indenter" placeholder="Dr. Harpreet Singh" value="<%= formData.indenter %>" required>
                         <div class="invalid-feedback">
                             Please enter a valid Name of indenter.
@@ -164,7 +164,7 @@
                 <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="poNumber" class="required bg-warning">Sanction Number</label>
-                    <input type="text" class="form-control" id="sanctionNumber" placeholder="" name="sanctionNumber" value="<%= formData.poNumber %>" required style="border-color:yellow;">
+                    <input type="text" class="form-control" id="sanctionNumber" placeholder="" name="sanctionNumber" value="<%= formData.sanctionNumber %>" required style="border-color:yellow;">
                     <div class="invalid-feedback">
                     Sanction Number is required
                     </div>
@@ -189,10 +189,10 @@
 
                 <div class="row">
                 <div class="mb-3 col-md-6">
-                    <label for="supplier" class="required">Supplier</label>
-                    <input type="supplier" class="form-control" id="supplier" placeholder="" name="supplier" value="<%= formData.supplier %>" required>
+                    <label for="sellerCompanyName" class="required">Seller Firm</label>
+                    <input type="sellerCompanyNamr" class="form-control" id="sellerCompanyName" placeholder="" name="sellerCompanyName" value="<%= formData.companyName %>" required>
                     <div class="invalid-feedback">
-                    Supplier is required
+                    Seller Company Name is required
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
