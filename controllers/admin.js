@@ -61,7 +61,7 @@ exports.getUserToUpdate = (req,res,next) =>{
 }
 
 exports.updateUser = (req,res,next) =>{
-    const driveRegex = /(?<=\/folders\/)[^\\/]*/;
+    const driveRegex = /[-\w]{25,}/;;
     const sheetRegex = /\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/;
     req.body.driveFolderLink=req.body.driveFolderLink.match(driveRegex)[0];
     req.body.googleSheetLink=req.body.googleSheetLink.match(sheetRegex)[1];

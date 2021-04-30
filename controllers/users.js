@@ -52,7 +52,7 @@ exports.logout= (req,res,next)=>{
 
 exports.register = (req,res,next)=>{
     let randomString = crypto.randomBytes(32).toString('base64').slice(0,8);
-    const driveRegex = /(?<=\/folders\/)[^\\/]*/;
+    const driveRegex = /[-\w]{25,}/;
     const sheetRegex = /\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/;
     req.body.driveFolderLink=req.body.driveFolderLink.match(driveRegex)[0];
     req.body.googleSheetLink=req.body.googleSheetLink.match(sheetRegex)[1];
