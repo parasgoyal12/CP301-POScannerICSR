@@ -237,19 +237,24 @@ function gemPoParser(data){
     // serialNo = PO.substring(0, PO.match('-').index);
 
   let info = {
-    datePrepared: "",
-    poDate: "",
-    amount: 1000,
-    poAmount: 10,
-    poNumber: 1,
-    fileNo: 12,
-    itemName: "Jalebi",
-    department: "CSE",
-    supplier: "Vijay Mallya",
-    indenter: "whatIsThis",
-    serialNo: 123,
-    indentNo: 456,
-    materialDescription: "material bery gud",
+    contractNo : "",
+    gstin : "",
+    GeMSellerId : "",
+    datePrepared : "",
+    department : "",
+    fundingAgency : "",
+    projectName : "",
+    itemName : "",
+    indianImported : "",
+    amount : "",
+    importAmount : "",
+    category : "",
+    modeofPurchase : "",
+    sanctionNumber : "",
+    poDate : "",
+    companyName : "",
+    materialDescription : "",
+    poAmount : ""
 };
 // console.log(info);
 return info;

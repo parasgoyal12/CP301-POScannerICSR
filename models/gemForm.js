@@ -68,5 +68,5 @@ const gemFormSchema = new Schema({
     }
 });
 
-const gemForm = mongoose.model('gemForm',gemFormSchema);
+const gemForm = mongoose.model('gemform',gemFormSchema);
 module.exports = gemForm;
