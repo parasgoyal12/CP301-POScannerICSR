@@ -56,7 +56,7 @@
       }
       document.querySelector('input[type="file"]').onchange = async function(e){
         // console.log(e.target.files[0].name);
-        let resp = await fetch(`/uploads/${e.target.files[0].name}`);
+        let resp = await fetch(`/gemUploads/${e.target.files[0].name}`);
         if(resp.ok){
           document.querySelector('.alert').classList.remove('d-none');
           document.querySelector('#modal-button').setAttribute('data-whatever',e.target.files[0].name);

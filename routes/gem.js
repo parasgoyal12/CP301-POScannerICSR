@@ -8,4 +8,8 @@ router.get('/uploadPage',isLoggedIn,gemPage.uploadPage);
 router.post('/submitGemUploadPage',isLoggedIn,gemPage.submitGemUploadPage);
 router.get('/gemConfirmationPage/:id',isLoggedIn,gemPage.getGemConfirmationPage);
 router.post('/gemConfirmationPage/:id',isLoggedIn,gemPage.submitGemConfirmationPage);
+router.get('/gemSavedPOPage',isLoggedIn,gemPage.gemSavedPOPage);
+router.post('/continueLater/:id',isLoggedIn,gemPage.continueLater);
+router.get('/deleteSaved/:id',gemPage.deleteSaved);
+
 module.exports = router;

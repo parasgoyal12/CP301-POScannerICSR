@@ -6,7 +6,7 @@ var keys=require('./../config/keys');
 const { response } = require('express');
 const { batchAnnotateFiles,parse,sendMail,saveToDrive,getFinancialYear,getDriveFolder,getSheetTitle,pdfParser,gemPoParser} = require('./util');
 const fs = require('fs');
-var Form = require('./../models/form');
+var Form = require('./../models/gemForm');
 let util = require('util');
 // const pdfParserAsync = util.promisify(pdfParser);
 
@@ -117,11 +117,45 @@ exports.submitGemConfirmationPage= async (req,res,next)=>{
             resource : {values : [resArr]}
         }
         await gsapi.spreadsheets.values.append(options);
-        res.redirect("/");
+        res.redirect("/gem");
     }
     catch(err){
         console.log(err);
         req.flash("success",`PO Addition Failed!`);
-        res.redirect("/");
+        res.redirect("/gem");
     }
+};
+
+exports.gemSavedPOPage = (req, res, next) => {
+    Form.find({User: req.user._id})
+        .then((result) => {
+            res.render('gem/gemSavedPO', {pos:result, user:req.user, title:"GeM Saved PO Page", successFlash:req.flash("success")});
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+}
+
+
+exports.continueLater = (req, res, next)=>{
+    Form.findByIdAndUpdate(req.params.id, {$set:req.body})
+        .then(result => {
+            req.flash("success", `PO ${result.poNumber} saved Succesfully! You can now edit it later.`);
+            res.redirect('/gem/gemSavedPOPage');
+        })
+    .catch(err=>res.send(err.message));
+};
+
+exports.deleteSaved = (req, res, next) => {
+    Form.findByIdAndDelete(req.params.id)
+        .then(resp => {
+            req.flash("success", `${resp.fileNo} Deleted Succesfully!`);
+            fs.unlinkSync(path.join(path.resolve(__dirname,'..'), 'public/uploads',resp.fileName));
+            res.redirect('/gem/savedPOPage');
+        })
+        .catch((err)=>{
+            console.log(err);
+            req.flash("success", "Delete Failed");
+            res.redirect("/gem/gemSavedPOPage");
+        })
 };
