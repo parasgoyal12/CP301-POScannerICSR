@@ -6,10 +6,13 @@ const gemFormSchema = new Schema({
         type : String,
         required : true
     },
-    serialNo : {
+    contractNo : {
         type : String,
     },
-    indentNo : {
+    gstin : {
+        type : String,
+    },
+    GeMSellerId : {
         type : String,
     },
     datePrepared : {
@@ -48,13 +51,13 @@ const gemFormSchema = new Schema({
     modeofPurchase : {
         type : String,
     },
-    poNumber : {
+    sanctionNumber : {
         type : String,
     },
     poDate : {
         type : String,
     },
-    supplier : {
+    companyName : {
         type : String,
     },
     materialDescription : {

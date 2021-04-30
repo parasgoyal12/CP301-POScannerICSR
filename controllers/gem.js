@@ -4,7 +4,7 @@ let path = require('path');
 const {google} = require('googleapis');
 var keys=require('./../config/keys');
 const { response } = require('express');
-const { batchAnnotateFiles,parse,sendMail,saveToDrive,getFinancialYear,getDriveFolder,getSheetTitle,pdfParser,gemPoParser} = require('./util');
+const { batchAnnotateFiles,parse,sendMail,saveToDrive,getFinancialYear,getDriveFolder,getSheetTitle,pdfParser,gemPoParser} = require('./gemUtils');
 const fs = require('fs');
 var Form = require('./../models/gemForm');
 let util = require('util');
@@ -150,8 +150,8 @@ exports.deleteSaved = (req, res, next) => {
     Form.findByIdAndDelete(req.params.id)
         .then(resp => {
             req.flash("success", `${resp.fileNo} Deleted Succesfully!`);
-            fs.unlinkSync(path.join(path.resolve(__dirname,'..'), 'public/uploads',resp.fileName));
-            res.redirect('/gem/savedPOPage');
+            fs.unlinkSync(path.join(path.resolve(__dirname,'..'), 'public/gemUploads',resp.fileName));
+            res.redirect('/gem/gemSavedPOPage');
         })
         .catch((err)=>{
             console.log(err);

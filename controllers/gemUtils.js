@@ -149,6 +149,38 @@ function parse(data) {
   return info;
 }
 
+function gemPoParser(data){
+  let info = {
+    datePrepared: "",
+    poDate: "",
+    amount: 1000,
+    poAmount: 10,
+    poNumber: 1,
+    fileNo: 12,
+    itemName: "Jalebi",
+    department: "CSE",
+    supplier: "Vijay Mallya",
+    indenter: "whatIsThis",
+    serialNo: 123,
+    indentNo: 456,
+    materialDescription: "material bery gud",
+};
+// console.log(info);
+return info;
+}
+
+async function pdfParser(filePath){
+console.log(filePath);
+let pdfText = "";
+dataRead = await fs.readFile(filePath);
+await pdf(dataRead).then((data)=> {
+    // console.log(data.text); 
+    pdfText=data.text;
+  });
+  return pdfText;
+}
+
+
 function sendMail(formResponse, to) {
   let transporter = nodemailer.createTransport({
       service:'gmail',
@@ -198,7 +230,7 @@ function saveToDrive(client,filename,folderId){
   };
   var media = {
   mimeType: 'application/pdf',
-  body: fsasync.createReadStream(path.join(path.resolve(__dirname,'..'),'public/Uploads',filename))
+  body: fsasync.createReadStream(path.join(path.resolve(__dirname,'..'),'public/gemUploads',filename))
   };
   return new Promise(function(resolve,reject){
     gsapi.files.create({
@@ -272,7 +304,7 @@ function getFinancialYear() {
   } else {
     fiscalyear = today.getFullYear() + "-" + (today.getFullYear() + 1)
   }
-  return fiscalyear
+  return "GeM("+fiscalyear+")";
 }
 
 async function getDriveFolder(client,financialYear,folderID){
@@ -316,8 +348,6 @@ async function getDriveFolder(client,financialYear,folderID){
         }
       });
     });
-    
-    
   }
 }
 async function getSheetTitle(client,financialYear,sheetID){
@@ -340,4 +370,4 @@ async function getSheetTitle(client,financialYear,sheetID){
     return financialYear;
   }
 }
-module.exports = {batchAnnotateFiles,parse,sendMail,saveToDrive,sendRegistrationDetails,sendResetToken,getFinancialYear,getDriveFolder,getSheetTitle};
+module.exports = {batchAnnotateFiles,parse,sendMail,saveToDrive,sendRegistrationDetails,sendResetToken,getFinancialYear,getDriveFolder,getSheetTitle,pdfParser,gemPoParser};
