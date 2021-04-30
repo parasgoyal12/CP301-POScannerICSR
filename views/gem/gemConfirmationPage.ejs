@@ -39,14 +39,14 @@
             <form class="needs-validation my-4 w-100" action="/gem/gemConfirmationPage/<%= formData._id %>" method="POST" novalidate>
                 <div class="row">
                     <div class="col-md-3 mb-3">
-                        <label for="serialNo" class="required">Sr.No.</label>
+                        <label for="serialNo" class="required">Contract No.</label>
                         <input type="number" class="form-control" id="serialNo" placeholder="" value="<%= formData.serialNo %>" name="serialNo" required>
                         <div class="invalid-feedback">
                         Valid Sr.no. is required.
                         </div>
                     </div>
                     <div class="col-md-3 mb-3">
-                        <label for="indentNo" class="required">Indent No.</label>
+                        <label for="indentNo" class="required">GSTIN</label>
                         <input type="number" class="form-control" id="indentNo" placeholder="" value="<%= formData.indentNo %>" name="indentNo" required>
                         <div class="invalid-feedback">
                         Valid indent number is required.
@@ -63,7 +63,7 @@
                 
                 <div class="row">
                     <div class="mb-3 col-md-6">
-                        <label for="fileNo" class="required bg-warning">File No.</label>
+                        <label for="fileNo" class="required bg-warning">GeM seller ID</label>
                             <input type="text" class="form-control" id="fileNo" placeholder="File Number" name="fileNo" value="<%= formData.fileNo %>" required style="border-color:yellow;">
                             <div class="invalid-feedback" style="width: 100%;">
                             File Number is required.
@@ -71,7 +71,7 @@
                     </div>
 
                     <div class="mb-3 col-md-6">
-                        <label for="indenter" class="required">Name of Indenter</label>
+                        <label for="indenter" class="required">Seller Company</label>
                         <input type="indenter" class="form-control" id="indenter" name="indenter" placeholder="Dr. Harpreet Singh" value="<%= formData.indenter %>" required>
                         <div class="invalid-feedback">
                             Please enter a valid Name of indenter.
@@ -163,10 +163,10 @@
                 
                 <div class="row">
                 <div class="col-md-6 mb-3">
-                    <label for="poNumber" class="required bg-warning">PO Number</label>
-                    <input type="text" class="form-control" id="poNumber" placeholder="" name="poNumber" value="<%= formData.poNumber %>" required style="border-color:yellow;">
+                    <label for="poNumber" class="required bg-warning">Sanction Number</label>
+                    <input type="text" class="form-control" id="sanctionNumber" placeholder="" name="sanctionNumber" value="<%= formData.poNumber %>" required style="border-color:yellow;">
                     <div class="invalid-feedback">
-                    PO Number is required
+                    Sanction Number is required
                     </div>
                 </div>
                 <div class="col-md-3 mb-3">
