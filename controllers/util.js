@@ -145,7 +145,7 @@ function parse(data) {
       indentNo: serialNo,
       materialDescription: item,
   };
-  // console.log(info);
+  console.log(info);
   return info;
 }
 

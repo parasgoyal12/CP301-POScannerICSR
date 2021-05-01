@@ -170,10 +170,10 @@
                     </div>
                 </div>
                 <div class="col-md-3 mb-3">
-                    <label for="poDate" class="required">Sanction Date</label>
-                    <input type="date" class="form-control" id="date" placeholder="" name="poDate" value="<%= formData.sanctionDate %>" required>
+                    <label for="sanctionDate" class="required">Sanction Date</label>
+                    <input type="date" class="form-control" id="date" placeholder="" name="sanctionDate" value="<%= formData.sanctionDate %>" required>
                     <div class="invalid-feedback">
-                    PO Date is required
+                    Sanction Date is required
                     </div>
                 </div>
                 <div class="col-md-3 mb-3">
@@ -231,6 +231,8 @@
 
     <%- include('../common/footer') %>
     <script>
+        var date = "<%= formData.sanctionDate %>";
+        console.log(date);
         // Example starter JavaScript for disabling form submissions if there are invalid fields
         (function() {
           'use strict';

@@ -171,7 +171,7 @@ function gemPoParser(data){
       materialDescription : "",
       poAmount : "",
       indenter : ""
-    }
+    };
   const GSTINrgx = /GSTIN[^\d]*[\dA-Z]*/i;
   let GST = str.match(GSTINrgx);
   if (GST == null) {
@@ -247,7 +247,8 @@ function gemPoParser(data){
       if (f == 1) {
         date = "0" + date;
       }
-      date = date.split("-").reverse().join("-"),
+      date = date.split("-").reverse().join("-");
+      // console.log(date);
       info.sanctionDate = date.trim();
   }
   let payment = /payment[ \t]*mode[^\n]*/i;

@@ -51,7 +51,7 @@ const gemFormSchema = new Schema({
     sanctionNumber : {  
         type : String,
     },
-    poDate : {          
+    sanctionDate : {          
         type : String,
     },
     companyName : {     
