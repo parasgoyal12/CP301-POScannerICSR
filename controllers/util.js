@@ -133,8 +133,8 @@ function parse(data) {
   let info = {
       datePrepared: date.split(".").reverse().join("-"),
       poDate: date.split(".").reverse().join("-"),
-      amount: amount.replace(",",""),
-      poAmount: amount.replace(",",""),
+      amount: amount.split(',').join(''),
+      poAmount: amount.split(',').join(''),
       poNumber: PO,
       fileNo: PO,
       itemName: item,
