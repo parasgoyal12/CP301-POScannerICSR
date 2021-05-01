@@ -56,6 +56,7 @@ exports.submitGemUploadPage = (req,res,next)=>{
             else{
                 pdfParser(filePath).then(resp =>{
                     formData=gemPoParser(resp);
+                    console.log(formData);
                     formData.fileName = filename;
                     formData.User=req.user._id;
                     const form = new Form(formData);
@@ -89,7 +90,7 @@ exports.submitGemConfirmationPage= async (req,res,next)=>{
         if(err)console.log(err);
     });
     let formResponse = req.body;
-    // console.log(req.body);
+    console.log("BODY", req.body);
     formResponse.fileName = `${keys.clientUrl}/gemUploads/${formResponse.fileName}`;
     formResponse.user = req.user.name;
     delete formResponse.submit;

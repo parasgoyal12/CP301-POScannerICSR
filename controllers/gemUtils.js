@@ -151,124 +151,132 @@ function parse(data) {
 
 function gemPoParser(data){
     let str = data;
-    // let str = data.text;
-  
-    // Assumptions for rgx in comments, won't work without these
-  
-    const GSTINrgx = /GSTIN/i;
-    let GST = str.match(GSTINrgx);
-    if (GST == null) {
-        // 
-        // 
-        // return
-        return {};
-    }
-    // // xx.xx.xxxx format, First instance is always date (as in samples)
-    // const dateRgx = /\d{2}[.]\d{2}[.]\d{4}/;
-    // let date = str.match(dateRgx);
-    // if (date != null) {
-    //     date = date[0];
-    // }
-  
-    // // Total followed by Amt
-    // // sometimes rs symbol -> 3
-    // const amountRgx = /total[^\d]*[\d,.]*/gi; 
-    // let amount = str.match(amountRgx);
-    // if (amount != null) {
-    //     amount = amount[amount.length - 1];
-    //     amount = amount.substring(amount.match(/[\d]/).index, amount.length);
-    // }
-    // const verifyAmtRgx = /\(rupees[\s\S]*only\)/gi;
-    // let verifyAmt = str.match(verifyAmtRgx);
-    // verifyAmt = verifyAmt[0];
-    // verifyAmt = verifyAmt.substring(8, verifyAmt.length - 6);
-    // let verifyAmt_float = "";
-    // for (let i = 0 ; i < amount.length ; i++) {
-    //     if (amount[i] != ',') {
-    //         verifyAmt_float += amount[i];
-    //     }
-    // }
-    // verifyAmt_float = parseFloat(verifyAmt_float)
-    // let check = convertRupeesIntoWords(verifyAmt_float);
-    // check = check.substring(0, check.length - 7);
-    // if (verifyAmt.toLowerCase() != check.toLowerCase()) {
-    //   amount = amount.substring(1, amount.length);
-    // }
-    // // PO number starts with digit and ??
-    // const PONoRgx = /po[" "]*no[^\d]*[\d-,/\w]*/i;
-    // let PO = str.match(PONoRgx);
-    // if (PO != null) {
-    //     PO = PO[0];
-    //     PO = PO.substring(PO.search(/[\d]/), PO.length);
-    // }
-  
-    // // Supple of 'item'
-    // const itemRgx = /supply[" "]*of[^\w]*[\w" "\d-.,:]*[^'\n]/i;
-    // let item = str.match(itemRgx);
-    // if (item != null) {
-    //     item = item[0];
-    //     item = item.substring(item.match(/supply[" "]*of[^\w]*/i)[0].length, item.length);
-    // }
-  
-    // // FOR : Deaprtment of .., (no comma in dept name & comma after dept name)
-    // const deptRgx = /for[" ":]*department of[" "]*[\w" "\d]*/i;
-    // let dept = str.match(deptRgx);
-    // if (dept != null) {
-    //     dept = dept[0];
-    //     dept = dept.substring(dept.match(/for[" ":]*department of[" "]*/i)[0].length, dept.length);
-    // }
-  
-    // // M/s supplier
-    // const supRgx = /M\/s[^,\n]*/i;
-    // let supplier = str.match(supRgx);
-    // if (supplier != null) {
-    //     supplier = supplier[0];
-    // }
-  
-    // // CC to : indenter   
-    // const indRgx = /cc[" "]*to[" ":]*\s*\n\s*1.[" "\w.]*/i;
-    // let indenter = str.match(indRgx);
-    // if (indenter != null) {
-    //     indenter = indenter[0];
-    //     indenter = indenter.substring(indenter.match(/cc[" "]*to[" ":]*\s*\n\s*1.[" "]*/i)[0].length, indenter.length);
-    // }
-  
-    // serialNo = PO.substring(0, PO.match('-').index);
+    
 
-  let info = {
-    contractNo : "1",
-    gstin : "12",
-    GeMSellerId : "123",
-    datePrepared : "",
-    department : "CSE",
-    fundingAgency : "GoI",
-    projectName : "DEP",
-    itemName : "xyz",
-    indianImported : "",
-    amount : "1234",
-    importAmount : "0",
-    category : "abc",
-    modeofPurchase : "CoD",
-    sanctionNumber : "123ABC",
-    poDate : "",
-    companyName : "MS",
-    materialDescription : "",
-    poAmount : "12",
-    indenter : "Puneet"
-};
-// console.log(info);
-return info;
+    let info = {
+      contractNo : "",
+      gstin : "",
+      GeMSellerId : "",
+      department : "",
+      fundingAgency : "",
+      projectName : "",
+      itemName : "",
+      indianImported : "",
+      amount : "",
+      category : "",
+      modeofPurchase : "",
+      sanctionNumber : "",
+      sanctionDate : "",
+      companyName : "",
+      materialDescription : "",
+      poAmount : "",
+      indenter : ""
+    }
+  const GSTINrgx = /GSTIN[^\d]*[\dA-Z]*/i;
+  let GST = str.match(GSTINrgx);
+  if (GST == null) {
+      return {};
+  } else {
+      GST = GST[0];
+      info.gstin = GST.substring(GST.match(/:/).index + 1, GST.length).trim();
+  }
+
+  const ord_val = /Total Order Value \(in INR\)[^\d]*[\d,.]*/i;
+  let amount = str.match(ord_val);
+  if (amount != null) {
+      amount = amount[0];
+      amount = amount.substring(amount.match(/[\d]/).index, amount.length).trim();;
+      info.amount = "";
+      for (let i = 0 ; i < amount.length ; i++) {
+        if (amount[i] != ',') {
+          info.amount += amount[i];
+        }
+      }
+  }
+
+  const gem_seller = /GeM Seller ID[^\d]*[\dA-Z]*/;
+  let GeMSellerId = str.match(gem_seller);
+  if (GeMSellerId != null) {
+      GeMSellerId = GeMSellerId[0];
+      info.GeMSellerId = GeMSellerId.substring(GeMSellerId.match(/:/).index + 1, GeMSellerId.length).trim();
+  }
+
+  const company = /Company Name:*[a-zA-Z \t\d]*/;
+  let companyName = str.match(company);
+  if (companyName != null) {
+      companyName = companyName[0];
+      info.companyName = companyName.substring(companyName.match(/:/).index + 1, companyName.length).trim();
+  }
+  console.log(amount, companyName, GST, GeMSellerId)
+
+  const sanction = /Sanction No[^\d]*[\d]*/i;
+  let sanctionNumber = str.match(sanction);
+  if (sanctionNumber != null) {
+      sanctionNumber = sanctionNumber[0];
+      info.sanctionNumber = sanctionNumber.substring(sanctionNumber.match(/[\d]/).index, sanctionNumber.length).trim();
+  }   
+  let buyer = /office[ \t]*name/i;//*name[^a-z^A-Z][\w]*/i;
+  let first = str.match(buyer).index;
+  let copy_str = str.substring(first + 10, str.length);
+  buyer = /name[^a-z^A-Z][\w \t]*/i;
+  let indenter = copy_str.match(buyer);
+  if (indenter != null) {
+      indenter = indenter[0];
+      info.indenter = indenter.substring(indenter.match(/name[^a-z^A-Z]/i)[0].length, indenter.length).trim();
+  }
+
+  let sanctionDate = /sanction[ \t]*date[^\n]*/i;
+  let date = str.match(sanctionDate);
+  if (date != null) {
+      date = date[0];
+      date = date.substring(date.match(/:/).index + 1, date.length);
+      date = date.replace("Jan", "01");
+      date = date.replace("Feb", "02");
+      date = date.replace("Mar", "03");
+      date = date.replace("Apr", "04");
+      date = date.replace("May", "05");
+      date = date.replace("Jun", "06");
+      date = date.replace("Jul", "07");
+      date = date.replace("Aug", "08");
+      date = date.replace("Sep", "09");
+      date = date.replace("Oct", "10");
+      date = date.replace("Nov", "11");
+      date = date.replace("Dec", "12");
+      date = date.trim();
+      let f = date.match("-").index;
+      if (f == 1) {
+        date = "0" + date;
+      }
+      date = date.split("-").reverse().join("-"),
+      info.sanctionDate = date.trim();
+  }
+  let payment = /payment[ \t]*mode[^\n]*/i;
+  let paymentMode = str.match(payment);
+  if (paymentMode != null) {
+      paymentMode = paymentMode[0];
+      info.modeofPurchase = paymentMode.substring(paymentMode.match(/:/).index + 1, paymentMode.length).trim();
+  }
+
+  let contract = /GEMC-[\d]*/;
+  let contractNumber = str.match(contract);
+  if (contractNumber != null) {
+      info.contractNo = contractNumber[0].trim();
+  }
+
+  // console.log(info.amount, info.companyName, info.gstin, info.GeMSellerId, info.sanctionNumber, info.indenter, info.sanctionDate, info.modeofPurchase, info.contractNo)
+  console.log(info);
+  return info;
 }
 
 async function pdfParser(filePath){
-console.log(filePath);
-let pdfText = "";
-dataRead = await fs.readFile(filePath);
-await pdf(dataRead).then((data)=> {
-    // console.log(data.text); 
-    pdfText=data.text;
-  });
-  return pdfText;
+  console.log(filePath);
+  let pdfText = "";
+  dataRead = await fs.readFile(filePath);
+  await pdf(dataRead).then((data)=> {
+      // console.log(data.text); 
+      pdfText=data.text;
+    });
+    return pdfText;
 }
 
 
@@ -281,6 +289,9 @@ function sendMail(formResponse, to) {
       }
   });
   let mailOptions = {
+
+    // CHANGE MAIL DETAILS
+
       from: keys.test.id,
       to: to,
       subject: 'Successfully added PO',

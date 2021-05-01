@@ -40,14 +40,14 @@
                 <div class="row">
                     <div class="col-md-3 mb-3">
                         <label for="serialNo" class="required">Contract No.</label>
-                        <input type="number" class="form-control" id="contractNo" placeholder="" value="<%= formData.contractNo %>" name="serialNo" required>
+                        <input type="string" class="form-control" id="contractNo" placeholder="" value="<%= formData.contractNo %>" name="serialNo" required>
                         <div class="invalid-feedback">
                         Valid Contract Number is required.
                         </div>
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="indentNo" class="required">GSTIN</label>
-                        <input type="number" class="form-control" id="GSTIN" placeholder="" value="<%= formData.GSTIN %>" name="GSTIN" required>
+                        <input type="string" class="form-control" id="GSTIN" placeholder="" value="<%= formData.gstin %>" name="GSTIN" required>
                         <div class="invalid-feedback">
                         Valid GSTIN number is required.
                         </div>
@@ -64,7 +64,7 @@
                 <div class="row">
                     <div class="mb-3 col-md-6">
                         <label for="fileNo" class="required bg-warning">GeM seller ID</label>
-                            <input type="text" class="form-control" id="GeMID" placeholder="GeM seller ID" name="GeMID" value="<%= formData.GeMSellerID%>" required style="border-color:yellow;">
+                            <input type="text" class="form-control" id="GeMID" placeholder="GeM seller ID" name="GeMID" value="<%= formData.GeMSellerId%>" required style="border-color:yellow;">
                             <div class="invalid-feedback" style="width: 100%;">
                             GeM seller ID is required.
                         </div> 
@@ -170,15 +170,15 @@
                     </div>
                 </div>
                 <div class="col-md-3 mb-3">
-                    <label for="poDate" class="required">PO Date</label>
-                    <input type="date" class="form-control" id="date" placeholder="" name="poDate" value="<%= formData.poDate %>" required>
+                    <label for="poDate" class="required">Sanction Date</label>
+                    <input type="date" class="form-control" id="date" placeholder="" name="poDate" value="<%= formData.sanctionDate %>" required>
                     <div class="invalid-feedback">
                     PO Date is required
                     </div>
                 </div>
                 <div class="col-md-3 mb-3">
-                    <label for="poAmount" class="required bg-warning">PO Amount</label>
-                    <input type="number" class="form-control" id="poAmount" name="poAmount" placeholder="" value="<%= formData.poAmount %>" required style="border-color:yellow;">
+                    <label for="poAmount" class="required bg-warning">Amount</label>
+                    <input type="number" class="form-control" id="poAmount" name="poAmount" placeholder="" value="<%= formData.amount %>" required style="border-color:yellow;">
                     <div class="invalid-feedback">
                     PO Amount is required
                     </div>
