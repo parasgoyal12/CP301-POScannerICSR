@@ -33,6 +33,7 @@ exports.submitUploadPage = (req,res,next)=>{
         file.path=path.join(path.resolve(__dirname,'..'),'public/uploads',file.name);
         filename=file.name;
         filePath=file.path;
+        // console.log(file);
         if(fs.existsSync(filePath)){
             this.emit('aborted')
         }
@@ -90,15 +91,16 @@ exports.submitConfirmationPage= async (req,res,next)=>{
     });
     let formResponse = req.body;
     // console.log(req.body);
-    formResponse.fileName = `${keys.clientUrl}/uploads/${formResponse.fileName}`;
+    // formResponse.fname = formResponse.fileName;
+    formResponse.link = `${keys.clientUrl}/uploads/${formResponse.fileName}`;
     formResponse.user = req.user.name;
     delete formResponse.submit;
     try{
         
-        let sheetTitle = await getSheetTitle(client,getFinancialYear(),req.user.googleSheetLink);
+        let sheetTitle = await getSheetTitle(client,getFinancialYear(formResponse.poDate),req.user.googleSheetLink);
         let result = await Form.findByIdAndDelete(req.params.id);
         
-        let driveFolderID = await getDriveFolder(client,getFinancialYear(),req.user.driveFolderLink);
+        let driveFolderID = await getDriveFolder(client,getFinancialYear(formResponse.poDate),req.user.driveFolderLink);
         req.flash("success",`PO ${result.poNumber} Added Succesfully!`);
         result = await saveToDrive(client,result.fileName,driveFolderID);
         

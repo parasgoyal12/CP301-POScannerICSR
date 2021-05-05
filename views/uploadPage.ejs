@@ -49,10 +49,15 @@
     <script src="https://www.w3schools.com/lib/w3.js"></script>
     <script>
       function show_alert() {
-        if(!confirm("Do you really want to submit this. As this file seems to exist?")) {
-          return false;
-        }
-        this.form.submit();
+        // if(!confirm("Do you really want to submit this. As this file seems to exist?")) {
+        //   return false;
+        // }
+        alert("A file with this name already exists! Kindly Change the file name and Try Again!");
+        return false;
+        // var newName = prompt("Please enter new file name as the file already exists!",$('input[type="file"]')[0].files[0].name);
+        // $('input[type="file"]')[0].files[0].name = newName;
+        // console.log($('input[type="file"]')[0].files[0].name);
+        // this.form.submit();
       }
       document.querySelector('input[type="file"]').onchange = async function(e){
         // console.log(e.target.files[0].name);
@@ -61,6 +66,11 @@
           document.querySelector('.alert').classList.remove('d-none');
           document.querySelector('#modal-button').setAttribute('data-whatever',e.target.files[0].name);
           document.querySelector('form').onsubmit = show_alert;
+        }
+        else{
+          document.querySelector('.alert').classList.add('d-none');
+          // document.querySelector('#modal-button').setAttribute('data-whatever',e.target.files[0].name);
+          document.querySelector('form').onsubmit = null;
         }
       }
       pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';

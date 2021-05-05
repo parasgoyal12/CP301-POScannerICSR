@@ -264,9 +264,10 @@ function sendResetToken(formResponse, to){
   });
 }
 
-function getFinancialYear() {
+function getFinancialYear(date) {
   var fiscalyear = "";
-  var today = new Date();
+  var today = new Date(date);
+  console.log(today);
   if ((today.getMonth() + 1) <= 3) {
     fiscalyear = (today.getFullYear() - 1) + "-" + today.getFullYear()
   } else {
