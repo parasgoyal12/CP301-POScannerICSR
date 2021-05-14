@@ -18,7 +18,7 @@ const gemFormSchema = new Schema({
     GeMSellerId : {     
         type : String,
     },
-    datePrepared : {    
+    date : {    
         type : String,
     },
     department : {      

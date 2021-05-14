@@ -39,7 +39,7 @@
             <form class="needs-validation my-4 w-100" action="/gem/gemConfirmationPage/<%= formData._id %>" method="POST" novalidate>
                 <div class="row">
                     <div class="col-md-3 mb-3">
-                        <label for="serialNo" class="required">Contract No.</label>
+                        <label for="serialNo" class="required">PO Number</label>
                         <input type="string" class="form-control" id="contractNo" placeholder="" value="<%= formData.contractNo %>" name="serialNo" required>
                         <div class="invalid-feedback">
                         Valid Contract Number is required.
@@ -54,7 +54,7 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="datePrepared" class="required">Date</label>
-                        <input type="date" class="form-control" id="datePrepared" placeholder="" value="<%= formData.datePrepared %>" name="datePrepared" required>
+                        <input type="date" class="form-control" id="datePrepared" placeholder="" value="<%= formData.date %>" name="datePrepared" required>
                         <div class="invalid-feedback">
                         Valid Date is required.
                         </div>
@@ -177,8 +177,8 @@
                     </div>
                 </div>
                 <div class="col-md-3 mb-3">
-                    <label for="poAmount" class="required bg-warning">Amount</label>
-                    <input type="number" class="form-control" id="poAmount" name="poAmount" placeholder="" value="<%= formData.amount %>" required style="border-color:yellow;">
+                    <label for="poAmount" class="required bg-warning">PO Amount</label>
+                    <input type="number" class="form-control" id="poAmount" name="poAmount" placeholder="" value="<%= formData.poAmount %>" required style="border-color:yellow;">
                     <div class="invalid-feedback">
                     PO Amount is required
                     </div>

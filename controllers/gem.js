@@ -141,7 +141,7 @@ exports.gemSavedPOPage = (req, res, next) => {
 exports.continueLater = (req, res, next)=>{
     Form.findByIdAndUpdate(req.params.id, {$set:req.body})
         .then(result => {
-            req.flash("success", `PO ${result.poNumber} saved Succesfully! You can now edit it later.`);
+            req.flash("success", `${result.contractNo} saved Succesfully! You can now edit it later.`);
             res.redirect('/gem/gemSavedPOPage');
         })
     .catch(err=>res.send(err.message));
@@ -150,7 +150,7 @@ exports.continueLater = (req, res, next)=>{
 exports.deleteSaved = (req, res, next) => {
     Form.findByIdAndDelete(req.params.id)
         .then(resp => {
-            req.flash("success", `${resp.fileNo} Deleted Succesfully!`);
+            req.flash("success", `${resp.contractNo} Deleted Succesfully!`);
             fs.unlinkSync(path.join(path.resolve(__dirname,'..'), 'public/gemUploads',resp.fileName));
             res.redirect('/gem/gemSavedPOPage');
         })

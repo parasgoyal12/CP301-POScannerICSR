@@ -35,8 +35,8 @@
         <table class="table">
             <thead>
               <tr>
-                <th scope="col" onclick="w3.sortHTML('.table','.item', 'td:nth-child(1)')">Serial No <i class="fa fa-sort"></i></th>
-                <th scope="col" onclick="w3.sortHTML('.table','.item', 'td:nth-child(2)')">Indent No <i class="fa fa-sort"></i></th>
+                <th scope="col" onclick="w3.sortHTML('.table','.item', 'td:nth-child(1)')">Contract No <i class="fa fa-sort"></i></th>
+                <th scope="col" onclick="w3.sortHTML('.table','.item', 'td:nth-child(2)')">Supplier <i class="fa fa-sort"></i></th>
                 <th scope="col" onclick="w3.sortHTML('.table','.item', 'td:nth-child(3)')">Date Prepared <i class="fa fa-sort"></i></th>
                 <th scope="col" onclick="w3.sortHTML('.table','.item', 'td:nth-child(4)')">File No <i class="fa fa-sort"></i></th>
                 <th scope="col">View this PO</th>
@@ -48,8 +48,8 @@
                 <% pos.forEach(po => { %> 
               <tr class='item'>
                 <!-- <th scope="row">1</th> -->
-                <td><%=po.serialNo %></td>
-                <td><%=po.indentNo %></td>
+                <td><%=po.contractNo %></td>
+                <td><%=po.companyName %></td>
                 <td><%=po.sanctionDate %></td>
                 <td><%=po.fileNo %></td>
                 <td><button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModal" data-whatever="<%= po.fileName %>"><i class="fa fa-eye"></i></button></td>
