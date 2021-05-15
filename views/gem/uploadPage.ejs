@@ -79,7 +79,7 @@
         var recipient = button.data('whatever') // Extract info from data-* attributes
         var url = '/gemUploads/'+recipient;
         pdfjsLib.getDocument(url).promise.then(function getPdfHelloWorld(pdf) {
-          pdf.getPage(pdf.numPages-2).then(function getPageHelloWorld(page) {
+          pdf.getPage(1).then(function getPageHelloWorld(page) {
             var scale = 1.3;
             var viewport = page.getViewport({scale});
             var canvas = document.getElementById('target-section');

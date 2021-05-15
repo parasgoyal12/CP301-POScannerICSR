@@ -53,15 +53,35 @@
               <span>Batch Upload PO</span>
               <a href="/batchUpload"><img src="images/batchup.png" alt=""></a>
             </li>
+            <li>
+              <span>Upload GeM PO</span>
+              <a href="/gem"><img src="images/gemLogo.jpg" alt=""></a>
+            </li>
           </ul>
         </div>
         
       </div>
     </div>
       <% if(user) { %>
-        <iframe class="mt-4 w-100" style="height:200px" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTaLRUM7kWap-wQs5kE_pKPUTBE2E4Wc9jd04NAIAOo_eiT_8AGe6_rUECqaZ_IVSYttEl5gN6211ze/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+        <!-- <iframe class="mt-4 w-100" style="height:200px" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTaLRUM7kWap-wQs5kE_pKPUTBE2E4Wc9jd04NAIAOo_eiT_8AGe6_rUECqaZ_IVSYttEl5gN6211ze/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"></iframe> -->
         <!-- <iframe  src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQp2z0stPhyH256UltThLB9LHid42QALok4sBIQOx8GSBgAzKM5KAkzgJtKzaaOAcfj8MopDYDOqWo_/pubhtml?gid=0&amp;widget=true&amp;headers=false"></iframe> -->
-          <% } %>
+        <div class="row my-4 py-4 mx-auto">
+          <div class="col-md-6 d-flex justify-content-center">
+            <a href="https://docs.google.com/spreadsheets/d/<%= user.googleSheetLink %>" target="_blank">
+            <div class="btn btn-outline-success btn-lg ">
+              Go to Google Sheet
+            </div>
+          </a>
+          </div>
+          <div class="col-md-6 d-flex justify-content-center">
+            <a href="https://drive.google.com/drive/folders/<%= user.driveFolderLink %>" target="_blank">
+            <div class="btn btn-outline-primary btn-lg ">
+              Go to Google Drive
+            </div>
+          </a>
+          </div>
+        </div>  
+        <% } %>
     </main>
     
     <%- include('./common/footer') %>
