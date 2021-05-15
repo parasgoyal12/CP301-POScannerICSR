@@ -90,7 +90,7 @@ exports.submitConfirmationPage= async (req,res,next)=>{
         if(err)console.log(err);
     });
     let formResponse = req.body;
-    // console.log(req.body);
+    console.log(req.body);
     // formResponse.fname = formResponse.fileName;
     formResponse.link = `${keys.clientUrl}/uploads/${formResponse.fileName}`;
     formResponse.user = req.user.name;

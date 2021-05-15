@@ -96,12 +96,12 @@ exports.submitGemConfirmationPage= async (req,res,next)=>{
     delete formResponse.submit;
     try{
         console.log(req.user.googleSheetLink);
-        let sheetTitle = await getSheetTitle(client,getFinancialYear(),req.user.googleSheetLink);
+        let sheetTitle = await getSheetTitle(client,getFinancialYear(formResponse.date),req.user.googleSheetLink);
         let result = await Form.findByIdAndDelete(req.params.id);
-        console.log(sheetTitle);
-        let driveFolderID = await getDriveFolder(client,getFinancialYear(),req.user.driveFolderLink);
+        console.log("sheetTitle"+sheetTitle);
+        let driveFolderID = await getDriveFolder(client,getFinancialYear(formResponse.date),req.user.driveFolderLink);
         console.log(driveFolderID);
-        req.flash("success",`PO ${result.poNumber} Added Succesfully!`);
+        req.flash("success",`PO ${result.contractNo} Added Succesfully!`);
         result = await saveToDrive(client,result.fileName,driveFolderID);
         
         formResponse.driveLink="https://drive.google.com/file/d/"+result.data.id;

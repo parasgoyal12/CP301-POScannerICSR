@@ -40,21 +40,21 @@
                 <div class="row">
                     <div class="col-md-3 mb-3">
                         <label for="serialNo" class="required">PO Number</label>
-                        <input type="string" class="form-control" id="contractNo" placeholder="" value="<%= formData.contractNo %>" name="serialNo" required>
+                        <input type="string" class="form-control" id="contractNo" placeholder="" value="<%= formData.contractNo %>" name="contractNo" required>
                         <div class="invalid-feedback">
                         Valid Contract Number is required.
                         </div>
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="indentNo" class="required">GSTIN</label>
-                        <input type="string" class="form-control" id="GSTIN" placeholder="" value="<%= formData.gstin %>" name="GSTIN" required>
+                        <input type="string" class="form-control" id="GSTIN" placeholder="" value="<%= formData.gstin %>" name="gstin" required>
                         <div class="invalid-feedback">
                         Valid GSTIN number is required.
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="datePrepared" class="required">Date</label>
-                        <input type="date" class="form-control" id="datePrepared" placeholder="" value="<%= formData.date %>" name="datePrepared" required>
+                        <input type="date" class="form-control" id="datePrepared" placeholder="" value="<%= formData.date %>" name="date" required>
                         <div class="invalid-feedback">
                         Valid Date is required.
                         </div>
@@ -64,7 +64,7 @@
                 <div class="row">
                     <div class="mb-3 col-md-6">
                         <label for="fileNo" class="required bg-warning">GeM seller ID</label>
-                            <input type="text" class="form-control" id="GeMID" placeholder="GeM seller ID" name="GeMID" value="<%= formData.GeMSellerId%>" required style="border-color:yellow;">
+                            <input type="text" class="form-control" id="GeMID" placeholder="GeM seller ID" name="GeMSellerId" value="<%= formData.GeMSellerId%>" required style="border-color:yellow;">
                             <div class="invalid-feedback" style="width: 100%;">
                             GeM seller ID is required.
                         </div> 
@@ -190,7 +190,7 @@
                 <div class="row">
                 <div class="mb-3 col-md-6">
                     <label for="sellerCompanyName" class="required">Seller Firm</label>
-                    <input type="sellerCompanyNamr" class="form-control" id="sellerCompanyName" placeholder="" name="sellerCompanyName" value="<%= formData.companyName %>" required>
+                    <input type="sellerCompanyNamr" class="form-control" id="sellerCompanyName" placeholder="" name="companyName" value="<%= formData.companyName %>" required>
                     <div class="invalid-feedback">
                     Seller Company Name is required
                     </div>
@@ -231,8 +231,8 @@
 
     <%- include('../common/footer') %>
     <script>
-        var date = "<%= formData.sanctionDate %>";
-        console.log(date);
+        // var date = "<%= formData.sanctionDate %>";
+        // console.log(date);
         // Example starter JavaScript for disabling form submissions if there are invalid fields
         (function() {
           'use strict';
